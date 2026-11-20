@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EventuApp - Staffing & Operaciones de Eventos</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons Web -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            800: '#27272A',
+                            900: '#18181B',
+                            950: '#09090B',
+                        },
+                        slate: {
+                            50: '#F8FAFC',
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            600: '#475569',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        },
+                        sky: {
+                            300: '#7DD3FC',
+                            400: '#38BDF8',
+                            500: '#0EA5E9',
+                            600: '#0284C7',
+                            700: '#0369A1',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    borderRadius: {
+                        'input': '12px',
+                        'card': '16px',
+                        'hero': '20px',
+                        'sheet': '24px',
+                    },
+                    boxShadow: {
+                        'glow-sky': '0 8px 20px -4px rgba(56, 189, 248, 0.35)',
+                        'glow-sky-subtle': '0 4px 14px -2px rgba(56, 189, 248, 0.25)',
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                        'fade-in': 'fadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+                        'toast': 'toastAnim 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                        'radar': 'radarPulse 1.2s infinite ease-out',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)' },
+                            '100%': { transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        toastAnim: {
+                            '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        radarPulse: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0.9' },
+                            '100%': { transform: 'scale(2.2)', opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .drag-handle {
+            width: 36px;
+            height: 4px;
+            border-radius: 2px;
+            margin: 8px auto 10px auto;
+        }
+    </style>
+</head>
+<body class="bg-[#09090B] text-zinc-100 min-h-screen overflow-x-hidden antialiased">
+    <div id="root"></div>
+
+    <!-- React & ReactDOM 18 -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Pre-compiled Native JavaScript -->
+    <script>
+// --- Source: src/data.js ---
+// Datos y Mock Data estructurados con estricta separación regional (AR vs ES)
+
+const EVENTS_DATA = {
+  AR: [{
+    id: "lolla-ar",
+    country: "AR",
+    name: "Lollapalooza 2026",
+    shortName: "Lollapalooza",
+    location: "Hipódromo de San Isidro · Buenos Aires",
+    bannerImg: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80",
+    badge: "EN VIVO",
+    currency: "ARS",
+    currencySymbol: "$",
+    legalDocLabel: "Póliza AP / ART al día",
+    nominaExportName: "Nomina_Lollapalooza_SanIsidro_2026.pdf",
+    staffCounts: {
+      Promotores: {
+        current: 8,
+        total: 10
+      },
+      Acreditaciones: {
+        current: 5,
+        total: 5
+      },
+      Barras: {
+        current: 12,
+        total: 15
+      },
+      Montaje: {
+        current: 4,
+        total: 4
+      }
+    },
+    workers: [{
+      id: 1,
+      name: "Ana Martínez",
+      status: "IN 13:45 hs",
+      score: 98,
+      role: "Promotores",
+      dist: "2.4 km",
+      height: "1.74 m",
+      shirtSize: "M",
+      pantSize: "38",
+      shoeSize: "38",
+      footwearType: "Botas negras reglamentarias",
+      docStatus: "ok",
+      dniNie: "DNI 41.205.892",
+      insuranceName: "La Segunda ART · Póliza #88219",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Bilingüe EN/ES", "Sampling VIP"]
+    }, {
+      id: 2,
+      name: "Carlos Gómez",
+      status: "Confirmados",
+      score: 89,
+      role: "Promotores",
+      dist: "4.8 km",
+      height: "1.82 m",
+      shirtSize: "L",
+      pantSize: "42",
+      shoeSize: "42",
+      footwearType: "Mocasines negros",
+      docStatus: "warning",
+      dniNie: "DNI 39.841.109",
+      insuranceName: "Sin póliza cargada",
+      hasVehicle: false,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Atención VIP", "Ventas"]
+    }, {
+      id: 3,
+      name: "Sofía Ruiz",
+      status: "Guardia 24h",
+      score: 96,
+      role: "Promotores",
+      dist: "1.2 km",
+      height: "1.70 m",
+      shirtSize: "S",
+      pantSize: "36",
+      shoeSize: "37",
+      footwearType: "Botas de combate",
+      docStatus: "ok",
+      dniNie: "DNI 42.100.412",
+      insuranceName: "Federación Patronal #10492",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Control Accesos", "PDA QR"]
+    }, {
+      id: 4,
+      name: "Martín Benítez",
+      status: "IN 13:50 hs",
+      score: 97,
+      role: "Acreditaciones",
+      dist: "3.1 km",
+      height: "1.78 m",
+      shirtSize: "L",
+      pantSize: "40",
+      shoeSize: "41",
+      footwearType: "Zapatillas negras lisas",
+      docStatus: "ok",
+      dniNie: "DNI 38.402.190",
+      insuranceName: "Sancor Seguros #78219",
+      hasVehicle: true,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Scanner QR", "Manejo Sistema"]
+    }, {
+      id: 5,
+      name: "Valentina Rossi",
+      status: "Confirmados",
+      score: 94,
+      role: "Acreditaciones",
+      dist: "1.8 km",
+      height: "1.68 m",
+      shirtSize: "S",
+      pantSize: "36",
+      shoeSize: "36",
+      footwearType: "Mocasines negros",
+      docStatus: "ok",
+      dniNie: "DNI 43.190.551",
+      insuranceName: "La Segunda ART #90212",
+      hasVehicle: false,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Ingreso Prensa", "Bilingüe EN"]
+    }, {
+      id: 6,
+      name: "Diego Álvarez",
+      status: "IN 13:30 hs",
+      score: 91,
+      role: "Barras",
+      dist: "5.2 km",
+      height: "1.85 m",
+      shirtSize: "XL",
+      pantSize: "44",
+      shoeSize: "43",
+      footwearType: "Zapatillas antideslizantes",
+      docStatus: "ok",
+      dniNie: "DNI 37.102.839",
+      insuranceName: "San Cristóbal ART #11928",
+      hasVehicle: true,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Cocktail VIP", "Cajero POS"]
+    }, {
+      id: 7,
+      name: "Pablo Castro",
+      status: "IN 08:00 hs",
+      score: 99,
+      role: "Montaje",
+      dist: "6.1 km",
+      height: "1.80 m",
+      shirtSize: "L",
+      pantSize: "42",
+      shoeSize: "42",
+      footwearType: "Botines de seguridad con puntera",
+      docStatus: "ok",
+      dniNie: "DNI 35.801.219",
+      insuranceName: "Prevención ART #88921",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Altura / Arneses", "Trabajo Eléctrico"]
+    }]
+  }, {
+    id: "matear-ar",
+    country: "AR",
+    name: "Feria Matear 2026",
+    shortName: "Feria Matear",
+    location: "Predio La Rural · Palermo CABA",
+    bannerImg: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+    badge: "EN VIVO",
+    currency: "ARS",
+    currencySymbol: "$",
+    legalDocLabel: "Póliza AP / ART La Rural",
+    nominaExportName: "Nomina_FeriaMatear_LaRural_2026.pdf",
+    staffCounts: {
+      Promotores: {
+        current: 6,
+        total: 8
+      },
+      Acreditaciones: {
+        current: 4,
+        total: 4
+      },
+      Barras: {
+        current: 8,
+        total: 10
+      },
+      Montaje: {
+        current: 4,
+        total: 4
+      }
+    },
+    workers: [{
+      id: 101,
+      name: "Camila Navarro",
+      status: "IN 11:30 hs",
+      score: 98,
+      role: "Promotores",
+      dist: "2.1 km",
+      height: "1.72 m",
+      shirtSize: "M",
+      pantSize: "38",
+      shoeSize: "38",
+      footwearType: "Zapatillas negras",
+      docStatus: "ok",
+      dniNie: "DNI 42.891.029",
+      insuranceName: "La Segunda ART #19201",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Degustación", "Atención al Público"]
+    }, {
+      id: 102,
+      name: "Lucas Pereyra",
+      status: "Confirmados",
+      score: 95,
+      role: "Promotores",
+      dist: "2.4 km",
+      height: "1.75 m",
+      shirtSize: "M",
+      pantSize: "40",
+      shoeSize: "38",
+      footwearType: "Botas reglamentarias negras",
+      docStatus: "ok",
+      dniNie: "DNI 40.119.382",
+      insuranceName: "Póliza AP Vigente #9910",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Movilidad Propia"]
+    }]
+  }],
+  ES: [{
+    id: "mwc-es",
+    country: "ES",
+    name: "Mobile World Congress 2026",
+    shortName: "MWC Barcelona",
+    location: "Fira Barcelona Gran Via",
+    bannerImg: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+    badge: "EN VIVO",
+    currency: "EUR",
+    currencySymbol: "€",
+    legalDocLabel: "Alta SS + Certificado PRL",
+    nominaExportName: "Nomina_MWC_Barcelona_2026.pdf",
+    staffCounts: {
+      Promotores: {
+        current: 18,
+        total: 20
+      },
+      Acreditaciones: {
+        current: 8,
+        total: 8
+      },
+      Barras: {
+        current: 14,
+        total: 16
+      },
+      Montaje: {
+        current: 6,
+        total: 6
+      }
+    },
+    workers: [{
+      id: 201,
+      name: "Elena Bosch",
+      status: "IN 13:45 hs",
+      score: 99,
+      role: "Promotores",
+      dist: "3.1 km",
+      height: "1.76 m",
+      shirtSize: "M",
+      pantSize: "38",
+      shoeSize: "38",
+      footwearType: "Mocasines negros",
+      docStatus: "ok",
+      dniNie: "NIE Y-4921028-H",
+      insuranceName: "Alta SS #482910 • PRL Apto",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Trilingüe ES/EN/FR", "Protocolo VIP"]
+    }, {
+      id: 202,
+      name: "Marc Valls",
+      status: "Confirmados",
+      score: 92,
+      role: "Promotores",
+      dist: "5.4 km",
+      height: "1.80 m",
+      shirtSize: "L",
+      pantSize: "40",
+      shoeSize: "42",
+      footwearType: "Zapatos formales negros",
+      docStatus: "warning",
+      dniNie: "DNI 48.910.231-K",
+      insuranceName: "Pendiente validación PRL",
+      hasVehicle: false,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Azafato de Imagen", "Tech Demo"]
+    }, {
+      id: 203,
+      name: "Clara Puig",
+      status: "Guardia 24h",
+      score: 97,
+      role: "Promotores",
+      dist: "1.9 km",
+      height: "1.71 m",
+      shirtSize: "S",
+      pantSize: "36",
+      shoeSize: "37",
+      footwearType: "Bailarinas negras de piel",
+      docStatus: "ok",
+      dniNie: "DNI 47.192.831-M",
+      insuranceName: "Mutua Universal • PRL Apto",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia Activa", "Bilingüe EN"]
+    }, {
+      id: 204,
+      name: "Pau Vidal",
+      status: "IN 13:40 hs",
+      score: 95,
+      role: "Acreditaciones",
+      dist: "2.7 km",
+      height: "1.77 m",
+      shirtSize: "M",
+      pantSize: "40",
+      shoeSize: "40",
+      footwearType: "Mocasines negros",
+      docStatus: "ok",
+      dniNie: "DNI 46.281.992-P",
+      insuranceName: "Alta SS #991028 • Asepeyo",
+      hasVehicle: true,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Escáner RFID", "Atención Prensa"]
+    }, {
+      id: 205,
+      name: "Sergi Gómez",
+      status: "IN 13:35 hs",
+      score: 90,
+      role: "Barras",
+      dist: "4.0 km",
+      height: "1.83 m",
+      shirtSize: "L",
+      pantSize: "42",
+      shoeSize: "43",
+      footwearType: "Zapatos antideslizantes Hostelería",
+      docStatus: "ok",
+      dniNie: "NIE X-8192019-R",
+      insuranceName: "FREMAP • PRL Hostelería Apto",
+      hasVehicle: true,
+      guard24: false,
+      img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Cocktails BCN", "Manipulador Alimentos"]
+    }, {
+      id: 206,
+      name: "David Navarro",
+      status: "IN 08:15 hs",
+      score: 98,
+      role: "Montaje",
+      dist: "6.5 km",
+      height: "1.82 m",
+      shirtSize: "XL",
+      pantSize: "44",
+      shoeSize: "44",
+      footwearType: "Botas homologadas S3 puntera acero",
+      docStatus: "ok",
+      dniNie: "DNI 45.109.821-L",
+      insuranceName: "Asepeyo • Curso PRL 60h Ferial",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Estructuras Fira", "Carretillero"]
+    }]
+  }, {
+    id: "sephora-es",
+    country: "ES",
+    name: "Sephora Beauty Experience",
+    shortName: "Sephora Beauty",
+    location: "IFEMA Madrid · Pabellón 14",
+    bannerImg: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+    badge: "EN VIVO",
+    currency: "EUR",
+    currencySymbol: "€",
+    legalDocLabel: "Alta SS IFEMA + PRL Cosmética",
+    nominaExportName: "Nomina_Sephora_IFEMA_2026.pdf",
+    staffCounts: {
+      Promotores: {
+        current: 12,
+        total: 15
+      },
+      Acreditaciones: {
+        current: 6,
+        total: 6
+      },
+      Barras: {
+        current: 8,
+        total: 10
+      },
+      Montaje: {
+        current: 4,
+        total: 4
+      }
+    },
+    workers: [{
+      id: 301,
+      name: "Laia Ferrer",
+      status: "IN 10:15 hs",
+      score: 97,
+      role: "Promotores",
+      dist: "2.3 km",
+      height: "1.74 m",
+      shirtSize: "M",
+      pantSize: "38",
+      shoeSize: "38",
+      footwearType: "Botas negras lisas",
+      docStatus: "ok",
+      dniNie: "DNI 49.102.831-C",
+      insuranceName: "Alta SS #501920 • PRL Apto",
+      hasVehicle: true,
+      guard24: true,
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Maquillaje", "Fragancias"]
+    }]
+  }]
+};
+const SMART_BACKUP_DATABASE = {
+  AR: {
+    M: {
+      id: 901,
+      name: "Lucas Pereyra",
+      role: "Promotores",
+      score: 95,
+      dist: "2.4 km",
+      height: "1.75 m",
+      shirtSize: "M",
+      pantSize: "40",
+      shoeSize: "38",
+      footwearType: "Botas reglamentarias negras",
+      attendance: 100,
+      docStatus: "ok",
+      dniNie: "DNI 40.119.382",
+      insuranceName: "Póliza AP Vigente #9910",
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      aiScanLog: "Lucas Pereyra · 95% Match · 2.4 km · Talle M verificado"
+    },
+    L: {
+      id: 902,
+      name: "Javier Maza",
+      role: "Promotores",
+      score: 93,
+      dist: "2.6 km",
+      height: "1.81 m",
+      shirtSize: "L",
+      pantSize: "42",
+      shoeSize: "42",
+      footwearType: "Mocasines negros",
+      attendance: 98,
+      docStatus: "ok",
+      dniNie: "DNI 38.991.012",
+      insuranceName: "Póliza AP Vigente #8410",
+      img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Talle L"],
+      aiScanLog: "Javier Maza · 93% Match · 2.6 km · Talle L verificado"
+    },
+    S: {
+      id: 903,
+      name: "Milagros Vega",
+      role: "Promotores",
+      score: 96,
+      dist: "1.5 km",
+      height: "1.69 m",
+      shirtSize: "S",
+      pantSize: "36",
+      shoeSize: "37",
+      footwearType: "Botas reglamentarias",
+      attendance: 100,
+      docStatus: "ok",
+      dniNie: "DNI 42.991.229",
+      insuranceName: "La Segunda ART #78190",
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Talle S"],
+      aiScanLog: "Milagros Vega · 96% Match · 1.5 km · Talle S verificado"
+    }
+  },
+  ES: {
+    M: {
+      id: 951,
+      name: "Lucas Pereyra",
+      role: "Promotores",
+      score: 96,
+      dist: "2.1 km",
+      height: "1.75 m",
+      shirtSize: "M",
+      pantSize: "40",
+      shoeSize: "38",
+      footwearType: "Mocasines negros",
+      attendance: 100,
+      docStatus: "ok",
+      dniNie: "NIE X-9921021-T",
+      insuranceName: "Alta SS #582109 • PRL Apto",
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      aiScanLog: "Lucas Pereyra · 96% Match · 2.1 km · Talle M verificado"
+    },
+    L: {
+      id: 952,
+      name: "Alejandro Ruiz",
+      role: "Promotores",
+      score: 94,
+      dist: "3.2 km",
+      height: "1.82 m",
+      shirtSize: "L",
+      pantSize: "42",
+      shoeSize: "42",
+      footwearType: "Zapatos negros",
+      attendance: 99,
+      docStatus: "ok",
+      dniNie: "DNI 50.192.831-V",
+      insuranceName: "Mutua Universal • PRL Apto",
+      img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Talle L"],
+      aiScanLog: "Alejandro Ruiz · 94% Match · 3.2 km · Talle L verificado"
+    },
+    S: {
+      id: 953,
+      name: "Clara Puig",
+      role: "Promotores",
+      score: 97,
+      dist: "1.9 km",
+      height: "1.71 m",
+      shirtSize: "S",
+      pantSize: "36",
+      shoeSize: "37",
+      footwearType: "Bailarinas negras",
+      attendance: 100,
+      docStatus: "ok",
+      dniNie: "DNI 47.192.831-M",
+      insuranceName: "Alta SS #482910 • PRL Apto",
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+      fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
+      shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+      tags: ["Guardia 24h", "Talle S"],
+      aiScanLog: "Clara Puig · 97% Match · 1.9 km · Talle S verificado"
+    }
+  }
+};
+const STAFF_PROPOSALS = {
+  AR: [{
+    id: "prop-ar-1",
+    title: "Activación Lollapalooza VIP",
+    agency: "Somos DER Producciones",
+    pay: "$65.000 Neto",
+    date: "Sáb 28 Nov · 10 a 18 hs",
+    dresscode: "Total black + Zapatillas oscuras",
+    venue: "Hipódromo de San Isidro · Puerta 4",
+    status: "pending"
+  }, {
+    id: "prop-ar-2",
+    title: "Maratón Nordelta",
+    agency: "Quantum Brand Agency",
+    pay: "$55.000 Neto",
+    date: "Dom 29 Nov · 07 a 13 hs",
+    dresscode: "Remera provista + Calzado reglamentario",
+    venue: "Bahía Grande Nordelta",
+    status: "pending"
+  }, {
+    id: "prop-ar-3",
+    title: "Feria Matear 2026",
+    agency: "La Rural Eventos",
+    pay: "$58.000 Neto",
+    date: "Vie 4 Dic · 12 a 20 hs",
+    dresscode: "Camisa blanca + Calzado negro cómodo",
+    venue: "Pabellón Ocre · La Rural Palermo",
+    status: "pending"
+  }],
+  ES: [{
+    id: "prop-es-1",
+    title: "Activación Sephora Beauty",
+    agency: "NSH Azafatas BCN",
+    pay: "€145 Neto + SS",
+    date: "Sáb 28 Nov · 10 a 18 hs",
+    dresscode: "Total black + Calzado oscuro reglamentario",
+    venue: "IFEMA Madrid · Pabellón 14",
+    status: "pending"
+  }, {
+    id: "prop-es-2",
+    title: "Congreso Fira VIP",
+    agency: "B2B Events Catalunya",
+    pay: "€130 Neto + PRL",
+    date: "Dom 29 Nov · 08 a 15 hs",
+    dresscode: "Traje formal oscuro + Zapatos negros",
+    venue: "Fira Barcelona Gran Via · Acceso Norte",
+    status: "pending"
+  }, {
+    id: "prop-es-3",
+    title: "Mobile World Congress 2026",
+    agency: "Staffing Global Spain",
+    pay: "€160 Neto + SS",
+    date: "Lun 2 Mar · 09 a 18 hs",
+    dresscode: "Blazer corporativo provisto + Calzado formal",
+    venue: "Fira Gran Via · Stand Qualcomm",
+    status: "pending"
+  }]
+};
+
+// --- Source: src/components.jsx ---
+const {
+  useState,
+  useEffect,
+  useRef,
+  createContext,
+  useContext
+} = React;
+const AppContext = createContext(null);
+
+// --- StatusBadge con tokens dual-theme y semánticos estrictos ---
+const StatusBadge = ({
+  variant = "accent",
+  children
+}) => {
+  const {
+    isDark
+  } = useContext(AppContext);
+  const baseClasses = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight border transition-colors shrink-0";
+  const variants = {
+    accent: isDark ? "bg-sky-400/15 text-sky-400 border-sky-400/30" : "bg-sky-50 text-sky-700 border-sky-600/30",
+    success: isDark ? "bg-[#34D399]/15 text-[#34D399] border-[#34D399]/30" : "bg-emerald-50 text-[#059669] border-[#059669]/30",
+    warning: isDark ? "bg-[#F97316]/15 text-[#F97316] border-[#F97316]/30" : "bg-amber-50 text-[#EA580C] border-[#EA580C]/30",
+    danger: isDark ? "bg-[#EF4444]/15 text-[#EF4444] border-[#EF4444]/30" : "bg-rose-50 text-[#DC2626] border-[#DC2626]/30",
+    info: isDark ? "bg-[#818CF8]/15 text-[#818CF8] border-[#818CF8]/30" : "bg-indigo-50 text-[#4F46E5] border-[#4F46E5]/30",
+    neutral: isDark ? "bg-zinc-800 text-zinc-300 border-zinc-700/60" : "bg-slate-100 text-slate-700 border-slate-200"
+  };
+  return /*#__PURE__*/React.createElement("span", {
+    className: `${baseClasses} ${variants[variant] || variants.accent}`
+  }, children);
+};
+
+// --- LuminousButton (Fitts Law: h-12 mínima, touch target amplio) ---
+const LuminousButton = ({
+  children,
+  onClick,
+  icon,
+  variant = "accent",
+  disabled = false,
+  loading = false,
+  full = true,
+  className = ""
+}) => {
+  const {
+    isDark
+  } = useContext(AppContext);
+  const heightClass = "h-12 min-h-[48px]";
+  const variants = {
+    accent: isDark ? "bg-sky-400 text-[#09090B] hover:bg-sky-300 active:bg-sky-400 font-bold shadow-glow-sky border-none" : "bg-sky-600 text-[#FFFFFF] hover:bg-sky-700 active:bg-sky-600 font-bold shadow-glow-sky-subtle border-none",
+    danger: isDark ? "bg-[#EF4444]/15 text-[#EF4444] border border-[#EF4444]/35 hover:bg-[#EF4444]/25" : "bg-rose-50 text-[#DC2626] border border-rose-200 hover:bg-rose-100",
+    secondary: isDark ? "bg-zinc-800 text-zinc-100 hover:bg-zinc-700 border border-zinc-700" : "bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200",
+    outline: isDark ? "bg-transparent text-zinc-300 border border-zinc-700 hover:border-zinc-500" : "bg-transparent text-slate-700 border border-slate-300 hover:border-slate-400"
+  };
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    disabled: disabled || loading,
+    className: `
+        ${full ? 'w-full' : 'px-4'} 
+        ${heightClass} 
+        rounded-input 
+        text-xs 
+        font-bold 
+        flex 
+        items-center 
+        justify-center 
+        gap-2 
+        transition-all 
+        duration-150 
+        active:scale-[0.98] 
+        cursor-pointer 
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${variants[variant] || variants.accent}
+        ${className}
+      `
+  }, loading ? /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-spinner-gap animate-spin text-base"
+  }) : icon ? /*#__PURE__*/React.createElement("i", {
+    className: `ph-bold ${icon} text-base`
+  }) : null, /*#__PURE__*/React.createElement("span", {
+    className: "truncate"
+  }, children));
+};
+
+// --- BottomSheet (Strictly ABSOLUTE dentro del contenedor mobile de 393px) ---
+const BottomSheet = ({
+  isOpen,
+  onClose,
+  title,
+  children
+}) => {
+  if (!isOpen) return null;
+  const {
+    isDark
+  } = useContext(AppContext);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 z-50 flex flex-col justify-end overflow-hidden"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: `
+        relative w-full rounded-t-sheet border-t shadow-2xl animate-slide-up flex flex-col max-h-[88%] z-10 transition-colors
+        ${isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-100' : 'bg-white border-slate-200 text-slate-900'}
+      `
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `drag-handle ${isDark ? 'bg-zinc-700' : 'bg-slate-300'}`
+  }), /*#__PURE__*/React.createElement("div", {
+    className: `px-4 pb-2.5 flex justify-between items-center border-b shrink-0 ${isDark ? 'border-zinc-800/80' : 'border-slate-100'}`
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-sm tracking-tight truncate pr-2"
+  }, title), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    className: `w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0 ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`,
+    "aria-label": "Cerrar modal"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-x text-base"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "overflow-y-auto hide-scroll p-4 pb-8 space-y-4"
+  }, children)));
+};
+
+// --- FeedbackToast (Cero alert() nativos, absolute al contenedor) ---
+const FeedbackToast = ({
+  message,
+  type = "info",
+  onClose
+}) => {
+  if (!message) return null;
+  const {
+    isDark
+  } = useContext(AppContext);
+  const colors = {
+    success: isDark ? "bg-zinc-900 border-[#34D399]/40 text-[#34D399]" : "bg-white border-[#059669]/40 text-[#059669]",
+    warning: isDark ? "bg-zinc-900 border-[#F97316]/40 text-[#F97316]" : "bg-white border-[#EA580C]/40 text-[#EA580C]",
+    danger: isDark ? "bg-zinc-900 border-[#EF4444]/40 text-[#EF4444]" : "bg-white border-[#DC2626]/40 text-[#DC2626]",
+    info: isDark ? "bg-zinc-900 border-sky-400/40 text-sky-400" : "bg-white border-sky-600/40 text-sky-600"
+  };
+  const icons = {
+    success: "ph-fill ph-check-circle",
+    warning: "ph-fill ph-warning",
+    danger: "ph-fill ph-warning-octagon",
+    info: "ph-fill ph-info"
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-3 left-3 right-3 z-50 animate-toast"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border shadow-xl flex items-center gap-2.5 backdrop-blur-md ${colors[type] || colors.info}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `${icons[type] || icons.info} text-lg shrink-0`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `flex-1 min-w-0 text-[11px] leading-snug whitespace-normal ${isDark ? 'text-zinc-100 font-medium' : 'text-slate-900 font-medium'}`
+  }, message), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    className: "text-zinc-400 hover:text-zinc-200 text-xs shrink-0 cursor-pointer p-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-x"
+  }))));
+};
+
+// --- LoginScreen (Selector de Rol Limpio & Acceso Directo) ---
+const LoginScreen = ({
+  role,
+  setRole,
+  onLoginSuccess,
+  onStartOnboarding
+}) => {
+  const {
+    isDark,
+    country
+  } = useContext(AppContext);
+  const [phone, setPhone] = useState("+54 9 11 4092-8812");
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col h-full p-4 justify-between animate-fade-in overflow-y-auto hide-scroll"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 pt-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-9 h-9 rounded-card bg-sky-400 flex items-center justify-center text-[#09090B] font-black text-base shadow-glow-sky"
+  }, "E"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "EventuApp"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] font-mono text-sky-400"
+  }, "Staffing & Operaciones B2B2C"))), /*#__PURE__*/React.createElement("div", {
+    className: `p-1 rounded-card border grid grid-cols-2 gap-1 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setRole('worker'),
+    className: `h-10 rounded-input text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === 'worker' ? 'bg-sky-400 text-zinc-950 font-black shadow-sm' : isDark ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-600 hover:text-slate-900'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-user"
+  }), /*#__PURE__*/React.createElement("span", null, "Soy Staff")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setRole('agency'),
+    className: `h-10 rounded-input text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === 'agency' ? 'bg-sky-400 text-zinc-950 font-black shadow-sm' : isDark ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-600 hover:text-slate-900'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-buildings"
+  }), /*#__PURE__*/React.createElement("span", null, "Productora / B2B"))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-sm font-extrabold tracking-tight"
+  }, role === 'worker' ? 'Acceso Staff & Promotores' : 'Panel de Agencias & Productoras'), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, role === 'worker' ? 'Ingresá para fichar con GPS, ver propuestas confirmadas y acceder a tu book verificado.' : 'Gestión de cupos en vivo, auditoría GPS y activación de Smart Backup inmediato.')), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Teléfono Celular (", country, ")"), /*#__PURE__*/React.createElement("div", {
+    className: `flex items-center border rounded-input px-3 h-12 transition-colors ${isDark ? 'bg-zinc-900 border-zinc-800 focus-within:border-sky-400' : 'bg-white border-slate-200 focus-within:border-sky-600 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-phone text-zinc-400 text-sm mr-2"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: phone,
+    onChange: e => setPhone(e.target.value),
+    className: "w-full bg-transparent font-mono text-xs font-semibold outline-none text-zinc-100"
+  }))), /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-arrow-right",
+    onClick: () => onLoginSuccess(role)
+  }, role === 'worker' ? 'Entrar a mi Jornada' : 'Entrar al Backstage Operativo')), role === 'worker' && /*#__PURE__*/React.createElement("div", {
+    className: "pt-2 text-center"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: onStartOnboarding,
+    className: `w-full h-12 rounded-input border text-xs font-bold transition-all active:scale-[0.98] ${isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:bg-zinc-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-sparkle text-sky-400 mr-1.5"
+  }), "¿Primera vez? Crear perfil verificado (3 pasos)"))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-4 border-t border-zinc-800/80 flex items-center justify-between text-[10px] font-mono text-zinc-400"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-shield-check text-[#34D399]"
+  }), " Compliance ", country), /*#__PURE__*/React.createElement("span", null, "EventuApp v1.0")));
+};
+
+// --- StaffOnboarding (3 Pasos: Datos -> Medidas/Fotos -> Disponibilidad) ---
+const StaffOnboarding = ({
+  onComplete,
+  onCancel
+}) => {
+  const {
+    isDark,
+    country,
+    showToast
+  } = useContext(AppContext);
+  const [step, setStep] = useState(1);
+  const [height, setHeight] = useState("1.74 m");
+  const [shirt, setShirt] = useState("M");
+  const [pant, setPant] = useState("40");
+  const [shoes, setShoes] = useState("38");
+  const [guard24, setGuard24] = useState(true);
+  const [car, setCar] = useState(true);
+  const handleNextStep = () => {
+    if (step < 3) {
+      setStep(step + 1);
+    } else {
+      showToast("¡Perfil guardado y activado con éxito!", "success");
+      onComplete();
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col h-full p-4 justify-between overflow-y-auto hide-scroll animate-fade-in pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-3"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: step === 1 ? onCancel : () => setStep(step - 1),
+    className: "text-xs text-zinc-400 hover:text-zinc-200 flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-arrow-left"
+  }), " ", step === 1 ? 'Volver al Login' : 'Paso anterior'), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-bold text-sky-400"
+  }, "Paso ", step, " de 3")), /*#__PURE__*/React.createElement("div", {
+    className: `w-full h-1.5 rounded-full overflow-hidden mb-4 ${isDark ? 'bg-zinc-800' : 'bg-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "h-full bg-sky-400 rounded-full transition-all duration-300 shadow-glow-sky-subtle",
+    style: {
+      width: `${step / 3 * 100}%`
+    }
+  })), step === 1 && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 animate-fade-in"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Validación Legal (", country, ")"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, country === 'AR' ? 'Ingresá tu DNI y estado tributario ante ARCA/AFIP para emitir facturación y activar póliza AP.' : 'Ingresá tu DNI/NIE y alta en Seguridad Social para contratación directa.')), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, country === 'AR' ? 'DNI / CUIL' : 'DNI / NIE'), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    defaultValue: country === 'AR' ? '41.205.892' : 'Y-4921028-H',
+    className: `w-full h-11 rounded-input px-3 text-xs font-mono font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, country === 'AR' ? 'CBU / Alias Bancario' : 'IBAN Bancario (SEPA)'), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    defaultValue: country === 'AR' ? 'martina.staff.mp' : 'ES91 2100 0418 4502 0005 1192',
+    className: `w-full h-11 rounded-input px-3 text-xs font-mono font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border flex items-center justify-between ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-file-text text-sky-400 text-base"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs font-semibold"
+  }, country === 'AR' ? 'Constancia Monotributo' : 'Certificado PRL Vigente')), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Vigente")))), step === 2 && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 animate-fade-in"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Armá tu perfil operativo"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Subí tus fotos reglamentarias y seleccioná tus talles para reserva directa de vestuario.")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-1.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Fotos Verificadas (3)"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-mono text-[#34D399] flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-check-circle"
+  }), " 3/3 Cargadas")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-3 gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative rounded-card overflow-hidden border border-zinc-700/60 aspect-[3/4] group"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-1.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold text-white"
+  }, "Rostro"))), /*#__PURE__*/React.createElement("div", {
+    className: "relative rounded-card overflow-hidden border border-zinc-700/60 aspect-[3/4] group"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-1.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold text-white"
+  }, "Cuerpo"))), /*#__PURE__*/React.createElement("div", {
+    className: "relative rounded-card overflow-hidden border border-zinc-700/60 aspect-[3/4] group"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-1.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold text-white"
+  }, "Calzado"))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
+  }, "Talles de Guardarropa"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-4 gap-1.5 font-mono text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "ALT"), /*#__PURE__*/React.createElement("input", {
+    value: height,
+    onChange: e => setHeight(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "REM"), /*#__PURE__*/React.createElement("input", {
+    value: shirt,
+    onChange: e => setShirt(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center text-sky-400 outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "PAN"), /*#__PURE__*/React.createElement("input", {
+    value: pant,
+    onChange: e => setPant(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "CAL"), /*#__PURE__*/React.createElement("input", {
+    value: shoes,
+    onChange: e => setShoes(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  }))))), step === 3 && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 animate-fade-in"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Disponibilidad & Smart Backup"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Configurá tu disponibilidad para reemplazos de último minuto y movilidad.")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: () => setGuard24(!guard24),
+    className: `p-3 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold"
+  }, "Guardia 24h Smart Backup"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-400"
+  }, "Recibí avisos de emergencia con plus de tarifa")), /*#__PURE__*/React.createElement("div", {
+    className: `w-9 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-4 h-4 rounded-full bg-white transition-transform ${guard24 ? 'translate-x-4' : 'translate-x-0'}`
+  }))), /*#__PURE__*/React.createElement("div", {
+    onClick: () => setCar(!car),
+    className: `p-3 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold"
+  }, "Movilidad Propia (Auto / Moto)"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-400"
+  }, "Prioridad en eventos de predios alejados")), /*#__PURE__*/React.createElement("div", {
+    className: `w-9 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${car ? 'bg-sky-400' : 'bg-zinc-700'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-4 h-4 rounded-full bg-white transition-transform ${car ? 'translate-x-4' : 'translate-x-0'}`
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-4 border-t border-zinc-800/80"
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: step === 3 ? "ph-check" : "ph-arrow-right",
+    onClick: handleNextStep
+  }, step === 3 ? "Activar Perfil y Entrar" : "Continuar")));
+};
+
+// --- Source: src/agency_views.jsx ---
+// Vistas completas de Productora (B2B): Evento, Fechas, Talento, Avisos
+
+const AgencyTabEvento = ({
+  currentEvent,
+  eventsList,
+  onSelectEvent,
+  onSmartBackupApplied
+}) => {
+  const {
+    isDark,
+    showToast,
+    country
+  } = useContext(AppContext);
+  const [activeRoleTab, setActiveRoleTab] = useState("Promotores");
+  const [statusFilter, setStatusFilter] = useState("Todos");
+  const [selectedWorker, setSelectedWorker] = useState(null);
+  const [nominaSheetOpen, setNominaSheetOpen] = useState(false);
+  const [aiCopilotSheetOpen, setAiCopilotSheetOpen] = useState(false);
+  const [eventSwitcherOpen, setEventSwitcherOpen] = useState(false);
+  const [aiQuery, setAiQuery] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiFoundProfiles, setAiFoundProfiles] = useState(null);
+  const [isScanningRadar, setIsScanningRadar] = useState(false);
+  const [scannedCandidate, setScannedCandidate] = useState(null);
+  const roleTabs = ["Promotores", "Acreditaciones", "Barras", "Montaje"];
+  const statusChips = ["Todos", "Check-in", "Confirmados", "Guardia 24h", "Baja"];
+
+  // Filtro combinado de Rol y Estado
+  const filteredWorkers = currentEvent.workers.filter(w => {
+    const roleMatches = w.role === activeRoleTab;
+    if (!roleMatches) return false;
+    if (statusFilter === "Todos") return true;
+    if (statusFilter === "Check-in") return w.status.includes("IN");
+    if (statusFilter === "Confirmados") return w.status === "Confirmados";
+    if (statusFilter === "Guardia 24h") return w.status === "Guardia 24h";
+    if (statusFilter === "Baja") return w.status === "Baja";
+    return true;
+  });
+  const handleExportNomina = () => {
+    setNominaSheetOpen(false);
+    showToast(`Nómina legal oficial generada: ${currentEvent.nominaExportName}`, "success");
+  };
+  const handleExecuteAISearch = customQuery => {
+    const queryToUse = customQuery || aiQuery;
+    if (!queryToUse.trim()) return;
+    setAiQuery(queryToUse);
+    setAiLoading(true);
+    setAiFoundProfiles(null);
+    setTimeout(() => {
+      setAiLoading(false);
+      setAiFoundProfiles([{
+        id: 801,
+        name: country === "AR" ? "Camila Navarro" : "Laia Ferrer",
+        match: 98,
+        distance: "2.1 km",
+        shirtSize: "M",
+        shoes: "Botas reglamentarias",
+        docStatus: "ok",
+        badges: ["Docs Vigentes", "< 3km", country === "AR" ? "Bilingüe EN" : "Trilingüe EN/FR"],
+        img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
+      }, {
+        id: 802,
+        name: country === "AR" ? "Tomás Peralta" : "Javier Maza",
+        match: 94,
+        distance: "3.8 km",
+        shirtSize: "L",
+        shoes: "Mocasines negros",
+        docStatus: "ok",
+        badges: ["Docs Vigentes", "Movilidad", "Guardia 24h"],
+        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
+      }]);
+      showToast("Copiloto IA: 2 candidatos compatibles encontrados.", "info");
+    }, 600);
+  };
+  const handleStartRadarScan = worker => {
+    setIsScanningRadar(true);
+    setScannedCandidate(null);
+    setTimeout(() => {
+      setIsScanningRadar(false);
+      const countryDB = SMART_BACKUP_DATABASE[country] || SMART_BACKUP_DATABASE["AR"];
+      const backup = countryDB[worker.shirtSize] || countryDB["M"];
+      setScannedCandidate(backup);
+      showToast(`Radar IA: Suplente de guardia ${backup.name} ubicada a ${backup.dist}.`, "warning");
+    }, 1000);
+  };
+  const handleConfirmSmartBackup = () => {
+    if (!selectedWorker || !scannedCandidate) return;
+    onSmartBackupApplied(selectedWorker.id, scannedCandidate);
+    setSelectedWorker(null);
+    setScannedCandidate(null);
+    showToast(`Reemplazo confirmado: ${scannedCandidate.name} ingresa como titular.`, "success");
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col h-full space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `pt-2.5 px-4 pb-2 sticky top-0 z-20 border-b backdrop-blur-md transition-colors ${isDark ? 'bg-zinc-950/95 border-zinc-800/80' : 'bg-slate-50/95 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: () => setEventSwitcherOpen(true),
+    className: "min-w-0 flex-1 mr-2 cursor-pointer group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 mb-0.5"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "text-sm font-extrabold tracking-tight truncate group-hover:text-sky-400 transition-colors"
+  }, currentEvent.name), /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-caret-down text-xs text-sky-400 shrink-0"
+  }), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "accent"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"
+  }), "VIVO")), /*#__PURE__*/React.createElement("p", {
+    className: `text-[10px] flex items-center gap-1 font-medium truncate ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-map-pin text-sky-400"
+  }), " ", currentEvent.location)), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setNominaSheetOpen(true),
+    className: `h-8 px-2.5 rounded-card border flex items-center gap-1 text-[11px] font-bold transition-all active:scale-95 shrink-0 ${isDark ? 'bg-zinc-900 border-zinc-700 text-sky-400 hover:bg-zinc-800' : 'bg-white border-slate-300 text-sky-700 hover:bg-slate-100 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-shield-check text-sm"
+  }), /*#__PURE__*/React.createElement("span", null, "Nómina"))), /*#__PURE__*/React.createElement("div", {
+    className: "w-full overflow-x-auto hide-scroll flex flex-nowrap items-center gap-1.5 pb-1"
+  }, roleTabs.map(role => {
+    const roleWorkers = currentEvent.workers.filter(w => w.role === role);
+    const activeCount = roleWorkers.filter(w => w.status !== "Baja").length;
+    const totalTarget = currentEvent.staffCounts[role]?.total || 10;
+    const isFull = activeCount >= totalTarget;
+    const isActive = activeRoleTab === role;
+    const pct = Math.min(activeCount / totalTarget * 100, 100);
+    return /*#__PURE__*/React.createElement("button", {
+      key: role,
+      onClick: () => {
+        setActiveRoleTab(role);
+        setStatusFilter("Todos");
+      },
+      className: `shrink-0 px-2.5 py-1.5 rounded-card border text-[11px] font-semibold transition-all flex flex-col gap-1 ${isActive ? isDark ? 'bg-zinc-900 border-zinc-700 shadow-sm' : 'bg-white border-slate-300 shadow-sm' : 'bg-transparent border-transparent opacity-60 hover:opacity-100'}`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-center w-full gap-1.5"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: isActive ? isDark ? 'text-zinc-100' : 'text-slate-900' : isDark ? 'text-zinc-400' : 'text-slate-500'
+    }, role), /*#__PURE__*/React.createElement("span", {
+      className: `font-mono text-[10px] font-bold px-1 rounded ${isFull ? isDark ? 'bg-[#34D399]/15 text-[#34D399]' : 'bg-[#059669]/15 text-[#059669]' : isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}`
+    }, activeCount, "/", totalTarget)), /*#__PURE__*/React.createElement("div", {
+      className: `w-full h-1 rounded-full overflow-hidden ${isDark ? 'bg-zinc-800' : 'bg-slate-200'}`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `h-full rounded-full transition-all duration-300 ${isFull ? isDark ? 'bg-[#34D399]' : 'bg-[#059669]' : isDark ? 'bg-sky-400' : 'bg-sky-600'}`,
+      style: {
+        width: `${pct}%`
+      }
+    })));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-1.5 overflow-x-auto hide-scroll pt-1.5"
+  }, statusChips.map(st => /*#__PURE__*/React.createElement("button", {
+    key: st,
+    onClick: () => setStatusFilter(st),
+    className: `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight border shrink-0 transition-colors ${statusFilter === st ? 'bg-sky-400 text-zinc-950 border-sky-400' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200' : 'bg-white border-slate-200 text-slate-600'}`
+  }, st)))), /*#__PURE__*/React.createElement("div", {
+    className: "p-3.5 space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: () => setAiCopilotSheetOpen(true),
+    className: `border rounded-card p-3 flex items-center gap-2.5 shadow-sm cursor-pointer transition-all active:scale-[0.99] group ${isDark ? 'bg-zinc-900 border-zinc-800 hover:border-sky-400/50' : 'bg-white border-slate-200 hover:border-sky-500/50'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-8 h-8 rounded-input flex items-center justify-center shrink-0 ${isDark ? 'bg-sky-400/15 text-sky-400 shadow-glow-sky-subtle' : 'bg-sky-50 text-sky-600'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-sparkle text-base"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 min-w-0"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xs font-bold tracking-tight truncate"
+  }, "Copiloto IA de Staffing"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[9px] font-bold px-1 rounded bg-sky-400/10 text-sky-400 border border-sky-400/20"
+  }, "PROMPT")), /*#__PURE__*/React.createElement("p", {
+    className: `text-[10px] truncate mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "\"✨ Talle M/L + Botas negras + < 5km...\"")), /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-caret-right text-zinc-500 text-xs"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center px-0.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, activeRoleTab, " (", filteredWorkers.length, ")"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-mono text-zinc-400"
+  }, "Filtro: ", statusFilter)), filteredWorkers.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    className: `p-6 rounded-card border text-center space-y-2 ${isDark ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-users text-2xl text-zinc-500"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-bold"
+  }, "No hay staff con filtro \"", statusFilter, "\""), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStatusFilter("Todos"),
+    className: "text-xs text-sky-400 font-bold hover:underline"
+  }, "Ver todos en ", activeRoleTab)) : filteredWorkers.map(worker => {
+    const isCheckedIn = worker.status.includes("IN");
+    const isBaja = worker.status === "Baja";
+    const isGuard = worker.status === "Guardia 24h";
+    return /*#__PURE__*/React.createElement("div", {
+      key: worker.id,
+      onClick: () => {
+        setSelectedWorker(worker);
+        setScannedCandidate(null);
+      },
+      className: `border rounded-card p-3 flex gap-2.5 active:scale-[0.98] transition-all cursor-pointer relative overflow-hidden ${isBaja ? isDark ? 'bg-red-950/20 border-red-900/40 opacity-75' : 'bg-rose-50 border-rose-200 opacity-75' : isDark ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 shadow-sm hover:border-slate-300'}`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "relative shrink-0"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: worker.img,
+      alt: worker.name,
+      className: "w-12 h-12 rounded-card object-cover border border-zinc-700/60"
+    }), isCheckedIn && /*#__PURE__*/React.createElement("span", {
+      className: "absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-[#34D399] border-2 border-zinc-900 rounded-full"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "flex-1 min-w-0"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-start gap-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "min-w-0"
+    }, /*#__PURE__*/React.createElement("h4", {
+      className: "font-bold text-xs truncate"
+    }, worker.name), /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-1.5 mt-0.5"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-[10px] text-zinc-400"
+    }, "Talle ", worker.shirtSize), /*#__PURE__*/React.createElement("span", {
+      className: "text-[10px] text-zinc-500"
+    }, "•"), /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-[10px] text-zinc-400"
+    }, worker.dist))), /*#__PURE__*/React.createElement("div", {
+      className: "flex flex-col items-end gap-1 shrink-0"
+    }, /*#__PURE__*/React.createElement(StatusBadge, {
+      variant: isBaja ? "danger" : isCheckedIn ? "success" : isGuard ? "info" : "warning"
+    }, worker.status), /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-[10px] font-bold text-sky-400"
+    }, worker.score, "% Match"))), /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center justify-between mt-2 pt-1.5 border-t border-zinc-800/60 text-[10px] font-mono text-zinc-400"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "truncate pr-1"
+    }, worker.footwearType), /*#__PURE__*/React.createElement("span", {
+      className: `shrink-0 font-bold ${worker.docStatus === 'ok' ? 'text-[#34D399]' : 'text-[#F97316]'}`
+    }, worker.docStatus === 'ok' ? 'Docs OK' : 'Falta Doc'))));
+  }))), /*#__PURE__*/React.createElement(BottomSheet, {
+    isOpen: eventSwitcherOpen,
+    onClose: () => setEventSwitcherOpen(false),
+    title: `Producciones Activas (${country})`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2.5"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Seleccioná la producción para ver cupos en vivo y nómina legal correspondiente:"), eventsList.map(ev => /*#__PURE__*/React.createElement("div", {
+    key: ev.id,
+    onClick: () => {
+      onSelectEvent(ev.id);
+      setEventSwitcherOpen(false);
+      showToast(`Cambiando a producción: ${ev.name}`, "info");
+    },
+    className: `p-3 rounded-card border flex items-center justify-between cursor-pointer transition-all active:scale-[0.98] ${ev.id === currentEvent.id ? isDark ? 'bg-sky-400/10 border-sky-400 text-sky-400 font-bold' : 'bg-sky-50 border-sky-600 text-sky-700 font-bold' : isDark ? 'bg-zinc-950 border-zinc-800 hover:border-zinc-700' : 'bg-slate-50 border-slate-200 hover:bg-slate-100'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0 pr-2"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold truncate"
+  }, ev.name), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] font-mono text-zinc-400 truncate mt-0.5"
+  }, ev.location)), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: ev.id === currentEvent.id ? "accent" : "neutral"
+  }, ev.id === currentEvent.id ? "ACTIVO" : "VER"))))), /*#__PURE__*/React.createElement(BottomSheet, {
+    isOpen: nominaSheetOpen,
+    onClose: () => setNominaSheetOpen(false),
+    title: "Nómina Legal & Pólizas de Ingreso"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold"
+  }, currentEvent.name), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] font-mono text-zinc-400"
+  }, currentEvent.legalDocLabel)), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "100% Cobertura")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2 max-h-56 overflow-y-auto hide-scroll"
+  }, currentEvent.workers.map(w => /*#__PURE__*/React.createElement("div", {
+    key: w.id,
+    className: `p-2 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0 pr-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold block truncate"
+  }, w.name, " (", w.role, ")"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block truncate"
+  }, w.dniNie, " • ", w.insuranceName)), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: w.docStatus === 'ok' ? 'success' : 'warning'
+  }, w.docStatus === 'ok' ? 'Aprobado' : 'Pendiente')))), /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-download-simple",
+    onClick: handleExportNomina
+  }, "Exportar Nómina Oficial PDF (", currentEvent.currency, ")"))), /*#__PURE__*/React.createElement(BottomSheet, {
+    isOpen: aiCopilotSheetOpen,
+    onClose: () => {
+      setAiCopilotSheetOpen(false);
+      setAiFoundProfiles(null);
+    },
+    title: "Copiloto IA de Staffing"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Búsqueda semántica sobre el pool de talentos de ", country, ":"), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: aiQuery,
+    onChange: e => setAiQuery(e.target.value),
+    placeholder: "Ej: Azafata bilingüe con mocasines talle M...",
+    className: `flex-1 h-11 px-3 text-xs rounded-input border outline-none font-medium ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  }), /*#__PURE__*/React.createElement("button", {
+    onClick: () => handleExecuteAISearch(),
+    className: "px-3 h-11 rounded-input bg-sky-400 text-zinc-950 font-bold text-xs flex items-center gap-1 shrink-0 shadow-glow-sky-subtle"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-magnifying-glass"
+  }), " Buscar")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1"
+  }, "PROMPTS RÁPIDOS SUGERIDOS"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-1.5"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => handleExecuteAISearch("Talle M/L con calzado reglamentario a < 3km"),
+    className: `p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'}`
+  }, "✨ Talle M + Botas negras"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => handleExecuteAISearch("Azafata bilingüe protocolo VIP"),
+    className: `p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'}`
+  }, "✨ Azafata bilingüe VIP"))), aiLoading && /*#__PURE__*/React.createElement("div", {
+    className: "py-4 text-center flex flex-col items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-spinner-gap animate-spin text-2xl text-sky-400"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[11px] font-mono text-zinc-400"
+  }, "Filtrando base de datos...")), aiFoundProfiles && !aiLoading && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2 pt-1 animate-fade-in"
+  }, aiFoundProfiles.map(cand => /*#__PURE__*/React.createElement("div", {
+    key: cand.id,
+    className: `p-2.5 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2.5 items-center mb-2"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: cand.img,
+    className: "w-10 h-10 rounded-card object-cover shrink-0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 min-w-0"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "font-bold text-xs truncate"
+  }, cand.name), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-bold text-sky-400"
+  }, cand.match, "% Match")), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[9px] text-zinc-400 block truncate"
+  }, cand.distance, " • Talle ", cand.shirtSize, " • ", cand.shoes))), /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-paper-plane-tilt",
+    onClick: () => {
+      setAiCopilotSheetOpen(false);
+      showToast(`Propuesta directa enviada a ${cand.name}.`, "success");
+    }
+  }, "Enviar Propuesta Directa")))))), /*#__PURE__*/React.createElement(BottomSheet, {
+    isOpen: !!selectedWorker,
+    onClose: () => {
+      setSelectedWorker(null);
+      setScannedCandidate(null);
+      setIsScanningRadar(false);
+    },
+    title: "Ficha Operativa & Guardarropa"
+  }, selectedWorker && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-3 items-center"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: selectedWorker.img,
+    className: "w-13 h-13 rounded-card object-cover border-2 border-zinc-700/60 shrink-0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0 flex-1"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold tracking-tight truncate"
+  }, selectedWorker.name), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 mt-0.5"
+  }, /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "accent"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-mono"
+  }, selectedWorker.score, "% Match")), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[11px] text-sky-400 flex items-center gap-1 font-semibold"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-navigation-arrow"
+  }), " ", selectedWorker.dist)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Medidas para Guardarropa"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-4 gap-1.5 font-mono text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "ALTURA"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, selectedWorker.height)), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "REMERA"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs text-sky-400"
+  }, selectedWorker.shirtSize)), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "PANTALÓN"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, selectedWorker.pantSize)), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "CALZADO"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, selectedWorker.shoeSize)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Book & Calzado Verificado (3 Fotos)"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-3 gap-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: selectedWorker.img,
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Rostro")), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: selectedWorker.fullBodyImg,
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Cuerpo")), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: selectedWorker.shoesImg,
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Calzado")))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `text-[10px] font-bold uppercase tracking-wider block ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Documentación Legal (", country, ")"), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0 pr-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold block text-zinc-200 truncate"
+  }, selectedWorker.dniNie), /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block truncate"
+  }, selectedWorker.insuranceName)), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: selectedWorker.docStatus === 'ok' ? 'success' : 'warning'
+  }, selectedWorker.docStatus === 'ok' ? 'Vigente' : 'Pendiente'))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-2 border-t border-zinc-800/80 space-y-2"
+  }, !scannedCandidate && !isScanningRadar && /*#__PURE__*/React.createElement(LuminousButton, {
+    variant: "danger",
+    icon: "ph-warning-octagon",
+    onClick: () => handleStartRadarScan(selectedWorker)
+  }, "Reportar Baja & Activar Smart Backup"), isScanningRadar && /*#__PURE__*/React.createElement("div", {
+    className: `p-4 rounded-card border text-center flex flex-col items-center justify-center gap-1.5 ${isDark ? 'bg-zinc-950 border-sky-400/30' : 'bg-slate-100 border-sky-600/30'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-10 h-10 rounded-full border-2 border-sky-400 flex items-center justify-center relative"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 rounded-full bg-sky-400/20 animate-radar"
+  }), /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-radar text-base text-sky-400"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-bold text-sky-400"
+  }, "Buscando suplente talle ", selectedWorker.shirtSize, "..."), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-400"
+  }, "Geolocalizando staff en guardia < 3km")), scannedCandidate && /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border space-y-2 animate-fade-in ${isDark ? 'bg-zinc-950 border-sky-400/40' : 'bg-sky-50 border-sky-600/40'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "accent"
+  }, "Candidato Suplente IA"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-bold text-sky-400"
+  }, scannedCandidate.score, "% Match")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2.5 items-center"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: scannedCandidate.img,
+    className: "w-10 h-10 rounded-card object-cover shrink-0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 min-w-0"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "font-bold text-xs truncate"
+  }, scannedCandidate.name), /*#__PURE__*/React.createElement("p", {
+    className: "font-mono text-[9px] text-zinc-300 truncate"
+  }, scannedCandidate.aiScanLog))), /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-arrows-left-right",
+    onClick: handleConfirmSmartBackup
+  }, "Confirmar reemplazo inmediato"))))));
+};
+
+// --- Tab 2: Fechas (Crear Nuevo Evento) ---
+const AgencyTabFechas = () => {
+  const {
+    isDark,
+    country,
+    showToast
+  } = useContext(AppContext);
+  const [eventName, setEventName] = useState(country === "AR" ? "Festival Primavera 2026" : "Festival Sonar 2026");
+  const [venue, setVenue] = useState(country === "AR" ? "Predio La Rural · CABA" : "Fira Montjuïc · Barcelona");
+  const [pay, setPay] = useState(country === "AR" ? "$60.000 Neto" : "€140 Neto + SS");
+  const [dresscode, setDresscode] = useState("Total black + calzado cómodo negro");
+  const handleCreate = e => {
+    e.preventDefault();
+    showToast(`Evento "${eventName}" creado con geocerca de 150m activada.`, "success");
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Crear nuevo evento"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Configurá la geocerca para fichaje GPS y requisitos de staff.")), /*#__PURE__*/React.createElement("form", {
+    onSubmit: handleCreate,
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Nombre de la producción"), /*#__PURE__*/React.createElement("input", {
+    value: eventName,
+    onChange: e => setEventName(e.target.value),
+    className: `w-full h-11 rounded-input px-3 text-xs font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Predio & Geocerca (150m)"), /*#__PURE__*/React.createElement("input", {
+    value: venue,
+    onChange: e => setVenue(e.target.value),
+    className: `w-full h-11 rounded-input px-3 text-xs font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Pago Neto (", country, ")"), /*#__PURE__*/React.createElement("input", {
+    value: pay,
+    onChange: e => setPay(e.target.value),
+    className: `w-full h-11 rounded-input px-3 text-xs font-mono font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Horario Turno"), /*#__PURE__*/React.createElement("input", {
+    defaultValue: "14:00 - 22:00 hs",
+    className: `w-full h-11 rounded-input px-3 text-xs font-mono font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400"
+  }, "Dresscode & Calzado Reglamentario"), /*#__PURE__*/React.createElement("input", {
+    value: dresscode,
+    onChange: e => setDresscode(e.target.value),
+    className: `w-full h-11 rounded-input px-3 text-xs font-semibold border outline-none ${isDark ? 'bg-zinc-900 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-white border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "pt-2"
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-plus-circle",
+    onClick: handleCreate
+  }, "Publicar Convocatoria B2B"))));
+};
+
+// --- Tab 3: Talento (Pool & Auditoría GPS) ---
+const AgencyTabTalento = () => {
+  const {
+    isDark,
+    showToast,
+    country
+  } = useContext(AppContext);
+  const [filter, setFilter] = useState("Todos");
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Base de talento (", country, ")"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Pool verificado de staff, historial y auditoría GPS de ingresos.")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
+  }, ["Todos", "Favoritos", "Guardia 24h", "Movilidad"].map(f => /*#__PURE__*/React.createElement("button", {
+    key: f,
+    onClick: () => setFilter(f),
+    className: `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${filter === f ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-600'}`
+  }, f))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border flex items-center justify-between ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2.5 min-w-0"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    className: "w-10 h-10 rounded-card object-cover shrink-0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold truncate"
+  }, "Ana Martínez"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono block"
+  }, "12 eventos · 100% puntualidad"))), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Favorita")), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border flex items-center justify-between ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2.5 min-w-0"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+    className: "w-10 h-10 rounded-card object-cover shrink-0"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold truncate"
+  }, "Lucas Pereyra"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono block"
+  }, "Guardia 24h activa · Auto propio"))), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "info"
+  }, "Guardia"))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2"
+  }, "AUDITORÍA GPS (Ingresos en tiempo real)"), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border space-y-2 font-mono text-[11px] ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center text-zinc-300"
+  }, /*#__PURE__*/React.createElement("span", null, "Ana Martínez · Puerta 4"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[#34D399]"
+  }, "13:45 hs (A 60m)")), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center text-zinc-300"
+  }, /*#__PURE__*/React.createElement("span", null, "Elena Bosch · Puerta VIP"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[#34D399]"
+  }, "13:42 hs (A 40m)")), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center text-zinc-400 text-[10px]"
+  }, /*#__PURE__*/React.createElement("span", null, "Carlos Gómez · Pendiente"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[#F97316]"
+  }, "En viaje")))));
+};
+
+// --- Tab 4: Avisos (Notificaciones Operativas) ---
+const AgencyTabAvisos = () => {
+  const {
+    isDark,
+    showToast,
+    country
+  } = useContext(AppContext);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Centro de avisos"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Alertas operativas, bajas reportadas y compliance de seguros (", country, ").")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border space-y-1.5 ${isDark ? 'bg-red-950/20 border-red-900/40 text-red-200' : 'bg-rose-50 border-rose-200 text-rose-800'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-warning text-sm text-[#EF4444]"
+  }), " Baja cubierta con Smart Backup"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[10px] text-zinc-400"
+  }, "Hace 10m")), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] leading-snug"
+  }, "Lucas Pereyra confirmó asistencia en reemplazo de la vacante en Puerta 4. Cupo completo.")), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border space-y-1.5 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-shield-warning text-sm text-[#F97316]"
+  }), country === 'AR' ? 'Póliza AP por vencer' : 'Certificado PRL por renovar'), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[10px] text-zinc-400"
+  }, "Hoy")), /*#__PURE__*/React.createElement("p", {
+    className: `text-[11px] leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Carlos Gómez tiene pendiente subir la constancia de cobertura antes de las 18:00 hs."))));
+};
+
+// --- Source: src/worker_views.jsx ---
+// Vistas de Staff (B2C): Inicio, Agenda, Cobros, Mi Perfil
+
+const WorkerTabInicio = ({
+  currentEvent
+}) => {
+  const {
+    isDark,
+    showToast,
+    country
+  } = useContext(AppContext);
+  const [hasShiftToday, setHasShiftToday] = useState(true);
+  const [checkedInState, setCheckedInState] = useState(false);
+  const [isCheckingIn, setIsCheckingIn] = useState(false);
+  const [checkInTime, setCheckInTime] = useState(null);
+  const [secondsInShift, setSecondsInShift] = useState(0);
+  const [gpsErrorState, setGpsErrorState] = useState(false);
+  const [proposals, setProposals] = useState(STAFF_PROPOSALS[country] || STAFF_PROPOSALS.AR);
+
+  // Sincronizar propuestas al cambiar país
+  useEffect(() => {
+    setProposals(STAFF_PROPOSALS[country] || STAFF_PROPOSALS.AR);
+  }, [country]);
+
+  // Cronómetro del turno en vivo
+  useEffect(() => {
+    let interval = null;
+    if (checkedInState) {
+      interval = setInterval(() => {
+        setSecondsInShift(prev => prev + 1);
+      }, 1000);
+    } else {
+      setSecondsInShift(0);
+    }
+    return () => clearInterval(interval);
+  }, [checkedInState]);
+  const formatTimer = totalSecs => {
+    const hrs = Math.floor(totalSecs / 3600).toString().padStart(2, "0");
+    const mins = Math.floor(totalSecs % 3600 / 60).toString().padStart(2, "0");
+    const secs = (totalSecs % 60).toString().padStart(2, "0");
+    return `${hrs}:${mins}:${secs}`;
+  };
+  const handleFicharGPS = () => {
+    setIsCheckingIn(true);
+    setGpsErrorState(false);
+    setTimeout(() => {
+      setIsCheckingIn(false);
+      setCheckedInState(true);
+      setCheckInTime(new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }));
+      showToast(`GPS validado en Puerta 4. Seguro activo y geocerca confirmada.`, "success");
+    }, 800);
+  };
+  const handleSimularErrorGPS = () => {
+    setCheckedInState(false);
+    setGpsErrorState(true);
+    showToast("Error de Geocerca GPS: Te encontrás a 420m de Puerta 4.", "warning");
+  };
+  const handleAcceptProposal = id => {
+    setProposals(prev => prev.map(p => p.id === id ? {
+      ...p,
+      status: "accepted"
+    } : p));
+    showToast("¡Propuesta aceptada! Perfil y medidas enviados a la agencia.", "success");
+  };
+  const handleRejectProposal = id => {
+    setProposals(prev => prev.map(p => p.id === id ? {
+      ...p,
+      status: "rejected"
+    } : p));
+    showToast("Propuesta declinada sin penalización en tu score.", "info");
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "text-base font-extrabold tracking-tight truncate"
+  }, "Hola, Martina"), /*#__PURE__*/React.createElement("span", {
+    className: "w-2 h-2 rounded-full bg-[#34D399] shrink-0"
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "font-mono text-[10px] font-semibold text-sky-400 mt-0.5 truncate"
+  }, "Perfil verificado • Top 5% Staff (", country, ")")), /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    className: "w-10 h-10 rounded-card object-cover border border-zinc-700 shrink-0"
+  })), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-1.5"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Tu Jornada de Hoy"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setHasShiftToday(!hasShiftToday),
+    className: "text-[10px] text-zinc-400 hover:text-sky-400 transition-colors font-mono"
+  }, hasShiftToday ? "Ver Estado Vacío" : "Ver Turno Asignado"), hasShiftToday && !checkedInState && /*#__PURE__*/React.createElement("button", {
+    onClick: handleSimularErrorGPS,
+    className: "text-[10px] font-mono text-zinc-400 hover:text-[#EF4444] transition-colors"
+  }, "Simular Error GPS"))), !hasShiftToday ? /*#__PURE__*/React.createElement("div", {
+    className: `p-5 rounded-hero border text-center space-y-3 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-12 h-12 rounded-full mx-auto flex items-center justify-center ${isDark ? 'bg-zinc-800 text-sky-400' : 'bg-sky-50 text-sky-600'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-calendar-blank text-2xl"
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold tracking-tight"
+  }, "Sin jornadas asignadas hoy"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-1 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "No tenés turnos activos para hoy en ", country, ". Activá tu Guardia 24h para recibir convocatorias de emergencia o postulate a las propuestas de abajo.")), /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-shield-check",
+    onClick: () => showToast("Guardia 24h activada. Tu perfil está primero en el radar de emergencias.", "success")
+  }, "Activar Guardia 24h Smart Backup")) :
+  /*#__PURE__*/
+  /* ESTADO ACTIVO: Hero Card del Turno */
+  React.createElement("div", {
+    className: `relative rounded-hero overflow-hidden border shadow-xl transition-all ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative h-28 w-full overflow-hidden"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: currentEvent.bannerImg,
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-2.5 left-2.5"
+  }, /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: checkedInState ? "success" : "warning"
+  }, checkedInState ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse"
+  }), "EN TURNO (", checkInTime, ")") : "PENDIENTE")), checkedInState && /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-sky-400 font-mono text-[10px] font-bold"
+  }, "⏱️ ", formatTimer(secondsInShift)), /*#__PURE__*/React.createElement("div", {
+    className: "absolute bottom-2 left-3 right-3"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-extrabold text-white tracking-tight truncate"
+  }, currentEvent.name), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-300 font-medium truncate"
+  }, "Anfitriona de Acceso VIP • Puerta 4"))), /*#__PURE__*/React.createElement("div", {
+    className: "p-3.5 space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1.5 font-mono text-xs"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-input flex items-center gap-2 border ${isDark ? 'bg-zinc-950/70 border-zinc-800/80 text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-clock text-sky-400 text-sm shrink-0"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "truncate"
+  }, "14:00 - 22:00 hs (Break 45m)")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-input flex items-center gap-2 border ${isDark ? 'bg-zinc-950/70 border-zinc-800/80 text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-map-pin text-sky-400 text-sm shrink-0"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "truncate"
+  }, currentEvent.location))), gpsErrorState && /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card border space-y-2 animate-fade-in ${isDark ? 'bg-red-950/30 border-red-800/50 text-red-300' : 'bg-rose-50 border-rose-200 text-red-800'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 font-bold text-xs"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-warning-octagon text-sm text-[#EF4444]"
+  }), /*#__PURE__*/React.createElement("span", null, "Error de Geocerca GPS")), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] leading-snug"
+  }, "Te encontrás a 420m del predio. Acercate a Puerta 4 para habilitar el fichaje de ingreso."), /*#__PURE__*/React.createElement("button", {
+    onClick: handleFicharGPS,
+    className: "w-full py-1.5 rounded-input bg-[#EF4444] text-white text-[11px] font-bold"
+  }, "Reintentar Detección GPS")), checkedInState && /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card border space-y-1.5 animate-fade-in ${isDark ? 'bg-[#34D399]/10 border-[#34D399]/30' : 'bg-emerald-50 border-emerald-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs text-[#34D399] flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-shield-check"
+  }), " Ingreso Registrado"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[10px] text-zinc-400"
+  }, "Seguro AP Activo")), /*#__PURE__*/React.createElement("p", {
+    className: `text-[10px] ${isDark ? 'text-zinc-300' : 'text-slate-600'}`
+  }, "Fichaje confirmado a las ", checkInTime, ". Tu liquidación se computará automáticamente al completar el turno.")), !checkedInState && !gpsErrorState && /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-navigation-arrow",
+    loading: isCheckingIn,
+    onClick: handleFicharGPS
+  }, "Fichar Ingreso con GPS")))), /*#__PURE__*/React.createElement("section", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center px-0.5"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Propuestas Directas"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-400/10 text-sky-400"
+  }, proposals.filter(p => p.status === 'pending').length, " NUEVAS")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2.5"
+  }, proposals.map(prop => /*#__PURE__*/React.createElement("div", {
+    key: prop.id,
+    className: `border rounded-card p-3 transition-all ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-start gap-1 mb-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-w-0"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-xs truncate"
+  }, prop.title), /*#__PURE__*/React.createElement("p", {
+    className: `text-[10px] ${isDark ? 'text-zinc-400' : 'text-slate-500'} truncate`
+  }, prop.agency)), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-black text-sky-400 shrink-0"
+  }, prop.pay)), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1 font-mono text-[10px] text-zinc-400 mb-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 truncate"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-calendar text-xs"
+  }), /*#__PURE__*/React.createElement("span", null, prop.date)), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 truncate"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-t-shirt text-xs"
+  }), /*#__PURE__*/React.createElement("span", null, prop.dresscode)), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 truncate"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-map-pin text-xs text-sky-400"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "truncate"
+  }, prop.venue))), prop.status === "pending" ? /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-check",
+    onClick: () => handleAcceptProposal(prop.id),
+    className: "flex-1"
+  }, "Aceptar con mi Perfil"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => handleRejectProposal(prop.id),
+    className: `px-3 h-12 rounded-input border text-xs font-bold transition-colors shrink-0 ${isDark ? 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700' : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'}`
+  }, "Rechazar")) : /*#__PURE__*/React.createElement("div", {
+    className: "pt-1 flex items-center justify-between font-mono text-[10px]"
+  }, /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: prop.status === "accepted" ? "success" : "neutral"
+  }, prop.status === "accepted" ? "Propuesta Confirmada" : "Declinada"), /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-500"
+  }, "Respondido")))))));
+};
+
+// --- Tab 2: Agenda (Mis Fechas) ---
+const WorkerTabAgenda = () => {
+  const {
+    isDark,
+    country,
+    showToast
+  } = useContext(AppContext);
+  const [agendaTab, setAgendaTab] = useState("Confirmados");
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Mis fechas"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Calendario operativo y logística de eventos confirmados (", country, ").")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
+  }, ["Confirmados", "Postulados", "Historial"].map(tab => /*#__PURE__*/React.createElement("button", {
+    key: tab,
+    onClick: () => setAgendaTab(tab),
+    className: `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${agendaTab === tab ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-600'}`
+  }, tab))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-start mb-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+    className: "text-xs font-bold"
+  }, country === "AR" ? "Lollapalooza 2026" : "Mobile World Congress 2026"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono"
+  }, country === "AR" ? "Sáb 28 Nov · 14:00 hs" : "Lun 2 Mar · 09:00 hs")), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Confirmado")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => showToast("Abriendo navegación en Google Maps...", "info"),
+    className: "w-full h-10 rounded-input border border-zinc-700 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800 transition-colors"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-navigation-arrow text-sky-400"
+  }), " Cómo llegar al Venue")), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
+  }, "COORDINADORA EN VENUE"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
+    className: "w-8 h-8 rounded-full object-cover"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h5", {
+    className: "text-xs font-bold"
+  }, country === "AR" ? "Florencia V. (Agencia DER)" : "Marta S. (NSH Azafatas BCN)"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400"
+  }, country === "AR" ? "En Puerta 4 Staff" : "En Pabellón 3 Acceso Norte"))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => showToast("Abriendo chat directo con la coordinadora...", "info"),
+    className: "px-2.5 py-1 rounded-input bg-sky-400/20 text-sky-400 border border-sky-400/30 text-[11px] font-bold"
+  }, "Contactar")))));
+};
+
+// --- Tab 3: Cobros (Centro Financiero) ---
+const WorkerTabCobros = () => {
+  const {
+    isDark,
+    country,
+    showToast
+  } = useContext(AppContext);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Cobros • Centro financiero"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Liquidaciones al día con pago garantizado (", country, ").")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-sky-400/30' : 'bg-white border-sky-600/30 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-0.5"
+  }, "PENDIENTE"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono font-extrabold text-sm text-sky-400 block"
+  }, country === "AR" ? "$120.000" : "€275")), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-0.5"
+  }, "COBRADO (MES)"), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono font-extrabold text-sm text-[#34D399] block"
+  }, country === "AR" ? "$185.000" : "€420"))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block"
+  }, "Detalle por evento trabajado"), /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold block text-zinc-200"
+  }, country === "AR" ? "Maratón Nordelta" : "Mobile World Congress 2026"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400"
+  }, "Hace 3 días • Acreditado")), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-zinc-100"
+  }, country === "AR" ? "$65.000" : "€130")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold block text-zinc-200"
+  }, country === "AR" ? "Experiencia Nike Run" : "Sephora Beauty Experience"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-sky-400"
+  }, "En proceso de liquidación")), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-sky-400"
+  }, country === "AR" ? "$55.000" : "€145"))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-1"
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-receipt",
+    onClick: () => showToast(country === 'AR' ? 'Cargando comprobante de Factura AFIP...' : 'Subiendo factura con IRPF/IVA...', 'success')
+  }, country === 'AR' ? 'Cargar Factura Electrónica (AFIP)' : 'Subir Factura con IRPF / IVA')), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card border space-y-1 font-mono text-xs ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block"
+  }, "CUENTA DE DEPÓSITO"), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-300"
+  }, country === 'AR' ? 'Alias: martina.staff.mp' : 'IBAN: ES91 2100 0418 4502 ****'), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Verificada"))));
+};
+
+// --- Tab 4: Mi Perfil (Medidas, Fotos & Bóveda Legal) ---
+const WorkerTabMiPerfil = ({
+  onLogout
+}) => {
+  const {
+    isDark,
+    country,
+    showToast
+  } = useContext(AppContext);
+  const [guard24, setGuard24] = useState(true);
+  const [car, setCar] = useState(true);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-start"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-base font-extrabold tracking-tight"
+  }, "Mi Perfil"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Medidas, fotos verificadas y bóveda legal (", country, ").")), /*#__PURE__*/React.createElement("button", {
+    onClick: onLogout,
+    className: `px-2.5 py-1 rounded-card border text-[11px] font-bold flex items-center gap-1 transition-colors ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-red-400 hover:border-red-500/40' : 'border-slate-300 text-slate-600 hover:text-red-600'}`,
+    title: "Cerrar sesión"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-sign-out"
+  }), " Salir")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
+  }, "Fotos de Perfil Verificadas (3)"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-3 gap-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Rostro")), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Cuerpo")), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+    className: "w-full h-full object-cover"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+  }, "Calzado")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
+  }, "Medidas de Guardarropa"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-4 gap-1.5 font-mono text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "ALT"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, "1.74 m")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "REM"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs text-sky-400"
+  }, "M")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "PAN"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, "38")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] text-zinc-400 block"
+  }, "CAL"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xs"
+  }, "38")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
+  }, "BÓVEDA LEGAL (", country, ")"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "DNI / CUIL: 42.100.892" : "DNI / NIE: Y-4921028-H"), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Vigente")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Monotributo: Al día" : "Seguridad Social: Alta activa"), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Verificado")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Póliza AP: Cláusula No Rep." : "Certificado PRL: Apto"), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: "success"
+  }, "Vigente")))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: () => {
+      setGuard24(!guard24);
+      showToast(guard24 ? "Guardia 24h pausada." : "Guardia 24h activada.", "info");
+    },
+    className: `p-2.5 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-xs font-bold"
+  }, "Guardia 24h Smart Backup"), /*#__PURE__*/React.createElement("div", {
+    className: `w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-4 h-4 rounded-full bg-white transition-transform ${guard24 ? 'translate-x-3' : 'translate-x-0'}`
+  }))), /*#__PURE__*/React.createElement("div", {
+    onClick: () => {
+      setCar(!car);
+      showToast(car ? "Movilidad propia desactivada." : "Movilidad propia activada.", "info");
+    },
+    className: `p-2.5 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-xs font-bold"
+  }, "Movilidad Propia"), /*#__PURE__*/React.createElement("div", {
+    className: `w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${car ? 'bg-sky-400' : 'bg-zinc-700'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `w-4 h-4 rounded-full bg-white transition-transform ${car ? 'translate-x-3' : 'translate-x-0'}`
+  })))));
+};
+
+// --- Source: src/app.jsx ---
+// App Shell Principal: Viewport Switcher, Dual Theme, Country Isolation & Nav
+
+const App = () => {
+  const [country, setCountry] = useState("AR");
+  const [roleView, setRoleView] = useState('worker'); // 'worker' | 'agency'
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const isDark = isDarkMode;
+  const [currentView, setCurrentView] = useState('app'); // 'app' | 'login' | 'onboarding'
+  const [viewportMode, setViewportMode] = useState('mobile'); // 'mobile' (393px) | 'tablet' (768px)
+
+  // Sub-tabs de Productora
+  const [prodTab, setProdTab] = useState('evento');
+  // Sub-tabs de Staff
+  const [staffTab, setStaffTab] = useState('inicio');
+
+  // Estado mutable de producciones por país
+  const [eventsState, setEventsState] = useState(EVENTS_DATA);
+  const [selectedEventId, setSelectedEventId] = useState({
+    AR: "lolla-ar",
+    ES: "mwc-es"
+  });
+  const [toastData, setToastData] = useState(null);
+
+  // Sincronizar dark mode en <html>
+  useEffect(() => {
+    const rootHtml = document.documentElement;
+    if (isDarkMode) {
+      rootHtml.classList.add('dark');
+    } else {
+      rootHtml.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+  const showToast = (message, type = "info") => {
+    setToastData({
+      message,
+      type
+    });
+    setTimeout(() => {
+      setToastData(null);
+    }, 3500);
+  };
+
+  // Evento activo actual
+  const countryEvents = eventsState[country] || eventsState.AR;
+  const activeEventId = selectedEventId[country] || countryEvents[0].id;
+  const currentEvent = countryEvents.find(e => e.id === activeEventId) || countryEvents[0];
+  const handleSelectEvent = eventId => {
+    setSelectedEventId(prev => ({
+      ...prev,
+      [country]: eventId
+    }));
+  };
+
+  // Aplicar Smart Backup
+  const handleSmartBackupApplied = (oldWorkerId, backupCandidate) => {
+    setEventsState(prev => {
+      const currentList = prev[country];
+      const updatedList = currentList.map(ev => {
+        if (ev.id === currentEvent.id) {
+          const updatedWorkers = ev.workers.map(w => {
+            if (w.id === oldWorkerId) {
+              return {
+                ...w,
+                status: "Baja"
+              };
+            }
+            return w;
+          });
+          // Insertar suplente al inicio
+          updatedWorkers.unshift({
+            ...backupCandidate,
+            id: Date.now(),
+            status: "Confirmados",
+            role: "Promotores"
+          });
+          return {
+            ...ev,
+            workers: updatedWorkers
+          };
+        }
+        return ev;
+      });
+      return {
+        ...prev,
+        [country]: updatedList
+      };
+    });
+  };
+  return /*#__PURE__*/React.createElement(AppContext.Provider, {
+    value: {
+      isDark: isDarkMode,
+      country,
+      showToast
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `min-h-screen w-full flex flex-col items-center justify-start py-2 sm:py-5 px-0 sm:px-4 transition-colors ${isDarkMode ? 'bg-[#09090B]' : 'bg-[#E2E8F0]'}`
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "w-full max-w-[393px] mb-2.5 flex items-center justify-between gap-1.5 px-3 select-none"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-7 h-7 rounded-input bg-sky-400 flex items-center justify-center text-[#09090B] font-black text-xs shadow-glow-sky-subtle"
+  }, "E"), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `font-bold text-xs tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-slate-900'}`
+  }, "EventuApp"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[9px] font-mono text-zinc-500"
+  }, "v1.0 • B2B2C"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setCountry("AR");
+      showToast("🇦🇷 Argentina (DNI, Monotributo, Póliza AP)", "info");
+    },
+    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "AR" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "AR"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setCountry("ES");
+      showToast("🇪🇸 España (NIE, Seguridad Social, PRL)", "info");
+    },
+    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "ES" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "ES")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsDarkMode(!isDarkMode),
+    className: `h-7 px-2 rounded-full text-[10px] font-semibold flex items-center gap-1 border transition-all ${isDarkMode ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-white text-slate-800 border-slate-300 shadow-sm'}`,
+    title: "Alternar Modo Oscuro / Claro"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `ph-fill ${isDarkMode ? 'ph-moon text-sky-400' : 'ph-sun text-amber-500'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setRoleView('worker');
+      setCurrentView('app');
+    },
+    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'worker' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "Staff"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setRoleView('agency');
+      setCurrentView('app');
+    },
+    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'agency' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "Prod")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView(currentView === 'login' ? 'app' : 'login'),
+    className: `h-7 px-2 rounded-full text-[10px] font-semibold border transition-all ${currentView === 'login' ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-zinc-200' : 'bg-white text-slate-600 border-slate-300'}`,
+    title: "Acceder a la cuenta"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-key text-xs"
+  })))), /*#__PURE__*/React.createElement("main", {
+    className: `
+          w-full max-w-full sm:max-w-[393px] h-[100dvh] sm:h-[852px] sm:max-h-[90dvh] mx-auto 
+          relative overflow-hidden sm:rounded-[40px] sm:border-[8px] border-zinc-800 shadow-2xl flex flex-col transition-colors
+          ${isDarkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-slate-50 text-slate-900'}
+        `
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `h-7 w-full flex justify-between items-center px-5 font-mono text-[10px] font-semibold select-none shrink-0 ${isDarkMode ? 'text-zinc-400 bg-zinc-950' : 'text-slate-500 bg-slate-50'}`
+  }, /*#__PURE__*/React.createElement("span", null, "09:41"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 text-xs"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-cell-signal-full"
+  }), /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-wifi-high"
+  }), /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-battery-full text-sm"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 w-full overflow-hidden relative min-w-0 pb-20"
+  }, currentView === 'login' && /*#__PURE__*/React.createElement(LoginScreen, {
+    role: roleView,
+    setRole: setRoleView,
+    onLoginSuccess: selectedRole => {
+      setRoleView(selectedRole);
+      setCurrentView('app');
+    },
+    onStartOnboarding: () => setCurrentView('onboarding')
+  }), currentView === 'onboarding' && /*#__PURE__*/React.createElement(StaffOnboarding, {
+    onComplete: () => {
+      setRoleView('worker');
+      setCurrentView('app');
+    },
+    onCancel: () => setCurrentView('login')
+  }), currentView === 'app' && (roleView === 'agency' ?
+  // VISTA PRODUCTORA (4 Tabs)
+  prodTab === 'evento' ? /*#__PURE__*/React.createElement(AgencyTabEvento, {
+    currentEvent: currentEvent,
+    eventsList: countryEvents,
+    onSelectEvent: handleSelectEvent,
+    onSmartBackupApplied: handleSmartBackupApplied
+  }) : prodTab === 'fechas' ? /*#__PURE__*/React.createElement(AgencyTabFechas, null) : prodTab === 'talento' ? /*#__PURE__*/React.createElement(AgencyTabTalento, null) : /*#__PURE__*/React.createElement(AgencyTabAvisos, null) :
+  // VISTA STAFF (4 Tabs)
+  staffTab === 'inicio' ? /*#__PURE__*/React.createElement(WorkerTabInicio, {
+    currentEvent: currentEvent
+  }) : staffTab === 'agenda' ? /*#__PURE__*/React.createElement(WorkerTabAgenda, null) : staffTab === 'cobros' ? /*#__PURE__*/React.createElement(WorkerTabCobros, null) : /*#__PURE__*/React.createElement(WorkerTabMiPerfil, {
+    onLogout: () => setCurrentView('login')
+  }))), currentView === 'app' && roleView === 'agency' && /*#__PURE__*/React.createElement("nav", {
+    className: `absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'}`
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setProdTab('evento'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'evento' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${prodTab === 'evento' ? 'ph-fill ph-broadcast' : 'ph ph-broadcast'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold"
+  }, "Evento")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setProdTab('fechas'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'fechas' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${prodTab === 'fechas' ? 'ph-fill ph-calendar-plus' : 'ph ph-calendar-plus'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Fechas")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setProdTab('talento'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'talento' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${prodTab === 'talento' ? 'ph-fill ph-users-three' : 'ph ph-users-three'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Talento")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setProdTab('avisos'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'avisos' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${prodTab === 'avisos' ? 'ph-fill ph-bell' : 'ph ph-bell'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full bg-[#F97316] absolute -top-0.5 -right-0.5"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Avisos"))), currentView === 'app' && roleView === 'worker' && /*#__PURE__*/React.createElement("nav", {
+    className: `absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'}`
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStaffTab('inicio'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'inicio' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${staffTab === 'inicio' ? 'ph-fill ph-house' : 'ph ph-house'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold"
+  }, "Inicio")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStaffTab('agenda'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'agenda' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${staffTab === 'agenda' ? 'ph-fill ph-calendar-blank' : 'ph ph-calendar-blank'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Agenda")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStaffTab('cobros'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'cobros' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${staffTab === 'cobros' ? 'ph-fill ph-wallet' : 'ph ph-wallet'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Cobros")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStaffTab('miperfil'),
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'miperfil' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: `text-xl ${staffTab === 'miperfil' ? 'ph-fill ph-user-circle' : 'ph ph-user-circle'}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full bg-sky-400 absolute -top-0.5 -right-0.5"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-semibold"
+  }, "Mi Perfil"))), /*#__PURE__*/React.createElement(FeedbackToast, {
+    message: toastData?.message,
+    type: toastData?.type,
+    onClose: () => setToastData(null)
+  }))));
+};
+
+// Mount Root
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(/*#__PURE__*/React.createElement(App, null));
+    </script>
+</body>
+</html>

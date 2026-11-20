@@ -1,0 +1,13 @@
+{
+  "name": "eventuapp",
+  "version": "1.0.0",
+  "description": "EventuApp Mobile-First Staffing & Event Operations Web App",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "ws": "^8.18.0"
+  }
+}

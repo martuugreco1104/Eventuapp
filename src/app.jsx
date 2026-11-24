@@ -22,6 +22,29 @@ const App = () => {
 
   const [toastData, setToastData] = useState(null);
 
+  // Perfil de staff editable
+  const [userProfile, setUserProfile] = useState({
+    name: "Martina Benítez",
+    phone: "+54 9 11 5821-9943",
+    city: "Buenos Aires, Palermo",
+    languages: "Español nativo · Inglés C1",
+    availability: "Fines de semana y turnos noche",
+    avatarImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+    shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+    height: "1.74 m",
+    shirt: "M",
+    pant: "38",
+    shoes: "38",
+    shoesType: "Botas negras reglamentarias",
+    cbuAlias: "martina.eventos.mp",
+    iban: "ES82 2100 0418 4502 0005 1234",
+    dniAr: "42.100.892",
+    nieEs: "Y-4921028-H",
+    guard24: true,
+    car: true
+  });
+
   // Sincronizar dark mode en <html>
   useEffect(() => {
     const rootHtml = document.documentElement;
@@ -51,8 +74,8 @@ const App = () => {
     }));
   };
 
-  // Aplicar Smart Backup
-  const handleSmartBackupApplied = (oldWorkerId, backupCandidate) => {
+  // Aplicar Reemplazo Inmediato
+  const handleReplacementApplied = (oldWorkerId, backupCandidate) => {
     setEventsState(prev => {
       const currentList = prev[country];
       const updatedList = currentList.map(ev => {
@@ -63,7 +86,7 @@ const App = () => {
             }
             return w;
           });
-          // Insertar suplente al inicio
+          // Insertar reemplazo al inicio
           updatedWorkers.unshift({
             ...backupCandidate,
             id: Date.now(),
@@ -86,7 +109,7 @@ const App = () => {
   };
 
   return (
-    <AppContext.Provider value={{ isDark: isDarkMode, country, showToast }}>
+    <AppContext.Provider value={{ isDark: isDarkMode, country, showToast, userProfile, setUserProfile }}>
       <div className={`min-h-screen w-full flex flex-col items-center justify-center py-0 sm:py-6 px-0 sm:px-4 transition-colors relative ${
         isDarkMode ? 'bg-[#09090B]' : 'bg-[#F1F5F9]'
       }`}>
@@ -269,7 +292,7 @@ const App = () => {
                     currentEvent={currentEvent}
                     eventsList={countryEvents}
                     onSelectEvent={handleSelectEvent}
-                    onSmartBackupApplied={handleSmartBackupApplied}
+                    onReplacementApplied={handleReplacementApplied}
                   />
                 ) : prodTab === 'fechas' ? (
                   <AgencyTabFechas />
@@ -367,7 +390,7 @@ const App = () => {
                   <i className={`text-xl ${staffTab === 'miperfil' ? 'ph-fill ph-user-circle' : 'ph ph-user-circle'}`} />
                   <span className="w-1.5 h-1.5 rounded-full bg-sky-400 absolute -top-0.5 -right-0.5" />
                 </div>
-                <span className="text-[10px] tracking-tight">Mi Book</span>
+                <span className="text-[10px] tracking-tight">Mi Perfil</span>
               </button>
             </nav>
           )}

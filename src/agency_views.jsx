@@ -4,7 +4,7 @@ const AgencyTabEvento = ({
   currentEvent,
   eventsList,
   onSelectEvent,
-  onSmartBackupApplied
+  onReplacementApplied
 }) => {
   const { isDark, showToast, country } = useContext(AppContext);
   const [activeRoleTab, setActiveRoleTab] = useState("Promotores");
@@ -20,7 +20,7 @@ const AgencyTabEvento = ({
   const [scannedCandidate, setScannedCandidate] = useState(null);
 
   const roleTabs = ["Promotores", "Acreditaciones", "Barras", "Montaje"];
-  const statusChips = ["Todos", "Check-in", "Confirmados", "Guardia 24h", "Baja"];
+  const statusChips = ["Todos", "En turno", "Confirmados", "Disponibles", "Baja"];
 
   // Filtro de Rol y Estado
   const filteredWorkers = currentEvent.workers.filter(w => {
@@ -28,16 +28,16 @@ const AgencyTabEvento = ({
     if (!roleMatches) return false;
     
     if (statusFilter === "Todos") return true;
-    if (statusFilter === "Check-in") return w.status.includes("IN");
+    if (statusFilter === "En turno") return w.status.includes("IN") || w.status === "En turno";
     if (statusFilter === "Confirmados") return w.status === "Confirmados";
-    if (statusFilter === "Guardia 24h") return w.status === "Guardia 24h";
+    if (statusFilter === "Disponibles") return w.status === "Disponibles" || w.status === "Guardia 24h" || w.status === "Disponible";
     if (statusFilter === "Baja") return w.status === "Baja";
     return true;
   });
 
   const handleExportNomina = () => {
     setNominaSheetOpen(false);
-    showToast(`Nómina legal oficial generada: ${currentEvent.nominaExportName}`, "success");
+    showToast(`Lista de ingreso descargada: ${currentEvent.nominaExportName}`, "success");
   };
 
   const handleExecuteAISearch = (customQuery) => {
@@ -69,11 +69,11 @@ const AgencyTabEvento = ({
           shirtSize: "L",
           shoes: "Mocasines negros",
           docStatus: "ok",
-          badges: ["Docs Vigentes", "Movilidad", "Guardia 24h"],
+          badges: ["Docs Vigentes", "Movilidad", "Disponibles"],
           img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
         }
       ]);
-      showToast("Copiloto IA: 2 candidatos compatibles encontrados.", "info");
+      showToast("Buscador de staff: 2 candidatos compatibles encontrados.", "info");
     }, 600);
   };
 
@@ -82,16 +82,16 @@ const AgencyTabEvento = ({
     setScannedCandidate(null);
     setTimeout(() => {
       setIsScanningRadar(false);
-      const countryDB = SMART_BACKUP_DATABASE[country] || SMART_BACKUP_DATABASE["AR"];
+      const countryDB = (typeof REPLACEMENTS_DATABASE !== 'undefined' ? REPLACEMENTS_DATABASE : SMART_BACKUP_DATABASE)[country] || SMART_BACKUP_DATABASE["AR"];
       const backup = countryDB[worker.shirtSize] || countryDB["M"];
       setScannedCandidate(backup);
-      showToast(`Radar IA: Suplente de guardia ${backup.name} ubicada a ${backup.dist}.`, "warning");
+      showToast(`Reemplazo cercano encontrado: ${backup.name} a ${backup.dist}.`, "warning");
     }, 900);
   };
 
-  const handleConfirmSmartBackup = () => {
+  const handleConfirmReplacement = () => {
     if (!selectedWorker || !scannedCandidate) return;
-    onSmartBackupApplied(selectedWorker.id, scannedCandidate);
+    onReplacementApplied(selectedWorker.id, scannedCandidate);
     setSelectedWorker(null);
     setScannedCandidate(null);
     showToast(`Reemplazo confirmado: ${scannedCandidate.name} ingresa como titular.`, "success");
@@ -202,7 +202,7 @@ const AgencyTabEvento = ({
 
       {/* Main Content List con espaciado amplio y aire */}
       <div className="p-4 space-y-4">
-        {/* Trigger Copiloto IA Card */}
+        {/* Trigger Buscador rápido de staff */}
         <div 
           onClick={() => setAiCopilotSheetOpen(true)}
           className={`rounded-card p-3 flex items-center gap-3 shadow-sm cursor-pointer transition-all active:scale-[0.99] group ${
@@ -212,17 +212,17 @@ const AgencyTabEvento = ({
           <div className={`w-9 h-9 rounded-input flex items-center justify-center shrink-0 ${
             isDark ? 'bg-sky-400/15 text-sky-400 shadow-glow-sky-subtle' : 'bg-sky-50 text-sky-600'
           }`}>
-            <i className="ph-fill ph-sparkle text-lg" />
+            <i className="ph-fill ph-magnifying-glass text-lg" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
-              <h2 className="text-xs font-bold tracking-tight truncate">Copiloto IA de Staffing</h2>
+              <h2 className="text-xs font-bold tracking-tight truncate">Buscador rápido de staff</h2>
               <span className="font-mono text-[9px] font-bold px-1 rounded bg-sky-400/10 text-sky-400 border border-sky-400/20">
-                PROMPT
+                FILTRO RÁPIDO
               </span>
             </div>
             <p className={`text-[10px] truncate mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-              "✨ Talle M/L + Botas negras + &lt; 5km..."
+              "Talle M + Calzado negro + cerca del predio..."
             </p>
           </div>
           <i className="ph ph-caret-right text-zinc-500 text-xs" />
@@ -352,11 +352,11 @@ const AgencyTabEvento = ({
         </div>
       </BottomSheet>
 
-      {/* MODAL 2: Nómina Legal de Ingreso & Seguros */}
+      {/* MODAL 2: Lista de Ingreso & Seguros */}
       <BottomSheet
         isOpen={nominaSheetOpen}
         onClose={() => setNominaSheetOpen(false)}
-        title="Nómina Legal & Pólizas de Ingreso"
+        title="Lista de ingreso y seguros"
       >
         <div className="space-y-3.5">
           <div className="flex justify-between items-center">
@@ -387,23 +387,23 @@ const AgencyTabEvento = ({
             icon="ph-download-simple"
             onClick={handleExportNomina}
           >
-            Exportar Nómina Oficial PDF ({currentEvent.currency})
+            Exportar lista de ingreso en PDF ({currentEvent.currency})
           </LuminousButton>
         </div>
       </BottomSheet>
 
-      {/* MODAL 3: Copiloto IA de Staffing */}
+      {/* MODAL 3: Buscador rápido de staff */}
       <BottomSheet
         isOpen={aiCopilotSheetOpen}
         onClose={() => {
           setAiCopilotSheetOpen(false);
           setAiFoundProfiles(null);
         }}
-        title="Copiloto IA de Staffing"
+        title="Buscador rápido de staff"
       >
         <div className="space-y-3.5">
           <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-            Búsqueda semántica sobre el pool de talentos de {country}:
+            Búsqueda rápida sobre el personal disponible en {country}:
           </p>
 
           <div className="flex gap-2">
@@ -411,7 +411,7 @@ const AgencyTabEvento = ({
               type="text"
               value={aiQuery}
               onChange={(e) => setAiQuery(e.target.value)}
-              placeholder="Ej: Azafata bilingüe con mocasines talle M..."
+              placeholder="Ej: Talle M con calzado negro cerca del predio..."
               className={`flex-1 h-11 px-3 text-xs rounded-input border outline-none font-medium ${
                 isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
               }`}
@@ -427,24 +427,24 @@ const AgencyTabEvento = ({
           {/* Quick Prompts */}
           <div>
             <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">
-              PROMPTS RÁPIDOS SUGERIDOS
+              BÚSQUEDAS RÁPIDAS
             </span>
             <div className="grid grid-cols-2 gap-1.5">
               <button 
-                onClick={() => handleExecuteAISearch("Talle M/L con calzado reglamentario a < 3km")}
+                onClick={() => handleExecuteAISearch("Talle M con calzado negro a < 3km")}
                 className={`p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${
                   isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
-                ✨ Talle M + Botas negras
+                Talle M + Calzado negro
               </button>
               <button 
-                onClick={() => handleExecuteAISearch("Azafata bilingüe protocolo VIP")}
+                onClick={() => handleExecuteAISearch("Personal con movilidad propia cerca del predio")}
                 className={`p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${
                   isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
-                ✨ Azafata bilingüe VIP
+                Con movilidad propia
               </button>
             </div>
           </div>
@@ -490,7 +490,7 @@ const AgencyTabEvento = ({
         </div>
       </BottomSheet>
 
-      {/* MODAL 4: Ficha Operativa & Smart Backup Radar */}
+      {/* MODAL 4: Ficha y Talles & Reemplazo */}
       <BottomSheet
         isOpen={!!selectedWorker}
         onClose={() => {
@@ -498,7 +498,7 @@ const AgencyTabEvento = ({
           setScannedCandidate(null);
           setIsScanningRadar(false);
         }}
-        title="Ficha Operativa & Guardarropa"
+        title="Ficha y Talles"
       >
         {selectedWorker && (
           <div className="space-y-4">
@@ -521,10 +521,10 @@ const AgencyTabEvento = ({
               </div>
             </div>
 
-            {/* Medidas de Guardarropa (4) */}
+            {/* Talles y Calzado (4) */}
             <div>
               <span className={`text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-                Medidas para Guardarropa
+                Talles y Calzado
               </span>
               <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
                 <div className={`p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
@@ -546,10 +546,10 @@ const AgencyTabEvento = ({
               </div>
             </div>
 
-            {/* Book & Calzado Verificado (3 Fotos) */}
+            {/* Book y calzado (3 fotos) */}
             <div>
               <span className={`text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-                Book & Calzado Verificado (3 Fotos)
+                Book y calzado (3 fotos)
               </span>
               <div className="grid grid-cols-3 gap-2">
                 <div className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm">
@@ -567,10 +567,10 @@ const AgencyTabEvento = ({
               </div>
             </div>
 
-            {/* Documentación Legal */}
+            {/* Documentación */}
             <div className="space-y-1">
               <span className={`text-[10px] font-bold uppercase tracking-wider block ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-                Documentación Legal ({country})
+                Documentación ({country})
               </span>
               <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
                 isDark ? 'bg-zinc-950' : 'bg-slate-100'
@@ -585,15 +585,23 @@ const AgencyTabEvento = ({
               </div>
             </div>
 
-            {/* Reportar Baja & Radar Smart Backup */}
+            {/* Acciones de Validación y Reemplazo */}
             <div className="pt-2 border-t border-zinc-800/60 space-y-2">
+              <LuminousButton
+                variant="secondary"
+                icon="ph-check-circle"
+                onClick={() => showToast(`Ingreso manual validado para ${selectedWorker.name}`, "success")}
+              >
+                Validar ingreso manual
+              </LuminousButton>
+
               {!scannedCandidate && !isScanningRadar && (
                 <LuminousButton
                   variant="danger"
                   icon="ph-warning-octagon"
                   onClick={() => handleStartRadarScan(selectedWorker)}
                 >
-                  Reportar Baja & Activar Smart Backup
+                  Reportar baja y buscar reemplazo
                 </LuminousButton>
               )}
 
@@ -607,9 +615,9 @@ const AgencyTabEvento = ({
                     <i className="ph-fill ph-radar text-base text-sky-400" />
                   </div>
                   <span className="font-mono text-xs font-bold text-sky-400">
-                    Buscando suplente talle {selectedWorker.shirtSize}...
+                    Buscando reemplazo cercano...
                   </span>
-                  <p className="text-[10px] text-zinc-400">Geolocalizando staff en guardia &lt; 3km</p>
+                  <p className="text-[10px] text-zinc-400">Geolocalizando staff disponible a &lt; 3km</p>
                 </div>
               )}
 
@@ -619,7 +627,7 @@ const AgencyTabEvento = ({
                   isDark ? 'bg-zinc-950 border border-sky-400/30' : 'bg-sky-50/80 border border-sky-200'
                 }`}>
                   <div className="flex justify-between items-center">
-                    <StatusBadge variant="accent">Candidato Suplente IA</StatusBadge>
+                    <StatusBadge variant="accent">Reemplazo asignado</StatusBadge>
                     <span className="font-mono text-xs font-bold text-sky-400">{scannedCandidate.score}% Match</span>
                   </div>
 
@@ -633,7 +641,7 @@ const AgencyTabEvento = ({
 
                   <LuminousButton
                     icon="ph-arrows-left-right"
-                    onClick={handleConfirmSmartBackup}
+                    onClick={handleConfirmReplacement}
                   >
                     Confirmar reemplazo inmediato
                   </LuminousButton>
@@ -754,7 +762,7 @@ const AgencyTabFechas = () => {
   );
 };
 
-// --- Tab 3: Talento (Pool & Auditoría GPS Aislado Regionalmente) ---
+// --- Tab 3: Talento (Base de Staff e Ingresos en Puerta) ---
 const AgencyTabTalento = () => {
   const { isDark, showToast, country } = useContext(AppContext);
   const [filter, setFilter] = useState("Todos");
@@ -764,6 +772,7 @@ const AgencyTabTalento = () => {
 
   const filteredTalent = talentList.filter(t => {
     if (filter === "Todos") return true;
+    if (filter === "Disponibles") return t.type === "Disponibles" || t.type === "Guardia 24h";
     return t.type === filter;
   });
 
@@ -772,12 +781,12 @@ const AgencyTabTalento = () => {
       <div>
         <h2 className="text-base font-extrabold tracking-tight">Base de talento ({country})</h2>
         <p className={`text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-          Pool verificado de staff, historial y auditoría GPS de ingresos.
+          Pool verificado de staff, historial e ingresos en puerta.
         </p>
       </div>
 
       <div className="flex gap-1.5 overflow-x-auto hide-scroll pb-1">
-        {["Todos", "Favoritos", "Guardia 24h", "Movilidad"].map((f) => (
+        {["Todos", "Favoritos", "Disponibles", "Movilidad"].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -810,10 +819,10 @@ const AgencyTabTalento = () => {
         ))}
       </div>
 
-      {/* Auditoría GPS en tiempo real Regional */}
+      {/* Ingresos en puerta en tiempo real */}
       <div className="pt-2">
         <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
-          AUDITORÍA GPS (Ingresos en tiempo real · {country})
+          INGRESOS EN PUERTA ({country})
         </span>
         <div className={`p-3 rounded-card space-y-2 font-mono text-[11px] ${
           isDark ? 'bg-zinc-950' : 'bg-slate-100'

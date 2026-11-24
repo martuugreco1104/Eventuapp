@@ -229,7 +229,7 @@ const LoginScreen = ({ role, setRole, onLoginSuccess, onStartOnboarding }) => {
           <p className={`text-xs mt-0.5 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
             {role === 'worker' 
               ? 'Ingresá para fichar con GPS, ver propuestas confirmadas y acceder a tu book verificado.' 
-              : 'Gestión de cupos en vivo, auditoría GPS y activación de Smart Backup inmediato.'}
+              : 'Gestión de cupos en vivo, ingresos en puerta y reemplazos inmediatos ante bajas.'}
           </p>
         </div>
 
@@ -427,7 +427,7 @@ const StaffOnboarding = ({ onComplete, onCancel }) => {
 
             {/* Sizes Grid */}
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">Talles de Guardarropa</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">Talles y Calzado</span>
               <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
                 <div className={`p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`}>
                   <span className="text-[9px] text-zinc-400 block">ALT</span>
@@ -450,11 +450,11 @@ const StaffOnboarding = ({ onComplete, onCancel }) => {
           </div>
         )}
 
-        {/* Step 3: Availability & Smart Backup */}
+        {/* Step 3: Availability & Reemplazos */}
         {step === 3 && (
           <div className="space-y-4 animate-fade-in">
             <div>
-              <h2 className="text-base font-extrabold tracking-tight">Disponibilidad & Smart Backup</h2>
+              <h2 className="text-base font-extrabold tracking-tight">Disponibilidad para reemplazos</h2>
               <p className={`text-xs mt-0.5 leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
                 Configurá tu disponibilidad para reemplazos de último minuto y movilidad.
               </p>
@@ -468,7 +468,7 @@ const StaffOnboarding = ({ onComplete, onCancel }) => {
                 }`}
               >
                 <div>
-                  <h4 className="text-xs font-bold">Guardia 24h Smart Backup</h4>
+                  <h4 className="text-xs font-bold">Disponible para reemplazos</h4>
                   <p className="text-[10px] text-zinc-400">Recibí avisos de emergencia con plus de tarifa</p>
                 </div>
                 <div className={`w-9 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`}>

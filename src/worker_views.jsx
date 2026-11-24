@@ -1,7 +1,7 @@
 // Vistas de Staff (B2C): Inicio, Agenda, Cobros, Mi Perfil
 
 const WorkerTabInicio = ({ currentEvent }) => {
-  const { isDark, showToast, country } = useContext(AppContext);
+  const { isDark, showToast, country, userProfile } = useContext(AppContext);
   const [hasShiftToday, setHasShiftToday] = useState(true);
   const [checkedInState, setCheckedInState] = useState(false);
   const [isCheckingIn, setIsCheckingIn] = useState(false);
@@ -49,14 +49,14 @@ const WorkerTabInicio = ({ currentEvent }) => {
   const handleSimularErrorGPS = () => {
     setCheckedInState(false);
     setGpsErrorState(true);
-    showToast("Error de Geocerca GPS: Te encontrás a 420m del predio.", "warning");
+    showToast("Estás fuera del radio del predio (a 1.4 km de Puerta 4).", "warning");
   };
 
   const handleAcceptProposal = (id) => {
     setProposals((prev) =>
       prev.map((p) => (p.id === id ? { ...p, status: "accepted" } : p))
     );
-    showToast("¡Propuesta aceptada! Perfil y medidas enviados a la agencia.", "success");
+    showToast("Propuesta aceptada. Ya enviamos tu perfil y talles.", "success");
   };
 
   const handleRejectProposal = (id) => {
@@ -66,13 +66,16 @@ const WorkerTabInicio = ({ currentEvent }) => {
     showToast("Propuesta declinada sin penalización en tu score.", "info");
   };
 
+  const staffFirstName = userProfile?.name ? userProfile.name.split(" ")[0] : "Martina";
+  const staffAvatar = userProfile?.avatarImg || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80";
+
   return (
     <div className="p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10">
       {/* Saludo & Avatar Header (Descongestionado) */}
       <div className="flex justify-between items-center">
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
-            <h1 className="text-base font-extrabold tracking-tight truncate">Hola, Martina</h1>
+            <h1 className="text-base font-extrabold tracking-tight truncate">Hola, {staffFirstName}</h1>
             <span className="w-2 h-2 rounded-full bg-[#34D399] shrink-0" />
           </div>
           <p className="font-mono text-[10px] font-semibold text-sky-400 mt-0.5 truncate">
@@ -80,8 +83,8 @@ const WorkerTabInicio = ({ currentEvent }) => {
           </p>
         </div>
         <img 
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80" 
-          className="w-10 h-10 rounded-card object-cover shrink-0" 
+          src={staffAvatar} 
+          className="w-10 h-10 rounded-card object-cover shrink-0 border border-sky-400/30" 
         />
       </div>
 
@@ -111,7 +114,7 @@ const WorkerTabInicio = ({ currentEvent }) => {
 
         {/* ESTADO VACÍO: Sin Jornadas Asignadas Hoy */}
         {!hasShiftToday ? (
-          <div className={`p-6 rounded-hero text-center space-y-3 ${
+          <div className={`p-5 rounded-hero text-center space-y-3 ${
             isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'
           }`}>
             <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center ${
@@ -122,14 +125,26 @@ const WorkerTabInicio = ({ currentEvent }) => {
             <div>
               <h3 className="text-sm font-bold tracking-tight">Sin jornadas asignadas hoy</h3>
               <p className={`text-xs mt-1 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-                No tenés turnos activos para hoy. Activá tu Guardia 24h para recibir convocatorias de emergencia o postulate a las propuestas de abajo.
+                No tenés turnos activos para hoy. Tu perfil está visible para convocatorias de productoras en {country}.
               </p>
             </div>
+
+            {/* Barra de Progreso de Verificación */}
+            <div className={`p-2.5 rounded-card text-left space-y-1.5 ${isDark ? 'bg-zinc-950' : 'bg-slate-50 border border-slate-200'}`}>
+              <div className="flex justify-between items-center text-[10px] font-mono">
+                <span className="font-bold text-sky-400">80% completo</span>
+                <span className="text-zinc-400">Falta subir comprobante</span>
+              </div>
+              <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-zinc-800' : 'bg-slate-200'}`}>
+                <div className="w-[80%] h-full bg-sky-400 rounded-full" />
+              </div>
+            </div>
+
             <LuminousButton
               icon="ph-shield-check"
-              onClick={() => showToast("Guardia 24h activada. Tu perfil está primero en el radar de emergencias.", "success")}
+              onClick={() => showToast("Disponibilidad activada para reemplazos de último minuto.", "success")}
             >
-              Activar Guardia 24h Smart Backup
+              Disponible para reemplazos
             </LuminousButton>
           </div>
         ) : (
@@ -174,7 +189,7 @@ const WorkerTabInicio = ({ currentEvent }) => {
               </div>
             </div>
 
-            {/* Datos Técnicos del Turno (Sin bordes duros) */}
+            {/* Datos Técnicos del Turno */}
             <div className="p-3.5 space-y-3">
               <div className="space-y-1.5 font-mono text-xs">
                 <div className={`p-2 rounded-input flex items-center gap-2 ${
@@ -198,23 +213,23 @@ const WorkerTabInicio = ({ currentEvent }) => {
                 }`}>
                   <div className="flex items-center gap-1.5 font-bold text-xs">
                     <i className="ph-fill ph-warning-octagon text-sm text-[#EF4444]" />
-                    <span>Error de Geocerca GPS</span>
+                    <span>Error de ubicación GPS</span>
                   </div>
                   <p className="text-[11px] leading-snug">
-                    Te encontrás a 420m del predio. Acercate a Puerta 4 para habilitar el fichaje de ingreso.
+                    Estás fuera del radio del predio (a 1.4 km de Puerta 4). Acercate para habilitar el fichaje.
                   </p>
                   <button 
                     onClick={handleFicharGPS}
-                    className="w-full py-1.5 rounded-input bg-[#EF4444] text-white text-[11px] font-bold"
+                    className="w-full py-2 rounded-input bg-[#EF4444] hover:bg-[#DC2626] text-white text-[11px] font-bold transition-colors cursor-pointer"
                   >
-                    Reintentar Detección GPS
+                    Reintentar ubicación
                   </button>
                 </div>
               )}
 
-              {/* Estado Fichaje Exitoso */}
+              {/* Estado Fichaje Exitoso con Botón Fichar Salida */}
               {checkedInState && (
-                <div className={`p-2.5 rounded-card space-y-1.5 animate-fade-in ${
+                <div className={`p-2.5 rounded-card space-y-2 animate-fade-in ${
                   isDark ? 'bg-[#34D399]/10 text-zinc-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'
                 }`}>
                   <div className="flex justify-between items-center">
@@ -226,6 +241,15 @@ const WorkerTabInicio = ({ currentEvent }) => {
                   <p className={`text-[10px] ${isDark ? 'text-zinc-300' : 'text-slate-600'}`}>
                     Fichaje confirmado a las {checkInTime}. Tu liquidación se computará automáticamente al completar el turno.
                   </p>
+                  <button
+                    onClick={() => {
+                      setCheckedInState(false);
+                      showToast("Salida registrada. Liquidación enviada a Cobros.", "info");
+                    }}
+                    className="w-full py-2 rounded-input bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <i className="ph-bold ph-sign-out" /> Fichar salida
+                  </button>
                 </div>
               )}
 
@@ -296,23 +320,26 @@ const WorkerTabInicio = ({ currentEvent }) => {
                     onClick={() => handleAcceptProposal(prop.id)}
                     className="flex-1"
                   >
-                    Aceptar con mi Perfil
+                    Aceptar con mi perfil
                   </LuminousButton>
-                  <button 
+                  <button
                     onClick={() => handleRejectProposal(prop.id)}
-                    className={`px-3 h-12 rounded-input border text-xs font-bold transition-colors shrink-0 ${
-                      isDark ? 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
+                    className={`px-3 py-2 rounded-input text-xs font-bold border transition-colors shrink-0 ${
+                      isDark 
+                        ? 'border-zinc-700 text-zinc-400 hover:text-zinc-200' 
+                        : 'border-slate-300 text-slate-600 hover:text-slate-800'
                     }`}
                   >
                     Rechazar
                   </button>
                 </div>
+              ) : prop.status === "accepted" ? (
+                <div className="p-2 rounded-input bg-[#34D399]/10 text-[#34D399] font-bold text-xs text-center flex items-center justify-center gap-1.5">
+                  <i className="ph-fill ph-check-circle" /> Postulación Confirmada
+                </div>
               ) : (
-                <div className="pt-1 flex items-center justify-between font-mono text-[10px]">
-                  <StatusBadge variant={prop.status === "accepted" ? "success" : "neutral"}>
-                    {prop.status === "accepted" ? "Propuesta Confirmada" : "Declinada"}
-                  </StatusBadge>
-                  <span className="text-zinc-500">Respondido</span>
+                <div className="p-2 rounded-input bg-zinc-800/40 text-zinc-500 font-bold text-xs text-center">
+                  Propuesta declinada
                 </div>
               )}
             </div>
@@ -323,99 +350,130 @@ const WorkerTabInicio = ({ currentEvent }) => {
   );
 };
 
-// --- Tab 2: Agenda (Mis Fechas Regionalizadas) ---
+// --- Tab 2: Agenda (Confirmados, Postulados, Historial) ---
 const WorkerTabAgenda = () => {
-  const { isDark, country, showToast } = useContext(AppContext);
-  const [agendaTab, setAgendaTab] = useState("Confirmados");
+  const { isDark, country } = useContext(AppContext);
+  const [activeTab, setActiveTab] = useState("confirmados");
+
+  const agendaItems = {
+    confirmados: [
+      {
+        id: 1,
+        title: country === "AR" ? "Lollapalooza 2026 · Día 2" : "Mobile World Congress 2026",
+        date: "Sábado 21 Mar • 14:00 hs",
+        role: "Promotora VIP",
+        venue: country === "AR" ? "Hipódromo de San Isidro" : "Fira Barcelona Gran Via",
+        badge: "CONFIRMADO",
+        badgeVariant: "success"
+      },
+      {
+        id: 2,
+        title: country === "AR" ? "Feria Matear 2026" : "Salón Náutico Internacional",
+        date: "Viernes 27 Mar • 10:00 hs",
+        role: "Acreditaciones",
+        venue: country === "AR" ? "Predio La Rural Palermo" : "Port Vell Barcelona",
+        badge: "CONFIRMADO",
+        badgeVariant: "success"
+      }
+    ],
+    postulados: [
+      {
+        id: 3,
+        title: country === "AR" ? "Heineken Sunset Session" : "Gastro Festival Madrid",
+        date: "Domingo 29 Mar • 18:00 hs",
+        role: "Bartender Principal",
+        venue: country === "AR" ? "Costanera Norte" : "IFEMA Madrid",
+        badge: "EN REVISIÓN",
+        badgeVariant: "warning"
+      }
+    ],
+    historial: [
+      {
+        id: 4,
+        title: country === "AR" ? "Maratón Nordelta 2026" : "Sephora Beauty Experience",
+        date: "14 Feb 2026",
+        role: "Guía de circuito",
+        venue: country === "AR" ? "Tigre, Buenos Aires" : "Palau Sant Jordi",
+        badge: "COMPLETADO",
+        badgeVariant: "accent"
+      }
+    ]
+  };
+
+  const currentList = agendaItems[activeTab] || [];
 
   return (
     <div className="p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10">
       <div>
-        <h2 className="text-base font-extrabold tracking-tight">Mis fechas</h2>
+        <h2 className="text-base font-extrabold tracking-tight">Tu Agenda</h2>
         <p className={`text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-          Calendario operativo y logística de eventos confirmados ({country}).
+          Fechas asignadas, postulaciones activas e historial ({country}).
         </p>
       </div>
 
-      <div className="flex gap-1.5 overflow-x-auto hide-scroll pb-1">
-        {["Confirmados", "Postulados", "Historial"].map((tab) => (
+      {/* Tabs Selector */}
+      <div className={`p-1 rounded-card flex gap-1 ${isDark ? 'bg-zinc-900' : 'bg-slate-100'}`}>
+        {[
+          { key: "confirmados", label: "Confirmados" },
+          { key: "postulados", label: "Postulados" },
+          { key: "historial", label: "Historial" }
+        ].map((tab) => (
           <button
-            key={tab}
-            onClick={() => setAgendaTab(tab)}
-            className={`px-3 py-1 rounded-full text-xs font-semibold border shrink-0 transition-colors ${
-              agendaTab === tab
-                ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold'
-                : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-700'
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`flex-1 py-1.5 text-xs font-bold rounded-input transition-colors ${
+              activeTab === tab.key
+                ? isDark ? 'bg-zinc-800 text-sky-400 shadow-sm' : 'bg-white text-sky-700 shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
-            {tab}
+            {tab.label}
           </button>
         ))}
       </div>
 
-      <div className="space-y-3">
-        {/* Evento Confirmado */}
-        <div className={`p-3.5 rounded-card ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
-          <div className="flex justify-between items-start mb-2.5">
-            <div>
-              <h4 className="text-xs font-bold">
-                {country === "AR" ? "Lollapalooza 2026" : "Mobile World Congress 2026"}
-              </h4>
-              <span className="text-[10px] text-zinc-400 font-mono">
-                {country === "AR" ? "Sáb 28 Nov · 14:00 hs · San Isidro" : "Lun 2 Mar · 09:00 hs · Fira Gran Via"}
-              </span>
-            </div>
-            <StatusBadge variant="success">Confirmado</StatusBadge>
-          </div>
-          <button 
-            onClick={() => showToast("Abriendo navegación en Google Maps...", "info")}
-            className="w-full h-10 rounded-input border border-zinc-700/60 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800/60 transition-colors"
+      {/* Items List */}
+      <div className="space-y-2.5">
+        {currentList.map((item) => (
+          <div 
+            key={item.id}
+            className={`p-3.5 rounded-card space-y-2 ${
+              isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'
+            }`}
           >
-            <i className="ph-fill ph-navigation-arrow text-sky-400" /> Cómo llegar al Venue
-          </button>
-        </div>
+            <div className="flex justify-between items-start gap-2">
+              <div className="min-w-0">
+                <h3 className="font-bold text-xs truncate">{item.title}</h3>
+                <span className="text-[10px] text-zinc-400 font-mono block">{item.role}</span>
+              </div>
+              <StatusBadge variant={item.badgeVariant}>{item.badge}</StatusBadge>
+            </div>
 
-        {/* Coordinadora en Venue */}
-        <div className={`p-3.5 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
-          <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
-            COORDINADORA EN VENUE
-          </span>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <img 
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80" 
-                className="w-8 h-8 rounded-full object-cover" 
-              />
-              <div>
-                <h5 className="text-xs font-bold">
-                  {country === "AR" ? "Florencia V. (Somos DER)" : "Marta S. (NSH Azafatas BCN)"}
-                </h5>
-                <span className="text-[10px] text-zinc-400">
-                  {country === "AR" ? "En Puerta 4 Staff" : "En Pabellón 3 Acceso Norte"}
-                </span>
+            <div className="space-y-1 font-mono text-[10px] text-zinc-400">
+              <div className="flex items-center gap-1.5">
+                <i className="ph ph-calendar text-xs" />
+                <span>{item.date}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <i className="ph ph-map-pin text-xs text-sky-400" />
+                <span className="truncate">{item.venue}</span>
               </div>
             </div>
-            <button 
-              onClick={() => showToast("Abriendo chat directo con la coordinadora...", "info")}
-              className="px-3 py-1.5 rounded-input bg-sky-400/20 text-sky-400 border border-sky-400/30 text-[11px] font-bold"
-            >
-              Contactar
-            </button>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 
-// --- Tab 3: Cobros (Centro Financiero Regionalizado) ---
+// --- Tab 3: Cobros (Mis Cobros y Liquidaciones) ---
 const WorkerTabCobros = () => {
-  const { isDark, country, showToast } = useContext(AppContext);
+  const { isDark, country, showToast, userProfile } = useContext(AppContext);
 
   return (
     <div className="p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10">
       <div>
-        <h2 className="text-base font-extrabold tracking-tight">Cobros • Centro financiero</h2>
+        <h2 className="text-base font-extrabold tracking-tight">Mis cobros</h2>
         <p className={`text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
           Liquidaciones al día con pago garantizado ({country}).
         </p>
@@ -486,7 +544,7 @@ const WorkerTabCobros = () => {
         </span>
         <div className="flex justify-between items-center">
           <span className={isDark ? 'text-zinc-300' : 'text-slate-800'}>
-            {country === 'AR' ? 'Alias: martina.staff.mp' : 'IBAN: ES91 2100 0418 4502 ****'}
+            {country === 'AR' ? `Alias: ${userProfile?.cbuAlias || 'martina.eventos.mp'}` : `IBAN: ${userProfile?.iban || 'ES82 2100 0418 ****'}`}
           </span>
           <StatusBadge variant="success">Verificada</StatusBadge>
         </div>
@@ -495,19 +553,114 @@ const WorkerTabCobros = () => {
   );
 };
 
-// --- Tab 4: Mi Book & Perfil (Medidas, Fotos & Bóveda Legal) ---
+// --- Tab 4: Mi Perfil (100% Editable en Estado Local) ---
 const WorkerTabMiPerfil = ({ onLogout }) => {
-  const { isDark, country, showToast } = useContext(AppContext);
-  const [guard24, setGuard24] = useState(true);
-  const [car, setCar] = useState(true);
+  const { isDark, country, showToast, userProfile, setUserProfile } = useContext(AppContext);
+
+  // 1. Datos personales editables
+  const [name, setName] = useState(userProfile?.name || "Martina Benítez");
+  const [phone, setPhone] = useState(userProfile?.phone || "+54 9 11 5821-9943");
+  const [city, setCity] = useState(userProfile?.city || (country === "AR" ? "Buenos Aires, Palermo" : "Barcelona, Eixample"));
+  const [languages, setLanguages] = useState(userProfile?.languages || "Español nativo · Inglés C1");
+  const [availability, setAvailability] = useState(userProfile?.availability || "Fines de semana y turnos noche");
+
+  // 2. Fotos verificadas
+  const [avatarImg, setAvatarImg] = useState(userProfile?.avatarImg || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80");
+  const [fullBodyImg, setFullBodyImg] = useState(userProfile?.fullBodyImg || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80");
+  const [shoesImg, setShoesImg] = useState(userProfile?.shoesImg || "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80");
+
+  // 3. Talles y calzado
+  const [height, setHeight] = useState(userProfile?.height || "1.74 m");
+  const [shirt, setShirt] = useState(userProfile?.shirt || "M");
+  const [pant, setPant] = useState(userProfile?.pant || "38");
+  const [shoes, setShoes] = useState(userProfile?.shoes || "38");
+  const [shoesType, setShoesType] = useState(userProfile?.shoesType || "Botas negras reglamentarias");
+
+  // 4. Documentación y cuenta
+  const [dni, setDni] = useState(country === "AR" ? (userProfile?.dniAr || "42.100.892") : (userProfile?.nieEs || "Y-4921028-H"));
+  const [cbuAlias, setCbuAlias] = useState(userProfile?.cbuAlias || "martina.eventos.mp");
+  const [iban, setIban] = useState(userProfile?.iban || "ES82 2100 0418 4502 0005 1234");
+
+  // 5. Switches de disponibilidad
+  const [guard24, setGuard24] = useState(userProfile?.guard24 ?? true);
+  const [car, setCar] = useState(userProfile?.car ?? true);
+
+  const [saving, setSaving] = useState(false);
+
+  const handleCyclePhoto = (type) => {
+    const photoPool = {
+      avatar: [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80"
+      ],
+      body: [
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80"
+      ],
+      shoes: [
+        "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80"
+      ]
+    };
+
+    if (type === "avatar") {
+      const idx = (photoPool.avatar.indexOf(avatarImg) + 1) % photoPool.avatar.length;
+      setAvatarImg(photoPool.avatar[idx]);
+      showToast("Foto de rostro actualizada.", "info");
+    } else if (type === "body") {
+      const idx = (photoPool.body.indexOf(fullBodyImg) + 1) % photoPool.body.length;
+      setFullBodyImg(photoPool.body[idx]);
+      showToast("Foto de cuerpo entero actualizada.", "info");
+    } else if (type === "shoes") {
+      const idx = (photoPool.shoes.indexOf(shoesImg) + 1) % photoPool.shoes.length;
+      setShoesImg(photoPool.shoes[idx]);
+      showToast("Foto de calzado reglamentario actualizada.", "info");
+    }
+  };
+
+  const handleSaveProfile = () => {
+    setSaving(true);
+    setTimeout(() => {
+      setSaving(false);
+      if (setUserProfile) {
+        setUserProfile(prev => ({
+          ...prev,
+          name,
+          phone,
+          city,
+          languages,
+          availability,
+          avatarImg,
+          fullBodyImg,
+          shoesImg,
+          height,
+          shirt,
+          pant,
+          shoes,
+          shoesType,
+          cbuAlias,
+          iban,
+          dniAr: country === "AR" ? dni : prev?.dniAr,
+          nieEs: country === "ES" ? dni : prev?.nieEs,
+          guard24,
+          car
+        }));
+      }
+      showToast("Perfil actualizado correctamente.", "success");
+    }, 400);
+  };
 
   return (
-    <div className="p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10">
+    <div className="p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-16">
+      {/* Header Mi Perfil */}
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-base font-extrabold tracking-tight">Mi Book Único</h2>
+          <h2 className="text-base font-extrabold tracking-tight">Mi Perfil</h2>
           <p className={`text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-            Medidas, fotos verificadas y bóveda legal ({country}).
+            Datos personales, book, talles y documentación ({country}).
           </p>
         </div>
         <button
@@ -521,110 +674,288 @@ const WorkerTabMiPerfil = ({ onLogout }) => {
         </button>
       </div>
 
-      {/* 3 Fotos Verificadas */}
-      <div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
-          Fotos de Perfil Verificadas (3)
+      {/* SECCIÓN 1: Datos Personales */}
+      <div className={`p-3.5 rounded-card space-y-3 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block">
+          1. DATOS PERSONALES
         </span>
+
+        <div className="space-y-2">
+          <div>
+            <label className="text-[10px] text-zinc-400 block mb-0.5">Nombre completo</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${
+                isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+              }`}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="text-[10px] text-zinc-400 block mb-0.5">Teléfono / WhatsApp</label>
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className={`w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${
+                  isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+                }`}
+              />
+            </div>
+            <div>
+              <label className="text-[10px] text-zinc-400 block mb-0.5">Ciudad / Zona</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className={`w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${
+                  isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+                }`}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="text-[10px] text-zinc-400 block mb-0.5">Idiomas</label>
+              <input
+                type="text"
+                value={languages}
+                onChange={(e) => setLanguages(e.target.value)}
+                className={`w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${
+                  isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+                }`}
+              />
+            </div>
+            <div>
+              <label className="text-[10px] text-zinc-400 block mb-0.5">Disponibilidad horaria</label>
+              <input
+                type="text"
+                value={availability}
+                onChange={(e) => setAvailability(e.target.value)}
+                className={`w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${
+                  isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+                }`}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SECCIÓN 2: Book y Calzado (3 Fotos Verificadas) */}
+      <div className={`p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
+        <div className="flex justify-between items-center">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+            2. BOOK Y CALZADO (3 FOTOS)
+          </span>
+          <span className="text-[10px] text-zinc-400">Tocá para cambiar foto</span>
+        </div>
+
         <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80" className="w-full h-full object-cover" />
+          {/* Rostro */}
+          <div 
+            onClick={() => handleCyclePhoto("avatar")}
+            className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
+          >
+            <img src={avatarImg} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded">Cambiar</span>
+            </div>
             <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white">Rostro</span>
           </div>
-          <div className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80" className="w-full h-full object-cover" />
+
+          {/* Cuerpo */}
+          <div 
+            onClick={() => handleCyclePhoto("body")}
+            className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
+          >
+            <img src={fullBodyImg} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded">Cambiar</span>
+            </div>
             <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white">Cuerpo</span>
           </div>
-          <div className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm">
-            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" className="w-full h-full object-cover" />
+
+          {/* Calzado */}
+          <div 
+            onClick={() => handleCyclePhoto("shoes")}
+            className="rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
+          >
+            <img src={shoesImg} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded">Cambiar</span>
+            </div>
             <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white">Calzado</span>
           </div>
         </div>
       </div>
 
-      {/* Medidas de Guardarropa */}
-      <div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
-          Medidas de Guardarropa
+      {/* SECCIÓN 3: Talles y Calzado */}
+      <div className={`p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block">
+          3. TALLES Y CALZADO
         </span>
+
         <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
-          <div className={`p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
-            <span className="text-[9px] text-zinc-400 block">ALT</span>
-            <span className="font-bold text-xs">1.74 m</span>
+          <div className={`p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+            <span className="text-[9px] text-zinc-400 block mb-0.5">ALT</span>
+            <input 
+              value={height} 
+              onChange={(e) => setHeight(e.target.value)} 
+              className="w-full bg-transparent font-bold text-xs text-center outline-none" 
+            />
           </div>
-          <div className={`p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
-            <span className="text-[9px] text-zinc-400 block">REM</span>
-            <span className="font-bold text-xs text-sky-400">M</span>
+          <div className={`p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+            <span className="text-[9px] text-zinc-400 block mb-0.5">REM</span>
+            <input 
+              value={shirt} 
+              onChange={(e) => setShirt(e.target.value)} 
+              className="w-full bg-transparent font-bold text-xs text-center text-sky-400 outline-none" 
+            />
           </div>
-          <div className={`p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
-            <span className="text-[9px] text-zinc-400 block">PAN</span>
-            <span className="font-bold text-xs">38</span>
+          <div className={`p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+            <span className="text-[9px] text-zinc-400 block mb-0.5">PAN</span>
+            <input 
+              value={pant} 
+              onChange={(e) => setPant(e.target.value)} 
+              className="w-full bg-transparent font-bold text-xs text-center outline-none" 
+            />
           </div>
-          <div className={`p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`}>
-            <span className="text-[9px] text-zinc-400 block">CAL</span>
-            <span className="font-bold text-xs">38</span>
+          <div className={`p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+            <span className="text-[9px] text-zinc-400 block mb-0.5">CAL</span>
+            <input 
+              value={shoes} 
+              onChange={(e) => setShoes(e.target.value)} 
+              className="w-full bg-transparent font-bold text-xs text-center outline-none" 
+            />
           </div>
+        </div>
+
+        <div>
+          <label className="text-[10px] text-zinc-400 block mb-0.5">Tipo de calzado reglamentario disponible</label>
+          <input
+            type="text"
+            value={shoesType}
+            onChange={(e) => setShoesType(e.target.value)}
+            className={`w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${
+              isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+            }`}
+          />
         </div>
       </div>
 
-      {/* Bóveda Legal */}
-      <div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
-          BÓVEDA LEGAL ({country})
+      {/* SECCIÓN 4: Documentación y Cobro */}
+      <div className={`p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block">
+          4. DOCUMENTACIÓN Y COBRO ({country})
         </span>
-        <div className="space-y-1.5">
-          <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
-            isDark ? 'bg-zinc-950' : 'bg-slate-100'
-          }`}>
-            <span>{country === "AR" ? "DNI / CUIL: 42.100.892" : "DNI / NIE: Y-4921028-H"}</span>
-            <StatusBadge variant="success">Vigente</StatusBadge>
+
+        <div className="space-y-2">
+          <div>
+            <label className="text-[10px] text-zinc-400 block mb-0.5">
+              {country === "AR" ? "DNI / CUIL" : "DNI / NIE"}
+            </label>
+            <input
+              type="text"
+              value={dni}
+              onChange={(e) => setDni(e.target.value)}
+              className={`w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${
+                isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+              }`}
+            />
           </div>
-          <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
-            isDark ? 'bg-zinc-950' : 'bg-slate-100'
-          }`}>
-            <span>{country === "AR" ? "Monotributo: Al día" : "Seguridad Social: Alta activa"}</span>
-            <StatusBadge variant="success">Verificado</StatusBadge>
+
+          <div>
+            <label className="text-[10px] text-zinc-400 block mb-0.5">
+              {country === "AR" ? "CBU / Alias para depósitos" : "IBAN bancario europeo"}
+            </label>
+            <input
+              type="text"
+              value={country === "AR" ? cbuAlias : iban}
+              onChange={(e) => country === "AR" ? setCbuAlias(e.target.value) : setIban(e.target.value)}
+              className={`w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${
+                isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'
+              }`}
+            />
           </div>
-          <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
-            isDark ? 'bg-zinc-950' : 'bg-slate-100'
-          }`}>
-            <span>{country === "AR" ? "Póliza AP: Cláusula No Rep." : "Certificado PRL: Apto"}</span>
-            <StatusBadge variant="success">Vigente</StatusBadge>
+
+          <div className="space-y-1.5 pt-1">
+            <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
+              isDark ? 'bg-zinc-950' : 'bg-slate-100'
+            }`}>
+              <span>{country === "AR" ? "Constancia Monotributo AFIP" : "Alta Seguridad Social"}</span>
+              <StatusBadge variant="success">Al día</StatusBadge>
+            </div>
+            <div className={`p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${
+              isDark ? 'bg-zinc-950' : 'bg-slate-100'
+            }`}>
+              <span>{country === "AR" ? "Póliza AP / Cláusula no repetición" : "Certificado Prevención Riesgos"}</span>
+              <StatusBadge variant="success">Vigente</StatusBadge>
+            </div>
+          </div>
+
+          <button
+            onClick={() => showToast("Subida de constancia legal habilitada.", "info")}
+            className={`w-full py-2 rounded-input border text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+              isDark ? 'border-zinc-700 hover:bg-zinc-800 text-zinc-300' : 'border-slate-300 hover:bg-slate-100 text-slate-700'
+            }`}
+          >
+            <i className="ph ph-upload-simple text-sm" /> Subir constancia actualizada
+          </button>
+        </div>
+      </div>
+
+      {/* SECCIÓN 5: Disponibilidad Operativa */}
+      <div className={`p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`}>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block">
+          5. DISPONIBILIDAD OPERATIVA
+        </span>
+
+        <div className="space-y-2">
+          <div 
+            onClick={() => setGuard24(!guard24)}
+            className={`p-3 rounded-card flex items-center justify-between cursor-pointer border ${
+              isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'
+            }`}
+          >
+            <div>
+              <h4 className="text-xs font-bold">Disponible para reemplazos</h4>
+              <p className="text-[10px] text-zinc-400">Recibí convocatorias urgentes con plus de tarifa</p>
+            </div>
+            <div className={`w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`}>
+              <div className={`w-4 h-4 rounded-full bg-white transition-transform ${guard24 ? 'translate-x-3' : 'translate-x-0'}`} />
+            </div>
+          </div>
+
+          <div 
+            onClick={() => setCar(!car)}
+            className={`p-3 rounded-card flex items-center justify-between cursor-pointer border ${
+              isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'
+            }`}
+          >
+            <div>
+              <h4 className="text-xs font-bold">Movilidad propia (Auto / Moto)</h4>
+              <p className="text-[10px] text-zinc-400">Prioridad en eventos de predios alejados</p>
+            </div>
+            <div className={`w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${car ? 'bg-sky-400' : 'bg-zinc-700'}`}>
+              <div className={`w-4 h-4 rounded-full bg-white transition-transform ${car ? 'translate-x-3' : 'translate-x-0'}`} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Switches Interactivos */}
-      <div className="space-y-2.5">
-        <div 
-          onClick={() => {
-            setGuard24(!guard24);
-            showToast(guard24 ? "Guardia 24h pausada." : "Guardia 24h activada.", "info");
-          }}
-          className={`p-3 rounded-card flex items-center justify-between cursor-pointer ${
-            isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'
-          }`}
+      {/* Botón Guardar Cambios (Fitts Law) */}
+      <div className="pt-2">
+        <LuminousButton
+          icon="ph-floppy-disk"
+          loading={saving}
+          onClick={handleSaveProfile}
         >
-          <span className="text-xs font-bold">Guardia 24h Smart Backup</span>
-          <div className={`w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`}>
-            <div className={`w-4 h-4 rounded-full bg-white transition-transform ${guard24 ? 'translate-x-3' : 'translate-x-0'}`} />
-          </div>
-        </div>
-
-        <div 
-          onClick={() => {
-            setCar(!car);
-            showToast(car ? "Movilidad propia desactivada." : "Movilidad propia activada.", "info");
-          }}
-          className={`p-3 rounded-card flex items-center justify-between cursor-pointer ${
-            isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'
-          }`}
-        >
-          <span className="text-xs font-bold">Movilidad Propia</span>
-          <div className={`w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${car ? 'bg-sky-400' : 'bg-zinc-700'}`}>
-            <div className={`w-4 h-4 rounded-full bg-white transition-transform ${car ? 'translate-x-3' : 'translate-x-0'}`} />
-          </div>
-        </div>
+          Guardar cambios en mi perfil
+        </LuminousButton>
       </div>
     </div>
   );

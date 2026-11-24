@@ -111,7 +111,7 @@
     <!-- Pre-compiled Native JavaScript -->
     <script>
 // --- Source: src/data.js ---
-// Datos y Mock Data estructurados con estricta separación regional (AR vs ES)
+// Datos y Mock Data estructurados con estricta separación regional (AR vs ES) y lenguaje real de eventos
 
 const EVENTS_DATA = {
   AR: [{
@@ -124,8 +124,8 @@ const EVENTS_DATA = {
     badge: "EN VIVO",
     currency: "ARS",
     currencySymbol: "$",
-    legalDocLabel: "Póliza AP / ART al día",
-    nominaExportName: "Nomina_Lollapalooza_SanIsidro_2026.pdf",
+    legalDocLabel: "Seguros y ART al día",
+    nominaExportName: "Lista_Ingreso_Lollapalooza_SanIsidro_2026.pdf",
     staffCounts: {
       Promotores: {
         current: 8,
@@ -179,7 +179,7 @@ const EVENTS_DATA = {
       footwearType: "Mocasines negros",
       docStatus: "warning",
       dniNie: "DNI 39.841.109",
-      insuranceName: "Sin póliza cargada",
+      insuranceName: "Pendiente comprobante ART",
       hasVehicle: false,
       guard24: false,
       img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
@@ -189,7 +189,7 @@ const EVENTS_DATA = {
     }, {
       id: 3,
       name: "Sofía Ruiz",
-      status: "Guardia 24h",
+      status: "Disponibles",
       score: 96,
       role: "Promotores",
       dist: "1.2 km",
@@ -302,8 +302,8 @@ const EVENTS_DATA = {
     badge: "EN VIVO",
     currency: "ARS",
     currencySymbol: "$",
-    legalDocLabel: "Póliza AP / ART La Rural",
-    nominaExportName: "Nomina_FeriaMatear_LaRural_2026.pdf",
+    legalDocLabel: "Seguros de ingreso La Rural",
+    nominaExportName: "Lista_Ingreso_FeriaMatear_LaRural_2026.pdf",
     staffCounts: {
       Promotores: {
         current: 6,
@@ -363,7 +363,7 @@ const EVENTS_DATA = {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Movilidad Propia"]
+      tags: ["Disponible para reemplazos", "Movilidad Propia"]
     }]
   }],
   ES: [{
@@ -377,7 +377,7 @@ const EVENTS_DATA = {
     currency: "EUR",
     currencySymbol: "€",
     legalDocLabel: "Alta SS + Certificado PRL",
-    nominaExportName: "Nomina_MWC_Barcelona_2026.pdf",
+    nominaExportName: "Lista_Ingreso_MWC_Barcelona_2026.pdf",
     staffCounts: {
       Promotores: {
         current: 18,
@@ -441,7 +441,7 @@ const EVENTS_DATA = {
     }, {
       id: 203,
       name: "Clara Puig",
-      status: "Guardia 24h",
+      status: "Disponibles",
       score: 97,
       role: "Promotores",
       dist: "1.9 km",
@@ -458,7 +458,7 @@ const EVENTS_DATA = {
       img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia Activa", "Bilingüe EN"]
+      tags: ["Disponible para reemplazos", "Bilingüe EN"]
     }, {
       id: 204,
       name: "Pau Vidal",
@@ -534,7 +534,7 @@ const EVENTS_DATA = {
     currency: "EUR",
     currencySymbol: "€",
     legalDocLabel: "Alta SS IFEMA + PRL Cosmética",
-    nominaExportName: "Nomina_Sephora_IFEMA_2026.pdf",
+    nominaExportName: "Lista_Ingreso_Sephora_IFEMA_2026.pdf",
     staffCounts: {
       Promotores: {
         current: 12,
@@ -577,7 +577,7 @@ const EVENTS_DATA = {
     }]
   }]
 };
-const SMART_BACKUP_DATABASE = {
+const REPLACEMENTS_DATABASE = {
   AR: {
     M: {
       id: 901,
@@ -597,7 +597,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      tags: ["Disponible para reemplazos", "Movilidad Propia", "Talle M"],
       aiScanLog: "Lucas Pereyra · 95% Match · 2.4 km · Talle M verificado"
     },
     L: {
@@ -618,7 +618,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle L"],
+      tags: ["Disponible para reemplazos", "Talle L"],
       aiScanLog: "Javier Maza · 93% Match · 2.6 km · Talle L verificado"
     },
     S: {
@@ -639,7 +639,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle S"],
+      tags: ["Disponible para reemplazos", "Talle S"],
       aiScanLog: "Milagros Vega · 96% Match · 1.5 km · Talle S verificado"
     }
   },
@@ -662,7 +662,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      tags: ["Disponible para reemplazos", "Movilidad Propia", "Talle M"],
       aiScanLog: "Lucas Pereyra · 96% Match · 2.1 km · Talle M verificado"
     },
     L: {
@@ -683,7 +683,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle L"],
+      tags: ["Disponible para reemplazos", "Talle L"],
       aiScanLog: "Alejandro Ruiz · 94% Match · 3.2 km · Talle L verificado"
     },
     S: {
@@ -704,7 +704,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle S"],
+      tags: ["Disponible para reemplazos", "Talle S"],
       aiScanLog: "Clara Puig · 97% Match · 1.9 km · Talle S verificado"
     }
   }
@@ -779,11 +779,11 @@ const TALENT_POOL = {
   }, {
     id: "tal-ar-2",
     name: "Lucas Pereyra",
-    stats: "Guardia 24h activa · Auto propio · Zona Norte",
-    badge: "Guardia",
+    stats: "Disponible para reemplazos · Auto propio · Zona Norte",
+    badge: "Disponible",
     badgeVariant: "info",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
-    type: "Guardia 24h"
+    type: "Disponibles para reemplazos"
   }, {
     id: "tal-ar-3",
     name: "Sofía Ruiz",
@@ -812,11 +812,11 @@ const TALENT_POOL = {
   }, {
     id: "tal-es-2",
     name: "Marc Valls",
-    stats: "Guardia 24h activa · Moto propia · L'Hospitalet",
-    badge: "Guardia",
+    stats: "Disponible para reemplazos · Moto propia · L'Hospitalet",
+    badge: "Disponible",
     badgeVariant: "info",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
-    type: "Guardia 24h"
+    type: "Disponibles para reemplazos"
   }, {
     id: "tal-es-3",
     name: "Clara Puig",
@@ -878,33 +878,33 @@ const GPS_LOGS = {
 const AVISOS_DATA = {
   AR: [{
     id: "av-ar-1",
-    title: "Baja cubierta con Smart Backup",
+    title: "Baja cubierta con reemplazo",
     time: "Hace 10m",
     type: "danger",
     icon: "ph-warning",
-    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Cupo 100% completo."
+    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Lista de ingreso completa."
   }, {
     id: "av-ar-2",
-    title: "Póliza AP / ART por vencer",
+    title: "Seguro ART por vencer",
     time: "Hoy 18:00 hs",
     type: "warning",
     icon: "ph-shield-warning",
     desc: "Carlos Gómez tiene pendiente subir la constancia de cobertura con cláusula de no repetición antes del inicio del turno."
   }, {
     id: "av-ar-3",
-    title: "Comprobantes de Facturación AFIP",
+    title: "Ingreso validado en puerta",
     time: "Ayer",
     type: "info",
-    icon: "ph-receipt",
-    desc: "Nóminas de Lollapalooza 2026 listas para recepción de Facturas C y liquidación directa."
+    icon: "ph-shield-check",
+    desc: "Ana Martínez fichó ingreso en Puerta 4 (a 60m). Cobertura y seguro activos."
   }],
   ES: [{
     id: "av-es-1",
-    title: "Baja cubierta con Smart Backup",
+    title: "Baja cubierta con reemplazo",
     time: "Hace 10m",
     type: "danger",
     icon: "ph-warning",
-    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Cupo 100% completo."
+    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Lista de ingreso completa."
   }, {
     id: "av-es-2",
     title: "Certificado PRL Ferial por renovar",
@@ -1124,7 +1124,7 @@ const LoginScreen = ({
     className: "text-sm font-extrabold tracking-tight"
   }, role === 'worker' ? 'Acceso Staff & Promotores' : 'Panel de Agencias & Productoras'), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
-  }, role === 'worker' ? 'Ingresá para fichar con GPS, ver propuestas confirmadas y acceder a tu book verificado.' : 'Gestión de cupos en vivo, auditoría GPS y activación de Smart Backup inmediato.')), /*#__PURE__*/React.createElement("div", {
+  }, role === 'worker' ? 'Ingresá para fichar con GPS, ver propuestas confirmadas y acceder a tu book verificado.' : 'Gestión de cupos en vivo, ingresos en puerta y reemplazos inmediatos ante bajas.')), /*#__PURE__*/React.createElement("div", {
     className: "space-y-3"
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-1"
@@ -1280,7 +1280,7 @@ const StaffOnboarding = ({
     className: "text-[9px] font-bold text-white"
   }, "Calzado"))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
-  }, "Talles de Guardarropa"), /*#__PURE__*/React.createElement("div", {
+  }, "Talles y Calzado"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 gap-1.5 font-mono text-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
@@ -1318,7 +1318,7 @@ const StaffOnboarding = ({
     className: "space-y-4 animate-fade-in"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
-  }, "Disponibilidad & Smart Backup"), /*#__PURE__*/React.createElement("p", {
+  }, "Disponibilidad para reemplazos"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
   }, "Configurá tu disponibilidad para reemplazos de último minuto y movilidad.")), /*#__PURE__*/React.createElement("div", {
     className: "space-y-2.5"
@@ -1327,7 +1327,7 @@ const StaffOnboarding = ({
     className: `p-3 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold"
-  }, "Guardia 24h Smart Backup"), /*#__PURE__*/React.createElement("p", {
+  }, "Disponible para reemplazos"), /*#__PURE__*/React.createElement("p", {
     className: "text-[10px] text-zinc-400"
   }, "Recibí avisos de emergencia con plus de tarifa")), /*#__PURE__*/React.createElement("div", {
     className: `w-9 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`
@@ -1359,7 +1359,7 @@ const AgencyTabEvento = ({
   currentEvent,
   eventsList,
   onSelectEvent,
-  onSmartBackupApplied
+  onReplacementApplied
 }) => {
   const {
     isDark,
@@ -1378,22 +1378,22 @@ const AgencyTabEvento = ({
   const [isScanningRadar, setIsScanningRadar] = useState(false);
   const [scannedCandidate, setScannedCandidate] = useState(null);
   const roleTabs = ["Promotores", "Acreditaciones", "Barras", "Montaje"];
-  const statusChips = ["Todos", "Check-in", "Confirmados", "Guardia 24h", "Baja"];
+  const statusChips = ["Todos", "En turno", "Confirmados", "Disponibles", "Baja"];
 
   // Filtro de Rol y Estado
   const filteredWorkers = currentEvent.workers.filter(w => {
     const roleMatches = w.role === activeRoleTab;
     if (!roleMatches) return false;
     if (statusFilter === "Todos") return true;
-    if (statusFilter === "Check-in") return w.status.includes("IN");
+    if (statusFilter === "En turno") return w.status.includes("IN") || w.status === "En turno";
     if (statusFilter === "Confirmados") return w.status === "Confirmados";
-    if (statusFilter === "Guardia 24h") return w.status === "Guardia 24h";
+    if (statusFilter === "Disponibles") return w.status === "Disponibles" || w.status === "Guardia 24h" || w.status === "Disponible";
     if (statusFilter === "Baja") return w.status === "Baja";
     return true;
   });
   const handleExportNomina = () => {
     setNominaSheetOpen(false);
-    showToast(`Nómina legal oficial generada: ${currentEvent.nominaExportName}`, "success");
+    showToast(`Lista de ingreso descargada: ${currentEvent.nominaExportName}`, "success");
   };
   const handleExecuteAISearch = customQuery => {
     const queryToUse = customQuery || aiQuery;
@@ -1421,10 +1421,10 @@ const AgencyTabEvento = ({
         shirtSize: "L",
         shoes: "Mocasines negros",
         docStatus: "ok",
-        badges: ["Docs Vigentes", "Movilidad", "Guardia 24h"],
+        badges: ["Docs Vigentes", "Movilidad", "Disponibles"],
         img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80"
       }]);
-      showToast("Copiloto IA: 2 candidatos compatibles encontrados.", "info");
+      showToast("Buscador de staff: 2 candidatos compatibles encontrados.", "info");
     }, 600);
   };
   const handleStartRadarScan = worker => {
@@ -1432,15 +1432,15 @@ const AgencyTabEvento = ({
     setScannedCandidate(null);
     setTimeout(() => {
       setIsScanningRadar(false);
-      const countryDB = SMART_BACKUP_DATABASE[country] || SMART_BACKUP_DATABASE["AR"];
+      const countryDB = (typeof REPLACEMENTS_DATABASE !== 'undefined' ? REPLACEMENTS_DATABASE : SMART_BACKUP_DATABASE)[country] || SMART_BACKUP_DATABASE["AR"];
       const backup = countryDB[worker.shirtSize] || countryDB["M"];
       setScannedCandidate(backup);
-      showToast(`Radar IA: Suplente de guardia ${backup.name} ubicada a ${backup.dist}.`, "warning");
+      showToast(`Reemplazo cercano encontrado: ${backup.name} a ${backup.dist}.`, "warning");
     }, 900);
   };
-  const handleConfirmSmartBackup = () => {
+  const handleConfirmReplacement = () => {
     if (!selectedWorker || !scannedCandidate) return;
-    onSmartBackupApplied(selectedWorker.id, scannedCandidate);
+    onReplacementApplied(selectedWorker.id, scannedCandidate);
     setSelectedWorker(null);
     setScannedCandidate(null);
     showToast(`Reemplazo confirmado: ${scannedCandidate.name} ingresa como titular.`, "success");
@@ -1517,18 +1517,18 @@ const AgencyTabEvento = ({
   }, /*#__PURE__*/React.createElement("div", {
     className: `w-9 h-9 rounded-input flex items-center justify-center shrink-0 ${isDark ? 'bg-sky-400/15 text-sky-400 shadow-glow-sky-subtle' : 'bg-sky-50 text-sky-600'}`
   }, /*#__PURE__*/React.createElement("i", {
-    className: "ph-fill ph-sparkle text-lg"
+    className: "ph-fill ph-magnifying-glass text-lg"
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 min-w-0"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-1.5"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "text-xs font-bold tracking-tight truncate"
-  }, "Copiloto IA de Staffing"), /*#__PURE__*/React.createElement("span", {
+  }, "Buscador rápido de staff"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-[9px] font-bold px-1 rounded bg-sky-400/10 text-sky-400 border border-sky-400/20"
-  }, "PROMPT")), /*#__PURE__*/React.createElement("p", {
+  }, "FILTRO RÁPIDO")), /*#__PURE__*/React.createElement("p", {
     className: `text-[10px] truncate mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "\"✨ Talle M/L + Botas negras + < 5km...\"")), /*#__PURE__*/React.createElement("i", {
+  }, "\"Talle M + Calzado negro + cerca del predio...\"")), /*#__PURE__*/React.createElement("i", {
     className: "ph ph-caret-right text-zinc-500 text-xs"
   })), /*#__PURE__*/React.createElement("div", {
     className: "space-y-2.5"
@@ -1616,7 +1616,7 @@ const AgencyTabEvento = ({
   }, ev.id === currentEvent.id ? "ACTIVO" : "VER"))))), /*#__PURE__*/React.createElement(BottomSheet, {
     isOpen: nominaSheetOpen,
     onClose: () => setNominaSheetOpen(false),
-    title: "Nómina Legal & Pólizas de Ingreso"
+    title: "Lista de ingreso y seguros"
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-3.5"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1643,24 +1643,24 @@ const AgencyTabEvento = ({
   }, w.docStatus === 'ok' ? 'Aprobado' : 'Pendiente')))), /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-download-simple",
     onClick: handleExportNomina
-  }, "Exportar Nómina Oficial PDF (", currentEvent.currency, ")"))), /*#__PURE__*/React.createElement(BottomSheet, {
+  }, "Exportar lista de ingreso en PDF (", currentEvent.currency, ")"))), /*#__PURE__*/React.createElement(BottomSheet, {
     isOpen: aiCopilotSheetOpen,
     onClose: () => {
       setAiCopilotSheetOpen(false);
       setAiFoundProfiles(null);
     },
-    title: "Copiloto IA de Staffing"
+    title: "Buscador rápido de staff"
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-3.5"
   }, /*#__PURE__*/React.createElement("p", {
     className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Búsqueda semántica sobre el pool de talentos de ", country, ":"), /*#__PURE__*/React.createElement("div", {
+  }, "Búsqueda rápida sobre el personal disponible en ", country, ":"), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2"
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
     value: aiQuery,
     onChange: e => setAiQuery(e.target.value),
-    placeholder: "Ej: Azafata bilingüe con mocasines talle M...",
+    placeholder: "Ej: Talle M con calzado negro cerca del predio...",
     className: `flex-1 h-11 px-3 text-xs rounded-input border outline-none font-medium ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
   }), /*#__PURE__*/React.createElement("button", {
     onClick: () => handleExecuteAISearch(),
@@ -1669,15 +1669,15 @@ const AgencyTabEvento = ({
     className: "ph-bold ph-magnifying-glass"
   }), " Buscar")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1"
-  }, "PROMPTS RÁPIDOS SUGERIDOS"), /*#__PURE__*/React.createElement("div", {
+  }, "BÚSQUEDAS RÁPIDAS"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 gap-1.5"
   }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => handleExecuteAISearch("Talle M/L con calzado reglamentario a < 3km"),
+    onClick: () => handleExecuteAISearch("Talle M con calzado negro a < 3km"),
     className: `p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'}`
-  }, "✨ Talle M + Botas negras"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => handleExecuteAISearch("Azafata bilingüe protocolo VIP"),
+  }, "Talle M + Calzado negro"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => handleExecuteAISearch("Personal con movilidad propia cerca del predio"),
     className: `p-2 rounded-input border text-left text-xs font-medium transition-colors truncate ${isDark ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-slate-100 border-slate-200 text-slate-700'}`
-  }, "✨ Azafata bilingüe VIP"))), aiLoading && /*#__PURE__*/React.createElement("div", {
+  }, "Con movilidad propia"))), aiLoading && /*#__PURE__*/React.createElement("div", {
     className: "py-4 text-center flex flex-col items-center gap-1.5"
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-spinner-gap animate-spin text-2xl text-sky-400"
@@ -1716,7 +1716,7 @@ const AgencyTabEvento = ({
       setScannedCandidate(null);
       setIsScanningRadar(false);
     },
-    title: "Ficha Operativa & Guardarropa"
+    title: "Ficha y Talles"
   }, selectedWorker && /*#__PURE__*/React.createElement("div", {
     className: "space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1740,7 +1740,7 @@ const AgencyTabEvento = ({
     className: "ph-fill ph-navigation-arrow"
   }), " ", selectedWorker.dist)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Medidas para Guardarropa"), /*#__PURE__*/React.createElement("div", {
+  }, "Talles y Calzado"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 gap-1.5 font-mono text-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
@@ -1768,7 +1768,7 @@ const AgencyTabEvento = ({
     className: "font-bold text-xs"
   }, selectedWorker.shoeSize)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Book & Calzado Verificado (3 Fotos)"), /*#__PURE__*/React.createElement("div", {
+  }, "Book y calzado (3 fotos)"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-3 gap-2"
   }, /*#__PURE__*/React.createElement("div", {
     className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
@@ -1795,7 +1795,7 @@ const AgencyTabEvento = ({
     className: "space-y-1"
   }, /*#__PURE__*/React.createElement("span", {
     className: `text-[10px] font-bold uppercase tracking-wider block ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Documentación Legal (", country, ")"), /*#__PURE__*/React.createElement("div", {
+  }, "Documentación (", country, ")"), /*#__PURE__*/React.createElement("div", {
     className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 pr-2"
@@ -1807,11 +1807,15 @@ const AgencyTabEvento = ({
     variant: selectedWorker.docStatus === 'ok' ? 'success' : 'warning'
   }, selectedWorker.docStatus === 'ok' ? 'Vigente' : 'Pendiente'))), /*#__PURE__*/React.createElement("div", {
     className: "pt-2 border-t border-zinc-800/60 space-y-2"
-  }, !scannedCandidate && !isScanningRadar && /*#__PURE__*/React.createElement(LuminousButton, {
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    variant: "secondary",
+    icon: "ph-check-circle",
+    onClick: () => showToast(`Ingreso manual validado para ${selectedWorker.name}`, "success")
+  }, "Validar ingreso manual"), !scannedCandidate && !isScanningRadar && /*#__PURE__*/React.createElement(LuminousButton, {
     variant: "danger",
     icon: "ph-warning-octagon",
     onClick: () => handleStartRadarScan(selectedWorker)
-  }, "Reportar Baja & Activar Smart Backup"), isScanningRadar && /*#__PURE__*/React.createElement("div", {
+  }, "Reportar baja y buscar reemplazo"), isScanningRadar && /*#__PURE__*/React.createElement("div", {
     className: `p-4 rounded-card text-center flex flex-col items-center justify-center gap-1.5 ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-10 h-10 rounded-full border-2 border-sky-400 flex items-center justify-center relative"
@@ -1821,15 +1825,15 @@ const AgencyTabEvento = ({
     className: "ph-fill ph-radar text-base text-sky-400"
   })), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-xs font-bold text-sky-400"
-  }, "Buscando suplente talle ", selectedWorker.shirtSize, "..."), /*#__PURE__*/React.createElement("p", {
+  }, "Buscando reemplazo cercano..."), /*#__PURE__*/React.createElement("p", {
     className: "text-[10px] text-zinc-400"
-  }, "Geolocalizando staff en guardia < 3km")), scannedCandidate && /*#__PURE__*/React.createElement("div", {
+  }, "Geolocalizando staff disponible a < 3km")), scannedCandidate && /*#__PURE__*/React.createElement("div", {
     className: `p-3 rounded-card space-y-2.5 animate-fade-in ${isDark ? 'bg-zinc-950 border border-sky-400/30' : 'bg-sky-50/80 border border-sky-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "accent"
-  }, "Candidato Suplente IA"), /*#__PURE__*/React.createElement("span", {
+  }, "Reemplazo asignado"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-xs font-bold text-sky-400"
   }, scannedCandidate.score, "% Match")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2.5 items-center"
@@ -1844,7 +1848,7 @@ const AgencyTabEvento = ({
     className: "font-mono text-[9px] text-zinc-400 truncate"
   }, scannedCandidate.aiScanLog))), /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-arrows-left-right",
-    onClick: handleConfirmSmartBackup
+    onClick: handleConfirmReplacement
   }, "Confirmar reemplazo inmediato"))))));
 };
 
@@ -1926,7 +1930,7 @@ const AgencyTabFechas = () => {
   }, "Publicar Convocatoria B2B"))));
 };
 
-// --- Tab 3: Talento (Pool & Auditoría GPS Aislado Regionalmente) ---
+// --- Tab 3: Talento (Base de Staff e Ingresos en Puerta) ---
 const AgencyTabTalento = () => {
   const {
     isDark,
@@ -1938,6 +1942,7 @@ const AgencyTabTalento = () => {
   const gpsList = GPS_LOGS[country] || GPS_LOGS.AR;
   const filteredTalent = talentList.filter(t => {
     if (filter === "Todos") return true;
+    if (filter === "Disponibles") return t.type === "Disponibles" || t.type === "Guardia 24h";
     return t.type === filter;
   });
   return /*#__PURE__*/React.createElement("div", {
@@ -1946,9 +1951,9 @@ const AgencyTabTalento = () => {
     className: "text-base font-extrabold tracking-tight"
   }, "Base de talento (", country, ")"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Pool verificado de staff, historial y auditoría GPS de ingresos.")), /*#__PURE__*/React.createElement("div", {
+  }, "Pool verificado de staff, historial e ingresos en puerta.")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
-  }, ["Todos", "Favoritos", "Guardia 24h", "Movilidad"].map(f => /*#__PURE__*/React.createElement("button", {
+  }, ["Todos", "Favoritos", "Disponibles", "Movilidad"].map(f => /*#__PURE__*/React.createElement("button", {
     key: f,
     onClick: () => setFilter(f),
     className: `px-3 py-1 rounded-full text-xs font-semibold border shrink-0 transition-colors ${filter === f ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-700'}`
@@ -1974,7 +1979,7 @@ const AgencyTabTalento = () => {
     className: "pt-2"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2"
-  }, "AUDITORÍA GPS (Ingresos en tiempo real · ", country, ")"), /*#__PURE__*/React.createElement("div", {
+  }, "INGRESOS EN PUERTA (", country, ")"), /*#__PURE__*/React.createElement("div", {
     className: `p-3 rounded-card space-y-2 font-mono text-[11px] ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, gpsList.map((log, idx) => /*#__PURE__*/React.createElement("div", {
     key: idx,
@@ -2031,7 +2036,8 @@ const WorkerTabInicio = ({
   const {
     isDark,
     showToast,
-    country
+    country,
+    userProfile
   } = useContext(AppContext);
   const [hasShiftToday, setHasShiftToday] = useState(true);
   const [checkedInState, setCheckedInState] = useState(false);
@@ -2080,14 +2086,14 @@ const WorkerTabInicio = ({
   const handleSimularErrorGPS = () => {
     setCheckedInState(false);
     setGpsErrorState(true);
-    showToast("Error de Geocerca GPS: Te encontrás a 420m del predio.", "warning");
+    showToast("Estás fuera del radio del predio (a 1.4 km de Puerta 4).", "warning");
   };
   const handleAcceptProposal = id => {
     setProposals(prev => prev.map(p => p.id === id ? {
       ...p,
       status: "accepted"
     } : p));
-    showToast("¡Propuesta aceptada! Perfil y medidas enviados a la agencia.", "success");
+    showToast("Propuesta aceptada. Ya enviamos tu perfil y talles.", "success");
   };
   const handleRejectProposal = id => {
     setProposals(prev => prev.map(p => p.id === id ? {
@@ -2096,6 +2102,8 @@ const WorkerTabInicio = ({
     } : p));
     showToast("Propuesta declinada sin penalización en tu score.", "info");
   };
+  const staffFirstName = userProfile?.name ? userProfile.name.split(" ")[0] : "Martina";
+  const staffAvatar = userProfile?.avatarImg || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80";
   return /*#__PURE__*/React.createElement("div", {
     className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2106,13 +2114,13 @@ const WorkerTabInicio = ({
     className: "flex items-center gap-1.5"
   }, /*#__PURE__*/React.createElement("h1", {
     className: "text-base font-extrabold tracking-tight truncate"
-  }, "Hola, Martina"), /*#__PURE__*/React.createElement("span", {
+  }, "Hola, ", staffFirstName), /*#__PURE__*/React.createElement("span", {
     className: "w-2 h-2 rounded-full bg-[#34D399] shrink-0"
   })), /*#__PURE__*/React.createElement("p", {
     className: "font-mono text-[10px] font-semibold text-sky-400 mt-0.5 truncate"
   }, "Perfil verificado • Top 5% Staff")), /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
-    className: "w-10 h-10 rounded-card object-cover shrink-0"
+    src: staffAvatar,
+    className: "w-10 h-10 rounded-card object-cover shrink-0 border border-sky-400/30"
   })), /*#__PURE__*/React.createElement("section", {
     className: "space-y-2"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2128,7 +2136,7 @@ const WorkerTabInicio = ({
     onClick: handleSimularErrorGPS,
     className: "text-[10px] font-mono text-zinc-400 hover:text-[#EF4444] transition-colors"
   }, "Simular Error GPS"))), !hasShiftToday ? /*#__PURE__*/React.createElement("div", {
-    className: `p-6 rounded-hero text-center space-y-3 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+    className: `p-5 rounded-hero text-center space-y-3 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: `w-12 h-12 rounded-full mx-auto flex items-center justify-center ${isDark ? 'bg-zinc-800 text-sky-400' : 'bg-sky-50 text-sky-600'}`
   }, /*#__PURE__*/React.createElement("i", {
@@ -2137,10 +2145,22 @@ const WorkerTabInicio = ({
     className: "text-sm font-bold tracking-tight"
   }, "Sin jornadas asignadas hoy"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-1 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "No tenés turnos activos para hoy. Activá tu Guardia 24h para recibir convocatorias de emergencia o postulate a las propuestas de abajo.")), /*#__PURE__*/React.createElement(LuminousButton, {
+  }, "No tenés turnos activos para hoy. Tu perfil está visible para convocatorias de productoras en ", country, ".")), /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card text-left space-y-1.5 ${isDark ? 'bg-zinc-950' : 'bg-slate-50 border border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center text-[10px] font-mono"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-sky-400"
+  }, "80% completo"), /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "Falta subir comprobante")), /*#__PURE__*/React.createElement("div", {
+    className: `w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-zinc-800' : 'bg-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-[80%] h-full bg-sky-400 rounded-full"
+  }))), /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-shield-check",
-    onClick: () => showToast("Guardia 24h activada. Tu perfil está primero en el radar de emergencias.", "success")
-  }, "Activar Guardia 24h Smart Backup")) :
+    onClick: () => showToast("Disponibilidad activada para reemplazos de último minuto.", "success")
+  }, "Disponible para reemplazos")) :
   /*#__PURE__*/
   /* ESTADO ACTIVO: Hero Card del Turno */
   React.createElement("div", {
@@ -2188,13 +2208,13 @@ const WorkerTabInicio = ({
     className: "flex items-center gap-1.5 font-bold text-xs"
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph-fill ph-warning-octagon text-sm text-[#EF4444]"
-  }), /*#__PURE__*/React.createElement("span", null, "Error de Geocerca GPS")), /*#__PURE__*/React.createElement("p", {
+  }), /*#__PURE__*/React.createElement("span", null, "Error de ubicación GPS")), /*#__PURE__*/React.createElement("p", {
     className: "text-[11px] leading-snug"
-  }, "Te encontrás a 420m del predio. Acercate a Puerta 4 para habilitar el fichaje de ingreso."), /*#__PURE__*/React.createElement("button", {
+  }, "Estás fuera del radio del predio (a 1.4 km de Puerta 4). Acercate para habilitar el fichaje."), /*#__PURE__*/React.createElement("button", {
     onClick: handleFicharGPS,
-    className: "w-full py-1.5 rounded-input bg-[#EF4444] text-white text-[11px] font-bold"
-  }, "Reintentar Detección GPS")), checkedInState && /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card space-y-1.5 animate-fade-in ${isDark ? 'bg-[#34D399]/10 text-zinc-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'}`
+    className: "w-full py-2 rounded-input bg-[#EF4444] hover:bg-[#DC2626] text-white text-[11px] font-bold transition-colors cursor-pointer"
+  }, "Reintentar ubicación")), checkedInState && /*#__PURE__*/React.createElement("div", {
+    className: `p-2.5 rounded-card space-y-2 animate-fade-in ${isDark ? 'bg-[#34D399]/10 text-zinc-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2205,7 +2225,15 @@ const WorkerTabInicio = ({
     className: "font-mono text-[10px] text-zinc-400"
   }, "Seguro Activo")), /*#__PURE__*/React.createElement("p", {
     className: `text-[10px] ${isDark ? 'text-zinc-300' : 'text-slate-600'}`
-  }, "Fichaje confirmado a las ", checkInTime, ". Tu liquidación se computará automáticamente al completar el turno.")), !checkedInState && !gpsErrorState && /*#__PURE__*/React.createElement(LuminousButton, {
+  }, "Fichaje confirmado a las ", checkInTime, ". Tu liquidación se computará automáticamente al completar el turno."), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setCheckedInState(false);
+      showToast("Salida registrada. Liquidación enviada a Cobros.", "info");
+    },
+    className: "w-full py-2 rounded-input bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-sign-out"
+  }), " Fichar salida")), !checkedInState && !gpsErrorState && /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-navigation-arrow",
     loading: isCheckingIn,
     onClick: handleFicharGPS
@@ -2254,88 +2282,127 @@ const WorkerTabInicio = ({
     icon: "ph-check",
     onClick: () => handleAcceptProposal(prop.id),
     className: "flex-1"
-  }, "Aceptar con mi Perfil"), /*#__PURE__*/React.createElement("button", {
+  }, "Aceptar con mi perfil"), /*#__PURE__*/React.createElement("button", {
     onClick: () => handleRejectProposal(prop.id),
-    className: `px-3 h-12 rounded-input border text-xs font-bold transition-colors shrink-0 ${isDark ? 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'}`
-  }, "Rechazar")) : /*#__PURE__*/React.createElement("div", {
-    className: "pt-1 flex items-center justify-between font-mono text-[10px]"
-  }, /*#__PURE__*/React.createElement(StatusBadge, {
-    variant: prop.status === "accepted" ? "success" : "neutral"
-  }, prop.status === "accepted" ? "Propuesta Confirmada" : "Declinada"), /*#__PURE__*/React.createElement("span", {
-    className: "text-zinc-500"
-  }, "Respondido")))))));
+    className: `px-3 py-2 rounded-input text-xs font-bold border transition-colors shrink-0 ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-zinc-200' : 'border-slate-300 text-slate-600 hover:text-slate-800'}`
+  }, "Rechazar")) : prop.status === "accepted" ? /*#__PURE__*/React.createElement("div", {
+    className: "p-2 rounded-input bg-[#34D399]/10 text-[#34D399] font-bold text-xs text-center flex items-center justify-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-fill ph-check-circle"
+  }), " Postulación Confirmada") : /*#__PURE__*/React.createElement("div", {
+    className: "p-2 rounded-input bg-zinc-800/40 text-zinc-500 font-bold text-xs text-center"
+  }, "Propuesta declinada"))))));
 };
 
-// --- Tab 2: Agenda (Mis Fechas Regionalizadas) ---
+// --- Tab 2: Agenda (Confirmados, Postulados, Historial) ---
 const WorkerTabAgenda = () => {
   const {
     isDark,
-    country,
-    showToast
+    country
   } = useContext(AppContext);
-  const [agendaTab, setAgendaTab] = useState("Confirmados");
+  const [activeTab, setActiveTab] = useState("confirmados");
+  const agendaItems = {
+    confirmados: [{
+      id: 1,
+      title: country === "AR" ? "Lollapalooza 2026 · Día 2" : "Mobile World Congress 2026",
+      date: "Sábado 21 Mar • 14:00 hs",
+      role: "Promotora VIP",
+      venue: country === "AR" ? "Hipódromo de San Isidro" : "Fira Barcelona Gran Via",
+      badge: "CONFIRMADO",
+      badgeVariant: "success"
+    }, {
+      id: 2,
+      title: country === "AR" ? "Feria Matear 2026" : "Salón Náutico Internacional",
+      date: "Viernes 27 Mar • 10:00 hs",
+      role: "Acreditaciones",
+      venue: country === "AR" ? "Predio La Rural Palermo" : "Port Vell Barcelona",
+      badge: "CONFIRMADO",
+      badgeVariant: "success"
+    }],
+    postulados: [{
+      id: 3,
+      title: country === "AR" ? "Heineken Sunset Session" : "Gastro Festival Madrid",
+      date: "Domingo 29 Mar • 18:00 hs",
+      role: "Bartender Principal",
+      venue: country === "AR" ? "Costanera Norte" : "IFEMA Madrid",
+      badge: "EN REVISIÓN",
+      badgeVariant: "warning"
+    }],
+    historial: [{
+      id: 4,
+      title: country === "AR" ? "Maratón Nordelta 2026" : "Sephora Beauty Experience",
+      date: "14 Feb 2026",
+      role: "Guía de circuito",
+      venue: country === "AR" ? "Tigre, Buenos Aires" : "Palau Sant Jordi",
+      badge: "COMPLETADO",
+      badgeVariant: "accent"
+    }]
+  };
+  const currentList = agendaItems[activeTab] || [];
   return /*#__PURE__*/React.createElement("div", {
     className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
-  }, "Mis fechas"), /*#__PURE__*/React.createElement("p", {
+  }, "Tu Agenda"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Calendario operativo y logística de eventos confirmados (", country, ").")), /*#__PURE__*/React.createElement("div", {
-    className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
-  }, ["Confirmados", "Postulados", "Historial"].map(tab => /*#__PURE__*/React.createElement("button", {
-    key: tab,
-    onClick: () => setAgendaTab(tab),
-    className: `px-3 py-1 rounded-full text-xs font-semibold border shrink-0 transition-colors ${agendaTab === tab ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-700'}`
-  }, tab))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-3"
+  }, "Fechas asignadas, postulaciones activas e historial (", country, ").")), /*#__PURE__*/React.createElement("div", {
+    className: `p-1 rounded-card flex gap-1 ${isDark ? 'bg-zinc-900' : 'bg-slate-100'}`
+  }, [{
+    key: "confirmados",
+    label: "Confirmados"
+  }, {
+    key: "postulados",
+    label: "Postulados"
+  }, {
+    key: "historial",
+    label: "Historial"
+  }].map(tab => /*#__PURE__*/React.createElement("button", {
+    key: tab.key,
+    onClick: () => setActiveTab(tab.key),
+    className: `flex-1 py-1.5 text-xs font-bold rounded-input transition-colors ${activeTab === tab.key ? isDark ? 'bg-zinc-800 text-sky-400 shadow-sm' : 'bg-white text-sky-700 shadow-sm' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, tab.label))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2.5"
+  }, currentList.map(item => /*#__PURE__*/React.createElement("div", {
+    key: item.id,
+    className: `p-3.5 rounded-card space-y-2 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+    className: "flex justify-between items-start gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-start mb-2.5"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
-    className: "text-xs font-bold"
-  }, country === "AR" ? "Lollapalooza 2026" : "Mobile World Congress 2026"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] text-zinc-400 font-mono"
-  }, country === "AR" ? "Sáb 28 Nov · 14:00 hs · San Isidro" : "Lun 2 Mar · 09:00 hs · Fira Gran Via")), /*#__PURE__*/React.createElement(StatusBadge, {
-    variant: "success"
-  }, "Confirmado")), /*#__PURE__*/React.createElement("button", {
-    onClick: () => showToast("Abriendo navegación en Google Maps...", "info"),
-    className: "w-full h-10 rounded-input border border-zinc-700/60 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800/60 transition-colors"
+    className: "min-w-0"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-xs truncate"
+  }, item.title), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono block"
+  }, item.role)), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: item.badgeVariant
+  }, item.badge)), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1 font-mono text-[10px] text-zinc-400"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
   }, /*#__PURE__*/React.createElement("i", {
-    className: "ph-fill ph-navigation-arrow text-sky-400"
-  }), " Cómo llegar al Venue")), /*#__PURE__*/React.createElement("div", {
-    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
-  }, "COORDINADORA EN VENUE"), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-2"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
-    className: "w-8 h-8 rounded-full object-cover"
-  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h5", {
-    className: "text-xs font-bold"
-  }, country === "AR" ? "Florencia V. (Somos DER)" : "Marta S. (NSH Azafatas BCN)"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] text-zinc-400"
-  }, country === "AR" ? "En Puerta 4 Staff" : "En Pabellón 3 Acceso Norte"))), /*#__PURE__*/React.createElement("button", {
-    onClick: () => showToast("Abriendo chat directo con la coordinadora...", "info"),
-    className: "px-3 py-1.5 rounded-input bg-sky-400/20 text-sky-400 border border-sky-400/30 text-[11px] font-bold"
-  }, "Contactar")))));
+    className: "ph ph-calendar text-xs"
+  }), /*#__PURE__*/React.createElement("span", null, item.date)), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-map-pin text-xs text-sky-400"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "truncate"
+  }, item.venue)))))));
 };
 
-// --- Tab 3: Cobros (Centro Financiero Regionalizado) ---
+// --- Tab 3: Cobros (Mis Cobros y Liquidaciones) ---
 const WorkerTabCobros = () => {
   const {
     isDark,
     country,
-    showToast
+    showToast,
+    userProfile
   } = useContext(AppContext);
   return /*#__PURE__*/React.createElement("div", {
     className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
-  }, "Cobros • Centro financiero"), /*#__PURE__*/React.createElement("p", {
+  }, "Mis cobros"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Liquidaciones al día con pago garantizado (", country, ").")), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 gap-2"
@@ -2384,132 +2451,322 @@ const WorkerTabCobros = () => {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement("span", {
     className: isDark ? 'text-zinc-300' : 'text-slate-800'
-  }, country === 'AR' ? 'Alias: martina.staff.mp' : 'IBAN: ES91 2100 0418 4502 ****'), /*#__PURE__*/React.createElement(StatusBadge, {
+  }, country === 'AR' ? `Alias: ${userProfile?.cbuAlias || 'martina.eventos.mp'}` : `IBAN: ${userProfile?.iban || 'ES82 2100 0418 ****'}`), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Verificada"))));
 };
 
-// --- Tab 4: Mi Book & Perfil (Medidas, Fotos & Bóveda Legal) ---
+// --- Tab 4: Mi Perfil (100% Editable en Estado Local) ---
 const WorkerTabMiPerfil = ({
   onLogout
 }) => {
   const {
     isDark,
     country,
-    showToast
+    showToast,
+    userProfile,
+    setUserProfile
   } = useContext(AppContext);
-  const [guard24, setGuard24] = useState(true);
-  const [car, setCar] = useState(true);
+
+  // 1. Datos personales editables
+  const [name, setName] = useState(userProfile?.name || "Martina Benítez");
+  const [phone, setPhone] = useState(userProfile?.phone || "+54 9 11 5821-9943");
+  const [city, setCity] = useState(userProfile?.city || (country === "AR" ? "Buenos Aires, Palermo" : "Barcelona, Eixample"));
+  const [languages, setLanguages] = useState(userProfile?.languages || "Español nativo · Inglés C1");
+  const [availability, setAvailability] = useState(userProfile?.availability || "Fines de semana y turnos noche");
+
+  // 2. Fotos verificadas
+  const [avatarImg, setAvatarImg] = useState(userProfile?.avatarImg || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80");
+  const [fullBodyImg, setFullBodyImg] = useState(userProfile?.fullBodyImg || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80");
+  const [shoesImg, setShoesImg] = useState(userProfile?.shoesImg || "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80");
+
+  // 3. Talles y calzado
+  const [height, setHeight] = useState(userProfile?.height || "1.74 m");
+  const [shirt, setShirt] = useState(userProfile?.shirt || "M");
+  const [pant, setPant] = useState(userProfile?.pant || "38");
+  const [shoes, setShoes] = useState(userProfile?.shoes || "38");
+  const [shoesType, setShoesType] = useState(userProfile?.shoesType || "Botas negras reglamentarias");
+
+  // 4. Documentación y cuenta
+  const [dni, setDni] = useState(country === "AR" ? userProfile?.dniAr || "42.100.892" : userProfile?.nieEs || "Y-4921028-H");
+  const [cbuAlias, setCbuAlias] = useState(userProfile?.cbuAlias || "martina.eventos.mp");
+  const [iban, setIban] = useState(userProfile?.iban || "ES82 2100 0418 4502 0005 1234");
+
+  // 5. Switches de disponibilidad
+  const [guard24, setGuard24] = useState(userProfile?.guard24 ?? true);
+  const [car, setCar] = useState(userProfile?.car ?? true);
+  const [saving, setSaving] = useState(false);
+  const handleCyclePhoto = type => {
+    const photoPool = {
+      avatar: ["https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80", "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80", "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80"],
+      body: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80", "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80", "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80"],
+      shoes: ["https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80", "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=400&q=80", "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80"]
+    };
+    if (type === "avatar") {
+      const idx = (photoPool.avatar.indexOf(avatarImg) + 1) % photoPool.avatar.length;
+      setAvatarImg(photoPool.avatar[idx]);
+      showToast("Foto de rostro actualizada.", "info");
+    } else if (type === "body") {
+      const idx = (photoPool.body.indexOf(fullBodyImg) + 1) % photoPool.body.length;
+      setFullBodyImg(photoPool.body[idx]);
+      showToast("Foto de cuerpo entero actualizada.", "info");
+    } else if (type === "shoes") {
+      const idx = (photoPool.shoes.indexOf(shoesImg) + 1) % photoPool.shoes.length;
+      setShoesImg(photoPool.shoes[idx]);
+      showToast("Foto de calzado reglamentario actualizada.", "info");
+    }
+  };
+  const handleSaveProfile = () => {
+    setSaving(true);
+    setTimeout(() => {
+      setSaving(false);
+      if (setUserProfile) {
+        setUserProfile(prev => ({
+          ...prev,
+          name,
+          phone,
+          city,
+          languages,
+          availability,
+          avatarImg,
+          fullBodyImg,
+          shoesImg,
+          height,
+          shirt,
+          pant,
+          shoes,
+          shoesType,
+          cbuAlias,
+          iban,
+          dniAr: country === "AR" ? dni : prev?.dniAr,
+          nieEs: country === "ES" ? dni : prev?.nieEs,
+          guard24,
+          car
+        }));
+      }
+      showToast("Perfil actualizado correctamente.", "success");
+    }, 400);
+  };
   return /*#__PURE__*/React.createElement("div", {
-    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
+    className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-16"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-start"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
-  }, "Mi Book Único"), /*#__PURE__*/React.createElement("p", {
+  }, "Mi Perfil"), /*#__PURE__*/React.createElement("p", {
     className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
-  }, "Medidas, fotos verificadas y bóveda legal (", country, ").")), /*#__PURE__*/React.createElement("button", {
+  }, "Datos personales, book, talles y documentación (", country, ").")), /*#__PURE__*/React.createElement("button", {
     onClick: onLogout,
     className: `px-3 py-1 rounded-card border text-[11px] font-bold flex items-center gap-1 transition-colors ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-red-400 hover:border-red-500/40' : 'border-slate-300 text-slate-700 hover:text-red-600'}`,
     title: "Cerrar sesión"
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-sign-out"
-  }), " Salir")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
-  }, "Fotos de Perfil Verificadas (3)"), /*#__PURE__*/React.createElement("div", {
+  }), " Salir")), /*#__PURE__*/React.createElement("div", {
+    className: `p-3.5 rounded-card space-y-3 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-sky-400 block"
+  }, "1. DATOS PERSONALES"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Nombre completo"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: name,
+    onChange: e => setName(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Teléfono / WhatsApp"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: phone,
+    onChange: e => setPhone(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Ciudad / Zona"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: city,
+    onChange: e => setCity(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Idiomas"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: languages,
+    onChange: e => setLanguages(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Disponibilidad horaria"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: availability,
+    onChange: e => setAvailability(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: `p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-sky-400"
+  }, "2. BOOK Y CALZADO (3 FOTOS)"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400"
+  }, "Tocá para cambiar foto")), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-3 gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
+    onClick: () => handleCyclePhoto("avatar"),
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
-    className: "w-full h-full object-cover"
-  }), /*#__PURE__*/React.createElement("span", {
+    src: avatarImg,
+    className: "w-full h-full object-cover transition-transform group-hover:scale-105"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded"
+  }, "Cambiar")), /*#__PURE__*/React.createElement("span", {
     className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Rostro")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
+    onClick: () => handleCyclePhoto("body"),
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
-    className: "w-full h-full object-cover"
-  }), /*#__PURE__*/React.createElement("span", {
+    src: fullBodyImg,
+    className: "w-full h-full object-cover transition-transform group-hover:scale-105"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded"
+  }, "Cambiar")), /*#__PURE__*/React.createElement("span", {
     className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Cuerpo")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
+    onClick: () => handleCyclePhoto("shoes"),
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm cursor-pointer group"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-    className: "w-full h-full object-cover"
-  }), /*#__PURE__*/React.createElement("span", {
+    src: shoesImg,
+    className: "w-full h-full object-cover transition-transform group-hover:scale-105"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold text-white bg-black/60 px-2 py-1 rounded"
+  }, "Cambiar")), /*#__PURE__*/React.createElement("span", {
     className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
-  }, "Calzado")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
-  }, "Medidas de Guardarropa"), /*#__PURE__*/React.createElement("div", {
+  }, "Calzado")))), /*#__PURE__*/React.createElement("div", {
+    className: `p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-sky-400 block"
+  }, "3. TALLES Y CALZADO"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 gap-1.5 font-mono text-center"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] text-zinc-400 block"
-  }, "ALT"), /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs"
-  }, "1.74 m")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
+    className: "text-[9px] text-zinc-400 block mb-0.5"
+  }, "ALT"), /*#__PURE__*/React.createElement("input", {
+    value: height,
+    onChange: e => setHeight(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] text-zinc-400 block"
-  }, "REM"), /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs text-sky-400"
-  }, "M")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
+    className: "text-[9px] text-zinc-400 block mb-0.5"
+  }, "REM"), /*#__PURE__*/React.createElement("input", {
+    value: shirt,
+    onChange: e => setShirt(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center text-sky-400 outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] text-zinc-400 block"
-  }, "PAN"), /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs"
-  }, "38")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
+    className: "text-[9px] text-zinc-400 block mb-0.5"
+  }, "PAN"), /*#__PURE__*/React.createElement("input", {
+    value: pant,
+    onChange: e => setPant(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] text-zinc-400 block"
-  }, "CAL"), /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs"
-  }, "38")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
-  }, "BÓVEDA LEGAL (", country, ")"), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-1.5"
+    className: "text-[9px] text-zinc-400 block mb-0.5"
+  }, "CAL"), /*#__PURE__*/React.createElement("input", {
+    value: shoes,
+    onChange: e => setShoes(e.target.value),
+    className: "w-full bg-transparent font-bold text-xs text-center outline-none"
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, "Tipo de calzado reglamentario disponible"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: shoesType,
+    onChange: e => setShoesType(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: `p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-sky-400 block"
+  }, "4. DOCUMENTACIÓN Y COBRO (", country, ")"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, country === "AR" ? "DNI / CUIL" : "DNI / NIE"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: dni,
+    onChange: e => setDni(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "text-[10px] text-zinc-400 block mb-0.5"
+  }, country === "AR" ? "CBU / Alias para depósitos" : "IBAN bancario europeo"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: country === "AR" ? cbuAlias : iban,
+    onChange: e => country === "AR" ? setCbuAlias(e.target.value) : setIban(e.target.value),
+    className: `w-full h-10 px-3 text-xs font-mono font-semibold rounded-input border outline-none ${isDark ? 'bg-zinc-950 border-zinc-800 focus:border-sky-400 text-zinc-100' : 'bg-slate-50 border-slate-200 focus:border-sky-600 text-slate-900 shadow-sm'}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-1.5 pt-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
-  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "DNI / CUIL: 42.100.892" : "DNI / NIE: Y-4921028-H"), /*#__PURE__*/React.createElement(StatusBadge, {
+  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Constancia Monotributo AFIP" : "Alta Seguridad Social"), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
-  }, "Vigente")), /*#__PURE__*/React.createElement("div", {
+  }, "Al día")), /*#__PURE__*/React.createElement("div", {
     className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
-  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Monotributo: Al día" : "Seguridad Social: Alta activa"), /*#__PURE__*/React.createElement(StatusBadge, {
+  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Póliza AP / Cláusula no repetición" : "Certificado Prevención Riesgos"), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
-  }, "Verificado")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
-  }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Póliza AP: Cláusula No Rep." : "Certificado PRL: Apto"), /*#__PURE__*/React.createElement(StatusBadge, {
-    variant: "success"
-  }, "Vigente")))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5"
-  }, /*#__PURE__*/React.createElement("div", {
-    onClick: () => {
-      setGuard24(!guard24);
-      showToast(guard24 ? "Guardia 24h pausada." : "Guardia 24h activada.", "info");
-    },
-    className: `p-3 rounded-card flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
+  }, "Vigente"))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => showToast("Subida de constancia legal habilitada.", "info"),
+    className: `w-full py-2 rounded-input border text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${isDark ? 'border-zinc-700 hover:bg-zinc-800 text-zinc-300' : 'border-slate-300 hover:bg-slate-100 text-slate-700'}`
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-upload-simple text-sm"
+  }), " Subir constancia actualizada"))), /*#__PURE__*/React.createElement("div", {
+    className: `p-3.5 rounded-card space-y-2.5 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold uppercase tracking-wider text-sky-400 block"
+  }, "5. DISPONIBILIDAD OPERATIVA"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: () => setGuard24(!guard24),
+    className: `p-3 rounded-card flex items-center justify-between cursor-pointer border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold"
-  }, "Guardia 24h Smart Backup"), /*#__PURE__*/React.createElement("div", {
+  }, "Disponible para reemplazos"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-400"
+  }, "Recibí convocatorias urgentes con plus de tarifa")), /*#__PURE__*/React.createElement("div", {
     className: `w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${guard24 ? 'bg-sky-400' : 'bg-zinc-700'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: `w-4 h-4 rounded-full bg-white transition-transform ${guard24 ? 'translate-x-3' : 'translate-x-0'}`
   }))), /*#__PURE__*/React.createElement("div", {
-    onClick: () => {
-      setCar(!car);
-      showToast(car ? "Movilidad propia desactivada." : "Movilidad propia activada.", "info");
-    },
-    className: `p-3 rounded-card flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
-  }, /*#__PURE__*/React.createElement("span", {
+    onClick: () => setCar(!car),
+    className: `p-3 rounded-card flex items-center justify-between cursor-pointer border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold"
-  }, "Movilidad Propia"), /*#__PURE__*/React.createElement("div", {
+  }, "Movilidad propia (Auto / Moto)"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-400"
+  }, "Prioridad en eventos de predios alejados")), /*#__PURE__*/React.createElement("div", {
     className: `w-8 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${car ? 'bg-sky-400' : 'bg-zinc-700'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: `w-4 h-4 rounded-full bg-white transition-transform ${car ? 'translate-x-3' : 'translate-x-0'}`
-  })))));
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-2"
+  }, /*#__PURE__*/React.createElement(LuminousButton, {
+    icon: "ph-floppy-disk",
+    loading: saving,
+    onClick: handleSaveProfile
+  }, "Guardar cambios en mi perfil")));
 };
 
 // --- Source: src/app.jsx ---
@@ -2535,6 +2792,29 @@ const App = () => {
     ES: "mwc-es"
   });
   const [toastData, setToastData] = useState(null);
+
+  // Perfil de staff editable
+  const [userProfile, setUserProfile] = useState({
+    name: "Martina Benítez",
+    phone: "+54 9 11 5821-9943",
+    city: "Buenos Aires, Palermo",
+    languages: "Español nativo · Inglés C1",
+    availability: "Fines de semana y turnos noche",
+    avatarImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
+    shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
+    height: "1.74 m",
+    shirt: "M",
+    pant: "38",
+    shoes: "38",
+    shoesType: "Botas negras reglamentarias",
+    cbuAlias: "martina.eventos.mp",
+    iban: "ES82 2100 0418 4502 0005 1234",
+    dniAr: "42.100.892",
+    nieEs: "Y-4921028-H",
+    guard24: true,
+    car: true
+  });
 
   // Sincronizar dark mode en <html>
   useEffect(() => {
@@ -2566,8 +2846,8 @@ const App = () => {
     }));
   };
 
-  // Aplicar Smart Backup
-  const handleSmartBackupApplied = (oldWorkerId, backupCandidate) => {
+  // Aplicar Reemplazo Inmediato
+  const handleReplacementApplied = (oldWorkerId, backupCandidate) => {
     setEventsState(prev => {
       const currentList = prev[country];
       const updatedList = currentList.map(ev => {
@@ -2581,7 +2861,7 @@ const App = () => {
             }
             return w;
           });
-          // Insertar suplente al inicio
+          // Insertar reemplazo al inicio
           updatedWorkers.unshift({
             ...backupCandidate,
             id: Date.now(),
@@ -2605,7 +2885,9 @@ const App = () => {
     value: {
       isDark: isDarkMode,
       country,
-      showToast
+      showToast,
+      userProfile,
+      setUserProfile
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: `min-h-screen w-full flex flex-col items-center justify-center py-0 sm:py-6 px-0 sm:px-4 transition-colors relative ${isDarkMode ? 'bg-[#09090B]' : 'bg-[#F1F5F9]'}`
@@ -2727,7 +3009,7 @@ const App = () => {
     currentEvent: currentEvent,
     eventsList: countryEvents,
     onSelectEvent: handleSelectEvent,
-    onSmartBackupApplied: handleSmartBackupApplied
+    onReplacementApplied: handleReplacementApplied
   }) : prodTab === 'fechas' ? /*#__PURE__*/React.createElement(AgencyTabFechas, null) : prodTab === 'talento' ? /*#__PURE__*/React.createElement(AgencyTabTalento, null) : /*#__PURE__*/React.createElement(AgencyTabAvisos, null) :
   // VISTA STAFF (4 Tabs)
   staffTab === 'inicio' ? /*#__PURE__*/React.createElement(WorkerTabInicio, {
@@ -2802,7 +3084,7 @@ const App = () => {
     className: "w-1.5 h-1.5 rounded-full bg-sky-400 absolute -top-0.5 -right-0.5"
   })), /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] tracking-tight"
-  }, "Mi Book"))), /*#__PURE__*/React.createElement(FeedbackToast, {
+  }, "Mi Perfil"))), /*#__PURE__*/React.createElement(FeedbackToast, {
     message: toastData?.message,
     type: toastData?.type,
     onClose: () => setToastData(null)

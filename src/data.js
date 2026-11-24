@@ -1,4 +1,4 @@
-// Datos y Mock Data estructurados con estricta separación regional (AR vs ES)
+// Datos y Mock Data estructurados con estricta separación regional (AR vs ES) y lenguaje real de eventos
 
 const EVENTS_DATA = {
   AR: [
@@ -12,8 +12,8 @@ const EVENTS_DATA = {
       badge: "EN VIVO",
       currency: "ARS",
       currencySymbol: "$",
-      legalDocLabel: "Póliza AP / ART al día",
-      nominaExportName: "Nomina_Lollapalooza_SanIsidro_2026.pdf",
+      legalDocLabel: "Seguros y ART al día",
+      nominaExportName: "Lista_Ingreso_Lollapalooza_SanIsidro_2026.pdf",
       staffCounts: {
         Promotores: { current: 8, total: 10 },
         Acreditaciones: { current: 5, total: 5 },
@@ -57,7 +57,7 @@ const EVENTS_DATA = {
           footwearType: "Mocasines negros",
           docStatus: "warning",
           dniNie: "DNI 39.841.109",
-          insuranceName: "Sin póliza cargada",
+          insuranceName: "Pendiente comprobante ART",
           hasVehicle: false,
           guard24: false,
           img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
@@ -68,7 +68,7 @@ const EVENTS_DATA = {
         {
           id: 3,
           name: "Sofía Ruiz",
-          status: "Guardia 24h",
+          status: "Disponibles",
           score: 96,
           role: "Promotores",
           dist: "1.2 km",
@@ -187,8 +187,8 @@ const EVENTS_DATA = {
       badge: "EN VIVO",
       currency: "ARS",
       currencySymbol: "$",
-      legalDocLabel: "Póliza AP / ART La Rural",
-      nominaExportName: "Nomina_FeriaMatear_LaRural_2026.pdf",
+      legalDocLabel: "Seguros de ingreso La Rural",
+      nominaExportName: "Lista_Ingreso_FeriaMatear_LaRural_2026.pdf",
       staffCounts: {
         Promotores: { current: 6, total: 8 },
         Acreditaciones: { current: 4, total: 4 },
@@ -238,7 +238,7 @@ const EVENTS_DATA = {
           img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
           fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
           shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-          tags: ["Guardia 24h", "Movilidad Propia"]
+          tags: ["Disponible para reemplazos", "Movilidad Propia"]
         }
       ]
     }
@@ -255,7 +255,7 @@ const EVENTS_DATA = {
       currency: "EUR",
       currencySymbol: "€",
       legalDocLabel: "Alta SS + Certificado PRL",
-      nominaExportName: "Nomina_MWC_Barcelona_2026.pdf",
+      nominaExportName: "Lista_Ingreso_MWC_Barcelona_2026.pdf",
       staffCounts: {
         Promotores: { current: 18, total: 20 },
         Acreditaciones: { current: 8, total: 8 },
@@ -310,7 +310,7 @@ const EVENTS_DATA = {
         {
           id: 203,
           name: "Clara Puig",
-          status: "Guardia 24h",
+          status: "Disponibles",
           score: 97,
           role: "Promotores",
           dist: "1.9 km",
@@ -327,7 +327,7 @@ const EVENTS_DATA = {
           img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
           fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
           shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-          tags: ["Guardia Activa", "Bilingüe EN"]
+          tags: ["Disponible para reemplazos", "Bilingüe EN"]
         },
         {
           id: 204,
@@ -408,7 +408,7 @@ const EVENTS_DATA = {
       currency: "EUR",
       currencySymbol: "€",
       legalDocLabel: "Alta SS IFEMA + PRL Cosmética",
-      nominaExportName: "Nomina_Sephora_IFEMA_2026.pdf",
+      nominaExportName: "Lista_Ingreso_Sephora_IFEMA_2026.pdf",
       staffCounts: {
         Promotores: { current: 12, total: 15 },
         Acreditaciones: { current: 6, total: 6 },
@@ -443,7 +443,7 @@ const EVENTS_DATA = {
   ]
 };
 
-const SMART_BACKUP_DATABASE = {
+const REPLACEMENTS_DATABASE = {
   AR: {
     M: {
       id: 901,
@@ -463,7 +463,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      tags: ["Disponible para reemplazos", "Movilidad Propia", "Talle M"],
       aiScanLog: "Lucas Pereyra · 95% Match · 2.4 km · Talle M verificado"
     },
     L: {
@@ -484,7 +484,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle L"],
+      tags: ["Disponible para reemplazos", "Talle L"],
       aiScanLog: "Javier Maza · 93% Match · 2.6 km · Talle L verificado"
     },
     S: {
@@ -505,7 +505,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle S"],
+      tags: ["Disponible para reemplazos", "Talle S"],
       aiScanLog: "Milagros Vega · 96% Match · 1.5 km · Talle S verificado"
     }
   },
@@ -528,7 +528,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Movilidad Propia", "Talle M Exacto"],
+      tags: ["Disponible para reemplazos", "Movilidad Propia", "Talle M"],
       aiScanLog: "Lucas Pereyra · 96% Match · 2.1 km · Talle M verificado"
     },
     L: {
@@ -549,7 +549,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle L"],
+      tags: ["Disponible para reemplazos", "Talle L"],
       aiScanLog: "Alejandro Ruiz · 94% Match · 3.2 km · Talle L verificado"
     },
     S: {
@@ -570,7 +570,7 @@ const SMART_BACKUP_DATABASE = {
       img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
       fullBodyImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
       shoesImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
-      tags: ["Guardia 24h", "Talle S"],
+      tags: ["Disponible para reemplazos", "Talle S"],
       aiScanLog: "Clara Puig · 97% Match · 1.9 km · Talle S verificado"
     }
   }
@@ -657,11 +657,11 @@ const TALENT_POOL = {
     {
       id: "tal-ar-2",
       name: "Lucas Pereyra",
-      stats: "Guardia 24h activa · Auto propio · Zona Norte",
-      badge: "Guardia",
+      stats: "Disponible para reemplazos · Auto propio · Zona Norte",
+      badge: "Disponible",
       badgeVariant: "info",
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
-      type: "Guardia 24h"
+      type: "Disponibles para reemplazos"
     },
     {
       id: "tal-ar-3",
@@ -695,11 +695,11 @@ const TALENT_POOL = {
     {
       id: "tal-es-2",
       name: "Marc Valls",
-      stats: "Guardia 24h activa · Moto propia · L'Hospitalet",
-      badge: "Guardia",
+      stats: "Disponible para reemplazos · Moto propia · L'Hospitalet",
+      badge: "Disponible",
       badgeVariant: "info",
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
-      type: "Guardia 24h"
+      type: "Disponibles para reemplazos"
     },
     {
       id: "tal-es-3",
@@ -739,15 +739,15 @@ const AVISOS_DATA = {
   AR: [
     {
       id: "av-ar-1",
-      title: "Baja cubierta con Smart Backup",
+      title: "Baja cubierta con reemplazo",
       time: "Hace 10m",
       type: "danger",
       icon: "ph-warning",
-      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Cupo 100% completo."
+      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Lista de ingreso completa."
     },
     {
       id: "av-ar-2",
-      title: "Póliza AP / ART por vencer",
+      title: "Seguro ART por vencer",
       time: "Hoy 18:00 hs",
       type: "warning",
       icon: "ph-shield-warning",
@@ -755,21 +755,21 @@ const AVISOS_DATA = {
     },
     {
       id: "av-ar-3",
-      title: "Comprobantes de Facturación AFIP",
+      title: "Ingreso validado en puerta",
       time: "Ayer",
       type: "info",
-      icon: "ph-receipt",
-      desc: "Nóminas de Lollapalooza 2026 listas para recepción de Facturas C y liquidación directa."
+      icon: "ph-shield-check",
+      desc: "Ana Martínez fichó ingreso en Puerta 4 (a 60m). Cobertura y seguro activos."
     }
   ],
   ES: [
     {
       id: "av-es-1",
-      title: "Baja cubierta con Smart Backup",
+      title: "Baja cubierta con reemplazo",
       time: "Hace 10m",
       type: "danger",
       icon: "ph-warning",
-      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Cupo 100% completo."
+      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Lista de ingreso completa."
     },
     {
       id: "av-es-2",

@@ -642,3 +642,150 @@ const STAFF_PROPOSALS = {
     }
   ]
 };
+
+const TALENT_POOL = {
+  AR: [
+    {
+      id: "tal-ar-1",
+      name: "Ana Martínez",
+      stats: "12 eventos · 100% puntualidad · Hipódromo San Isidro",
+      badge: "Favorita",
+      badgeVariant: "success",
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+      type: "Favoritos"
+    },
+    {
+      id: "tal-ar-2",
+      name: "Lucas Pereyra",
+      stats: "Guardia 24h activa · Auto propio · Zona Norte",
+      badge: "Guardia",
+      badgeVariant: "info",
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      type: "Guardia 24h"
+    },
+    {
+      id: "tal-ar-3",
+      name: "Sofía Ruiz",
+      stats: "8 eventos · Control Accesos VIP · CABA",
+      badge: "Favorita",
+      badgeVariant: "success",
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+      type: "Favoritos"
+    },
+    {
+      id: "tal-ar-4",
+      name: "Martín Benítez",
+      stats: "10 eventos · Acreditaciones RFID · Vicente López",
+      badge: "Movilidad",
+      badgeVariant: "accent",
+      img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=250&q=80",
+      type: "Movilidad"
+    }
+  ],
+  ES: [
+    {
+      id: "tal-es-1",
+      name: "Elena Bosch",
+      stats: "15 eventos · 100% puntualidad · Fira Gran Via BCN",
+      badge: "Favorita",
+      badgeVariant: "success",
+      img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
+      type: "Favoritos"
+    },
+    {
+      id: "tal-es-2",
+      name: "Marc Valls",
+      stats: "Guardia 24h activa · Moto propia · L'Hospitalet",
+      badge: "Guardia",
+      badgeVariant: "info",
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+      type: "Guardia 24h"
+    },
+    {
+      id: "tal-es-3",
+      name: "Clara Puig",
+      stats: "11 eventos · Protocolo VIP · IFEMA Madrid",
+      badge: "Favorita",
+      badgeVariant: "success",
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+      type: "Favoritos"
+    },
+    {
+      id: "tal-es-4",
+      name: "Pau Vidal",
+      stats: "9 eventos · Acreditaciones RFID · Sants BCN",
+      badge: "Movilidad",
+      badgeVariant: "accent",
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
+      type: "Movilidad"
+    }
+  ]
+};
+
+const GPS_LOGS = {
+  AR: [
+    { staff: "Ana Martínez", gate: "Puerta 4 (San Isidro)", time: "13:45 hs", distance: "A 60m", status: "ok" },
+    { staff: "Martín Benítez", gate: "Acceso Prensa", time: "13:50 hs", distance: "A 45m", status: "ok" },
+    { staff: "Carlos Gómez", gate: "En camino", time: "Pendiente", distance: "Panamericana", status: "traveling" }
+  ],
+  ES: [
+    { staff: "Elena Bosch", gate: "Acceso Norte (Fira)", time: "13:45 hs", distance: "A 40m", status: "ok" },
+    { staff: "Pau Vidal", gate: "Puerta VIP MWC", time: "13:40 hs", distance: "A 30m", status: "ok" },
+    { staff: "Marc Valls", gate: "En camino", time: "Pendiente", distance: "Metro L9S", status: "traveling" }
+  ]
+};
+
+const AVISOS_DATA = {
+  AR: [
+    {
+      id: "av-ar-1",
+      title: "Baja cubierta con Smart Backup",
+      time: "Hace 10m",
+      type: "danger",
+      icon: "ph-warning",
+      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Cupo 100% completo."
+    },
+    {
+      id: "av-ar-2",
+      title: "Póliza AP / ART por vencer",
+      time: "Hoy 18:00 hs",
+      type: "warning",
+      icon: "ph-shield-warning",
+      desc: "Carlos Gómez tiene pendiente subir la constancia de cobertura con cláusula de no repetición antes del inicio del turno."
+    },
+    {
+      id: "av-ar-3",
+      title: "Comprobantes de Facturación AFIP",
+      time: "Ayer",
+      type: "info",
+      icon: "ph-receipt",
+      desc: "Nóminas de Lollapalooza 2026 listas para recepción de Facturas C y liquidación directa."
+    }
+  ],
+  ES: [
+    {
+      id: "av-es-1",
+      title: "Baja cubierta con Smart Backup",
+      time: "Hace 10m",
+      type: "danger",
+      icon: "ph-warning",
+      desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Cupo 100% completo."
+    },
+    {
+      id: "av-es-2",
+      title: "Certificado PRL Ferial por renovar",
+      time: "Hoy 18:00 hs",
+      type: "warning",
+      icon: "ph-shield-warning",
+      desc: "Marc Valls tiene pendiente la acreditación del curso de Prevención de Riesgos Laborales para recinto ferial IFEMA/Fira."
+    },
+    {
+      id: "av-es-3",
+      title: "Alta Seguridad Social TGSS Confirmada",
+      time: "Ayer",
+      type: "info",
+      icon: "ph-shield-check",
+      desc: "Altas en Régimen General tramitadas ante la Tesorería General para el evento Mobile World Congress 2026."
+    }
+  ]
+};

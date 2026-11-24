@@ -767,6 +767,160 @@ const STAFF_PROPOSALS = {
     status: "pending"
   }]
 };
+const TALENT_POOL = {
+  AR: [{
+    id: "tal-ar-1",
+    name: "Ana Martínez",
+    stats: "12 eventos · 100% puntualidad · Hipódromo San Isidro",
+    badge: "Favorita",
+    badgeVariant: "success",
+    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    type: "Favoritos"
+  }, {
+    id: "tal-ar-2",
+    name: "Lucas Pereyra",
+    stats: "Guardia 24h activa · Auto propio · Zona Norte",
+    badge: "Guardia",
+    badgeVariant: "info",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+    type: "Guardia 24h"
+  }, {
+    id: "tal-ar-3",
+    name: "Sofía Ruiz",
+    stats: "8 eventos · Control Accesos VIP · CABA",
+    badge: "Favorita",
+    badgeVariant: "success",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+    type: "Favoritos"
+  }, {
+    id: "tal-ar-4",
+    name: "Martín Benítez",
+    stats: "10 eventos · Acreditaciones RFID · Vicente López",
+    badge: "Movilidad",
+    badgeVariant: "accent",
+    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=250&q=80",
+    type: "Movilidad"
+  }],
+  ES: [{
+    id: "tal-es-1",
+    name: "Elena Bosch",
+    stats: "15 eventos · 100% puntualidad · Fira Gran Via BCN",
+    badge: "Favorita",
+    badgeVariant: "success",
+    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=250&q=80",
+    type: "Favoritos"
+  }, {
+    id: "tal-es-2",
+    name: "Marc Valls",
+    stats: "Guardia 24h activa · Moto propia · L'Hospitalet",
+    badge: "Guardia",
+    badgeVariant: "info",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
+    type: "Guardia 24h"
+  }, {
+    id: "tal-es-3",
+    name: "Clara Puig",
+    stats: "11 eventos · Protocolo VIP · IFEMA Madrid",
+    badge: "Favorita",
+    badgeVariant: "success",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80",
+    type: "Favoritos"
+  }, {
+    id: "tal-es-4",
+    name: "Pau Vidal",
+    stats: "9 eventos · Acreditaciones RFID · Sants BCN",
+    badge: "Movilidad",
+    badgeVariant: "accent",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80",
+    type: "Movilidad"
+  }]
+};
+const GPS_LOGS = {
+  AR: [{
+    staff: "Ana Martínez",
+    gate: "Puerta 4 (San Isidro)",
+    time: "13:45 hs",
+    distance: "A 60m",
+    status: "ok"
+  }, {
+    staff: "Martín Benítez",
+    gate: "Acceso Prensa",
+    time: "13:50 hs",
+    distance: "A 45m",
+    status: "ok"
+  }, {
+    staff: "Carlos Gómez",
+    gate: "En camino",
+    time: "Pendiente",
+    distance: "Panamericana",
+    status: "traveling"
+  }],
+  ES: [{
+    staff: "Elena Bosch",
+    gate: "Acceso Norte (Fira)",
+    time: "13:45 hs",
+    distance: "A 40m",
+    status: "ok"
+  }, {
+    staff: "Pau Vidal",
+    gate: "Puerta VIP MWC",
+    time: "13:40 hs",
+    distance: "A 30m",
+    status: "ok"
+  }, {
+    staff: "Marc Valls",
+    gate: "En camino",
+    time: "Pendiente",
+    distance: "Metro L9S",
+    status: "traveling"
+  }]
+};
+const AVISOS_DATA = {
+  AR: [{
+    id: "av-ar-1",
+    title: "Baja cubierta con Smart Backup",
+    time: "Hace 10m",
+    type: "danger",
+    icon: "ph-warning",
+    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Puerta 4 (Hipódromo San Isidro). Cupo 100% completo."
+  }, {
+    id: "av-ar-2",
+    title: "Póliza AP / ART por vencer",
+    time: "Hoy 18:00 hs",
+    type: "warning",
+    icon: "ph-shield-warning",
+    desc: "Carlos Gómez tiene pendiente subir la constancia de cobertura con cláusula de no repetición antes del inicio del turno."
+  }, {
+    id: "av-ar-3",
+    title: "Comprobantes de Facturación AFIP",
+    time: "Ayer",
+    type: "info",
+    icon: "ph-receipt",
+    desc: "Nóminas de Lollapalooza 2026 listas para recepción de Facturas C y liquidación directa."
+  }],
+  ES: [{
+    id: "av-es-1",
+    title: "Baja cubierta con Smart Backup",
+    time: "Hace 10m",
+    type: "danger",
+    icon: "ph-warning",
+    desc: "Lucas Pereyra confirmó asistencia en reemplazo de vacante en Acceso Norte (Fira Barcelona). Cupo 100% completo."
+  }, {
+    id: "av-es-2",
+    title: "Certificado PRL Ferial por renovar",
+    time: "Hoy 18:00 hs",
+    type: "warning",
+    icon: "ph-shield-warning",
+    desc: "Marc Valls tiene pendiente la acreditación del curso de Prevención de Riesgos Laborales para recinto ferial IFEMA/Fira."
+  }, {
+    id: "av-es-3",
+    title: "Alta Seguridad Social TGSS Confirmada",
+    time: "Ayer",
+    type: "info",
+    icon: "ph-shield-check",
+    desc: "Altas en Régimen General tramitadas ante la Tesorería General para el evento Mobile World Congress 2026."
+  }]
+};
 
 // --- Source: src/components.jsx ---
 const {
@@ -1226,7 +1380,7 @@ const AgencyTabEvento = ({
   const roleTabs = ["Promotores", "Acreditaciones", "Barras", "Montaje"];
   const statusChips = ["Todos", "Check-in", "Confirmados", "Guardia 24h", "Baja"];
 
-  // Filtro combinado de Rol y Estado
+  // Filtro de Rol y Estado
   const filteredWorkers = currentEvent.workers.filter(w => {
     const roleMatches = w.role === activeRoleTab;
     if (!roleMatches) return false;
@@ -1282,7 +1436,7 @@ const AgencyTabEvento = ({
       const backup = countryDB[worker.shirtSize] || countryDB["M"];
       setScannedCandidate(backup);
       showToast(`Radar IA: Suplente de guardia ${backup.name} ubicada a ${backup.dist}.`, "warning");
-    }, 1000);
+    }, 900);
   };
   const handleConfirmSmartBackup = () => {
     if (!selectedWorker || !scannedCandidate) return;
@@ -1292,11 +1446,11 @@ const AgencyTabEvento = ({
     showToast(`Reemplazo confirmado: ${scannedCandidate.name} ingresa como titular.`, "success");
   };
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col h-full space-y-3"
+    className: "flex flex-col h-full space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `pt-2.5 px-4 pb-2 sticky top-0 z-20 border-b backdrop-blur-md transition-colors ${isDark ? 'bg-zinc-950/95 border-zinc-800/80' : 'bg-slate-50/95 border-slate-200'}`
+    className: `pt-3 px-4 pb-2.5 sticky top-0 z-20 border-b backdrop-blur-md transition-colors ${isDark ? 'bg-zinc-950/95 border-zinc-800/60' : 'bg-slate-50/95 border-slate-200/80'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center mb-2"
+    className: "flex justify-between items-center mb-2.5"
   }, /*#__PURE__*/React.createElement("div", {
     onClick: () => setEventSwitcherOpen(true),
     className: "min-w-0 flex-1 mr-2 cursor-pointer group"
@@ -1311,16 +1465,16 @@ const AgencyTabEvento = ({
   }, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"
   }), "VIVO")), /*#__PURE__*/React.createElement("p", {
-    className: `text-[10px] flex items-center gap-1 font-medium truncate ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] flex items-center gap-1 font-medium truncate ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-map-pin text-sky-400"
   }), " ", currentEvent.location)), /*#__PURE__*/React.createElement("button", {
     onClick: () => setNominaSheetOpen(true),
-    className: `h-8 px-2.5 rounded-card border flex items-center gap-1 text-[11px] font-bold transition-all active:scale-95 shrink-0 ${isDark ? 'bg-zinc-900 border-zinc-700 text-sky-400 hover:bg-zinc-800' : 'bg-white border-slate-300 text-sky-700 hover:bg-slate-100 shadow-sm'}`
+    className: `h-8 px-3 rounded-card border flex items-center gap-1.5 text-[11px] font-bold transition-all active:scale-95 shrink-0 ${isDark ? 'bg-zinc-900 border-zinc-700/70 text-sky-400 hover:bg-zinc-800' : 'bg-white border-slate-300 text-sky-700 hover:bg-slate-100 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph-fill ph-shield-check text-sm"
   }), /*#__PURE__*/React.createElement("span", null, "Nómina"))), /*#__PURE__*/React.createElement("div", {
-    className: "w-full overflow-x-auto hide-scroll flex flex-nowrap items-center gap-1.5 pb-1"
+    className: "w-full overflow-x-auto hide-scroll flex flex-nowrap items-center gap-2 pb-1.5"
   }, roleTabs.map(role => {
     const roleWorkers = currentEvent.workers.filter(w => w.role === role);
     const activeCount = roleWorkers.filter(w => w.status !== "Baja").length;
@@ -1334,13 +1488,13 @@ const AgencyTabEvento = ({
         setActiveRoleTab(role);
         setStatusFilter("Todos");
       },
-      className: `shrink-0 px-2.5 py-1.5 rounded-card border text-[11px] font-semibold transition-all flex flex-col gap-1 ${isActive ? isDark ? 'bg-zinc-900 border-zinc-700 shadow-sm' : 'bg-white border-slate-300 shadow-sm' : 'bg-transparent border-transparent opacity-60 hover:opacity-100'}`
+      className: `shrink-0 px-3 py-1.5 rounded-card border text-[11px] font-semibold transition-all flex flex-col gap-1 ${isActive ? isDark ? 'bg-zinc-900 border-zinc-700 shadow-sm' : 'bg-white border-slate-300 shadow-sm' : 'bg-transparent border-transparent opacity-60 hover:opacity-100'}`
     }, /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between items-center w-full gap-1.5"
+      className: "flex justify-between items-center w-full gap-2"
     }, /*#__PURE__*/React.createElement("span", {
-      className: isActive ? isDark ? 'text-zinc-100' : 'text-slate-900' : isDark ? 'text-zinc-400' : 'text-slate-500'
+      className: isActive ? isDark ? 'text-zinc-100 font-bold' : 'text-slate-900 font-bold' : isDark ? 'text-zinc-400' : 'text-slate-600'
     }, role), /*#__PURE__*/React.createElement("span", {
-      className: `font-mono text-[10px] font-bold px-1 rounded ${isFull ? isDark ? 'bg-[#34D399]/15 text-[#34D399]' : 'bg-[#059669]/15 text-[#059669]' : isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}`
+      className: `font-mono text-[10px] font-bold px-1 rounded ${isFull ? isDark ? 'bg-[#34D399]/15 text-[#34D399]' : 'bg-[#059669]/15 text-[#059669]' : isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-700'}`
     }, activeCount, "/", totalTarget)), /*#__PURE__*/React.createElement("div", {
       className: `w-full h-1 rounded-full overflow-hidden ${isDark ? 'bg-zinc-800' : 'bg-slate-200'}`
     }, /*#__PURE__*/React.createElement("div", {
@@ -1350,20 +1504,20 @@ const AgencyTabEvento = ({
       }
     })));
   })), /*#__PURE__*/React.createElement("div", {
-    className: "flex gap-1.5 overflow-x-auto hide-scroll pt-1.5"
+    className: "flex gap-1.5 overflow-x-auto hide-scroll pt-1"
   }, statusChips.map(st => /*#__PURE__*/React.createElement("button", {
     key: st,
     onClick: () => setStatusFilter(st),
-    className: `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight border shrink-0 transition-colors ${statusFilter === st ? 'bg-sky-400 text-zinc-950 border-sky-400' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200' : 'bg-white border-slate-200 text-slate-600'}`
+    className: `px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight border shrink-0 transition-colors ${statusFilter === st ? 'bg-sky-400 text-zinc-950 border-sky-400' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200' : 'bg-white border-slate-200 text-slate-700'}`
   }, st)))), /*#__PURE__*/React.createElement("div", {
-    className: "p-3.5 space-y-3"
+    className: "p-4 space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
     onClick: () => setAiCopilotSheetOpen(true),
-    className: `border rounded-card p-3 flex items-center gap-2.5 shadow-sm cursor-pointer transition-all active:scale-[0.99] group ${isDark ? 'bg-zinc-900 border-zinc-800 hover:border-sky-400/50' : 'bg-white border-slate-200 hover:border-sky-500/50'}`
+    className: `rounded-card p-3 flex items-center gap-3 shadow-sm cursor-pointer transition-all active:scale-[0.99] group ${isDark ? 'bg-zinc-900 hover:bg-zinc-800/80' : 'bg-white hover:bg-slate-50 border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: `w-8 h-8 rounded-input flex items-center justify-center shrink-0 ${isDark ? 'bg-sky-400/15 text-sky-400 shadow-glow-sky-subtle' : 'bg-sky-50 text-sky-600'}`
+    className: `w-9 h-9 rounded-input flex items-center justify-center shrink-0 ${isDark ? 'bg-sky-400/15 text-sky-400 shadow-glow-sky-subtle' : 'bg-sky-50 text-sky-600'}`
   }, /*#__PURE__*/React.createElement("i", {
-    className: "ph-fill ph-sparkle text-base"
+    className: "ph-fill ph-sparkle text-lg"
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 min-w-0"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1373,24 +1527,24 @@ const AgencyTabEvento = ({
   }, "Copiloto IA de Staffing"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-[9px] font-bold px-1 rounded bg-sky-400/10 text-sky-400 border border-sky-400/20"
   }, "PROMPT")), /*#__PURE__*/React.createElement("p", {
-    className: `text-[10px] truncate mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] truncate mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "\"✨ Talle M/L + Botas negras + < 5km...\"")), /*#__PURE__*/React.createElement("i", {
     className: "ph ph-caret-right text-zinc-500 text-xs"
   })), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2"
+    className: "space-y-2.5"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center px-0.5"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, activeRoleTab, " (", filteredWorkers.length, ")"), /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-mono text-zinc-400"
   }, "Filtro: ", statusFilter)), filteredWorkers.length === 0 ? /*#__PURE__*/React.createElement("div", {
-    className: `p-6 rounded-card border text-center space-y-2 ${isDark ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-8 rounded-card text-center space-y-2 ${isDark ? 'bg-zinc-900/40' : 'bg-slate-50'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-users text-2xl text-zinc-500"
   }), /*#__PURE__*/React.createElement("p", {
     className: "text-xs font-bold"
-  }, "No hay staff con filtro \"", statusFilter, "\""), /*#__PURE__*/React.createElement("button", {
+  }, "No hay staff con estado \"", statusFilter, "\""), /*#__PURE__*/React.createElement("button", {
     onClick: () => setStatusFilter("Todos"),
     className: "text-xs text-sky-400 font-bold hover:underline"
   }, "Ver todos en ", activeRoleTab)) : filteredWorkers.map(worker => {
@@ -1403,15 +1557,15 @@ const AgencyTabEvento = ({
         setSelectedWorker(worker);
         setScannedCandidate(null);
       },
-      className: `border rounded-card p-3 flex gap-2.5 active:scale-[0.98] transition-all cursor-pointer relative overflow-hidden ${isBaja ? isDark ? 'bg-red-950/20 border-red-900/40 opacity-75' : 'bg-rose-50 border-rose-200 opacity-75' : isDark ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 shadow-sm hover:border-slate-300'}`
+      className: `rounded-card p-3 flex gap-3 active:scale-[0.98] transition-all cursor-pointer relative overflow-hidden ${isBaja ? isDark ? 'bg-red-950/20 opacity-75' : 'bg-rose-50/70 opacity-75' : isDark ? 'bg-zinc-900 hover:bg-zinc-800/80 shadow-sm' : 'bg-white hover:bg-slate-50 shadow-sm border border-slate-200/60'}`
     }, /*#__PURE__*/React.createElement("div", {
       className: "relative shrink-0"
     }, /*#__PURE__*/React.createElement("img", {
       src: worker.img,
       alt: worker.name,
-      className: "w-12 h-12 rounded-card object-cover border border-zinc-700/60"
+      className: "w-12 h-12 rounded-card object-cover"
     }), isCheckedIn && /*#__PURE__*/React.createElement("span", {
-      className: "absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-[#34D399] border-2 border-zinc-900 rounded-full"
+      className: "absolute -bottom-1 -right-1 w-3 h-3 bg-[#34D399] border-2 border-zinc-900 rounded-full"
     })), /*#__PURE__*/React.createElement("div", {
       className: "flex-1 min-w-0"
     }, /*#__PURE__*/React.createElement("div", {
@@ -1421,21 +1575,15 @@ const AgencyTabEvento = ({
     }, /*#__PURE__*/React.createElement("h4", {
       className: "font-bold text-xs truncate"
     }, worker.name), /*#__PURE__*/React.createElement("div", {
-      className: "flex items-center gap-1.5 mt-0.5"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "font-mono text-[10px] text-zinc-400"
-    }, "Talle ", worker.shirtSize), /*#__PURE__*/React.createElement("span", {
-      className: "text-[10px] text-zinc-500"
-    }, "•"), /*#__PURE__*/React.createElement("span", {
-      className: "font-mono text-[10px] text-zinc-400"
-    }, worker.dist))), /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-1.5 mt-0.5 font-mono text-[10px] text-zinc-400"
+    }, /*#__PURE__*/React.createElement("span", null, "Talle ", worker.shirtSize), /*#__PURE__*/React.createElement("span", null, "•"), /*#__PURE__*/React.createElement("span", null, worker.dist))), /*#__PURE__*/React.createElement("div", {
       className: "flex flex-col items-end gap-1 shrink-0"
     }, /*#__PURE__*/React.createElement(StatusBadge, {
       variant: isBaja ? "danger" : isCheckedIn ? "success" : isGuard ? "info" : "warning"
     }, worker.status), /*#__PURE__*/React.createElement("span", {
       className: "font-mono text-[10px] font-bold text-sky-400"
     }, worker.score, "% Match"))), /*#__PURE__*/React.createElement("div", {
-      className: "flex items-center justify-between mt-2 pt-1.5 border-t border-zinc-800/60 text-[10px] font-mono text-zinc-400"
+      className: "flex items-center justify-between mt-2 pt-1 font-mono text-[10px] text-zinc-400"
     }, /*#__PURE__*/React.createElement("span", {
       className: "truncate pr-1"
     }, worker.footwearType), /*#__PURE__*/React.createElement("span", {
@@ -1448,7 +1596,7 @@ const AgencyTabEvento = ({
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-2.5"
   }, /*#__PURE__*/React.createElement("p", {
-    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Seleccioná la producción para ver cupos en vivo y nómina legal correspondiente:"), eventsList.map(ev => /*#__PURE__*/React.createElement("div", {
     key: ev.id,
     onClick: () => {
@@ -1456,7 +1604,7 @@ const AgencyTabEvento = ({
       setEventSwitcherOpen(false);
       showToast(`Cambiando a producción: ${ev.name}`, "info");
     },
-    className: `p-3 rounded-card border flex items-center justify-between cursor-pointer transition-all active:scale-[0.98] ${ev.id === currentEvent.id ? isDark ? 'bg-sky-400/10 border-sky-400 text-sky-400 font-bold' : 'bg-sky-50 border-sky-600 text-sky-700 font-bold' : isDark ? 'bg-zinc-950 border-zinc-800 hover:border-zinc-700' : 'bg-slate-50 border-slate-200 hover:bg-slate-100'}`
+    className: `p-3 rounded-card flex items-center justify-between cursor-pointer transition-all active:scale-[0.98] ${ev.id === currentEvent.id ? isDark ? 'bg-sky-400/15 text-sky-400 font-bold' : 'bg-sky-50 text-sky-700 font-bold border border-sky-300' : isDark ? 'bg-zinc-950 hover:bg-zinc-800' : 'bg-slate-100 hover:bg-slate-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 pr-2"
   }, /*#__PURE__*/React.createElement("h4", {
@@ -1483,7 +1631,7 @@ const AgencyTabEvento = ({
     className: "space-y-2 max-h-56 overflow-y-auto hide-scroll"
   }, currentEvent.workers.map(w => /*#__PURE__*/React.createElement("div", {
     key: w.id,
-    className: `p-2 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2.5 rounded-card flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-950' : 'bg-slate-50 border border-slate-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 pr-2"
   }, /*#__PURE__*/React.createElement("span", {
@@ -1503,9 +1651,9 @@ const AgencyTabEvento = ({
     },
     title: "Copiloto IA de Staffing"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "space-y-3"
+    className: "space-y-3.5"
   }, /*#__PURE__*/React.createElement("p", {
-    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Búsqueda semántica sobre el pool de talentos de ", country, ":"), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2"
   }, /*#__PURE__*/React.createElement("input", {
@@ -1539,7 +1687,7 @@ const AgencyTabEvento = ({
     className: "space-y-2 pt-1 animate-fade-in"
   }, aiFoundProfiles.map(cand => /*#__PURE__*/React.createElement("div", {
     key: cand.id,
-    className: `p-2.5 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-3 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-50 border border-slate-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2.5 items-center mb-2"
   }, /*#__PURE__*/React.createElement("img", {
@@ -1570,12 +1718,12 @@ const AgencyTabEvento = ({
     },
     title: "Ficha Operativa & Guardarropa"
   }, selectedWorker && /*#__PURE__*/React.createElement("div", {
-    className: "space-y-3.5"
+    className: "space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex gap-3 items-center"
   }, /*#__PURE__*/React.createElement("img", {
     src: selectedWorker.img,
-    className: "w-13 h-13 rounded-card object-cover border-2 border-zinc-700/60 shrink-0"
+    className: "w-13 h-13 rounded-card object-cover shrink-0"
   }), /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 flex-1"
   }, /*#__PURE__*/React.createElement("h3", {
@@ -1591,80 +1739,80 @@ const AgencyTabEvento = ({
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph-fill ph-navigation-arrow"
   }), " ", selectedWorker.dist)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Medidas para Guardarropa"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 gap-1.5 font-mono text-center"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "ALTURA"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs"
   }, selectedWorker.height)), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "REMERA"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs text-sky-400"
   }, selectedWorker.shirtSize)), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "PANTALÓN"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs"
   }, selectedWorker.pantSize)), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "CALZADO"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs"
   }, selectedWorker.shoeSize)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider block mb-1.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Book & Calzado Verificado (3 Fotos)"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-3 gap-1.5"
+    className: "grid grid-cols-3 gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: selectedWorker.img,
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Rostro")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: selectedWorker.fullBodyImg,
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Cuerpo")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: selectedWorker.shoesImg,
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Calzado")))), /*#__PURE__*/React.createElement("div", {
     className: "space-y-1"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `text-[10px] font-bold uppercase tracking-wider block ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider block ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Documentación Legal (", country, ")"), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'}`
+    className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 pr-2"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "font-bold block text-zinc-200 truncate"
+    className: "font-bold block truncate"
   }, selectedWorker.dniNie), /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block truncate"
   }, selectedWorker.insuranceName)), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: selectedWorker.docStatus === 'ok' ? 'success' : 'warning'
   }, selectedWorker.docStatus === 'ok' ? 'Vigente' : 'Pendiente'))), /*#__PURE__*/React.createElement("div", {
-    className: "pt-2 border-t border-zinc-800/80 space-y-2"
+    className: "pt-2 border-t border-zinc-800/60 space-y-2"
   }, !scannedCandidate && !isScanningRadar && /*#__PURE__*/React.createElement(LuminousButton, {
     variant: "danger",
     icon: "ph-warning-octagon",
     onClick: () => handleStartRadarScan(selectedWorker)
   }, "Reportar Baja & Activar Smart Backup"), isScanningRadar && /*#__PURE__*/React.createElement("div", {
-    className: `p-4 rounded-card border text-center flex flex-col items-center justify-center gap-1.5 ${isDark ? 'bg-zinc-950 border-sky-400/30' : 'bg-slate-100 border-sky-600/30'}`
+    className: `p-4 rounded-card text-center flex flex-col items-center justify-center gap-1.5 ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-10 h-10 rounded-full border-2 border-sky-400 flex items-center justify-center relative"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1676,7 +1824,7 @@ const AgencyTabEvento = ({
   }, "Buscando suplente talle ", selectedWorker.shirtSize, "..."), /*#__PURE__*/React.createElement("p", {
     className: "text-[10px] text-zinc-400"
   }, "Geolocalizando staff en guardia < 3km")), scannedCandidate && /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border space-y-2 animate-fade-in ${isDark ? 'bg-zinc-950 border-sky-400/40' : 'bg-sky-50 border-sky-600/40'}`
+    className: `p-3 rounded-card space-y-2.5 animate-fade-in ${isDark ? 'bg-zinc-950 border border-sky-400/30' : 'bg-sky-50/80 border border-sky-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement(StatusBadge, {
@@ -1693,7 +1841,7 @@ const AgencyTabEvento = ({
   }, /*#__PURE__*/React.createElement("h4", {
     className: "font-bold text-xs truncate"
   }, scannedCandidate.name), /*#__PURE__*/React.createElement("p", {
-    className: "font-mono text-[9px] text-zinc-300 truncate"
+    className: "font-mono text-[9px] text-zinc-400 truncate"
   }, scannedCandidate.aiScanLog))), /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-arrows-left-right",
     onClick: handleConfirmSmartBackup
@@ -1711,6 +1859,11 @@ const AgencyTabFechas = () => {
   const [venue, setVenue] = useState(country === "AR" ? "Predio La Rural · CABA" : "Fira Montjuïc · Barcelona");
   const [pay, setPay] = useState(country === "AR" ? "$60.000 Neto" : "€140 Neto + SS");
   const [dresscode, setDresscode] = useState("Total black + calzado cómodo negro");
+  useEffect(() => {
+    setEventName(country === "AR" ? "Festival Primavera 2026" : "Festival Sonar 2026");
+    setVenue(country === "AR" ? "Predio La Rural · CABA" : "Fira Montjuïc · Barcelona");
+    setPay(country === "AR" ? "$60.000 Neto" : "€140 Neto + SS");
+  }, [country]);
   const handleCreate = e => {
     e.preventDefault();
     showToast(`Evento "${eventName}" creado con geocerca de 150m activada.`, "success");
@@ -1720,10 +1873,10 @@ const AgencyTabFechas = () => {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
   }, "Crear nuevo evento"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
-  }, "Configurá la geocerca para fichaje GPS y requisitos de staff.")), /*#__PURE__*/React.createElement("form", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
+  }, "Configurá la geocerca para fichaje GPS y requisitos de staff (", country, ").")), /*#__PURE__*/React.createElement("form", {
     onSubmit: handleCreate,
-    className: "space-y-3"
+    className: "space-y-3.5"
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-1"
   }, /*#__PURE__*/React.createElement("label", {
@@ -1773,7 +1926,7 @@ const AgencyTabFechas = () => {
   }, "Publicar Convocatoria B2B"))));
 };
 
-// --- Tab 3: Talento (Pool & Auditoría GPS) ---
+// --- Tab 3: Talento (Pool & Auditoría GPS Aislado Regionalmente) ---
 const AgencyTabTalento = () => {
   const {
     isDark,
@@ -1781,111 +1934,92 @@ const AgencyTabTalento = () => {
     country
   } = useContext(AppContext);
   const [filter, setFilter] = useState("Todos");
+  const talentList = TALENT_POOL[country] || TALENT_POOL.AR;
+  const gpsList = GPS_LOGS[country] || GPS_LOGS.AR;
+  const filteredTalent = talentList.filter(t => {
+    if (filter === "Todos") return true;
+    return t.type === filter;
+  });
   return /*#__PURE__*/React.createElement("div", {
     className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
   }, "Base de talento (", country, ")"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Pool verificado de staff, historial y auditoría GPS de ingresos.")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
   }, ["Todos", "Favoritos", "Guardia 24h", "Movilidad"].map(f => /*#__PURE__*/React.createElement("button", {
     key: f,
     onClick: () => setFilter(f),
-    className: `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${filter === f ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-600'}`
+    className: `px-3 py-1 rounded-full text-xs font-semibold border shrink-0 transition-colors ${filter === f ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-700'}`
   }, f))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border flex items-center justify-between ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: "space-y-2.5"
+  }, filteredTalent.map(t => /*#__PURE__*/React.createElement("div", {
+    key: t.id,
+    className: `p-3 rounded-card flex items-center justify-between ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2.5 min-w-0"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+    src: t.img,
     className: "w-10 h-10 rounded-card object-cover shrink-0"
   }), /*#__PURE__*/React.createElement("div", {
     className: "min-w-0"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold truncate"
-  }, "Ana Martínez"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] text-zinc-400 font-mono block"
-  }, "12 eventos · 100% puntualidad"))), /*#__PURE__*/React.createElement(StatusBadge, {
-    variant: "success"
-  }, "Favorita")), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border flex items-center justify-between ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-2.5 min-w-0"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80",
-    className: "w-10 h-10 rounded-card object-cover shrink-0"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "min-w-0"
-  }, /*#__PURE__*/React.createElement("h4", {
-    className: "text-xs font-bold truncate"
-  }, "Lucas Pereyra"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] text-zinc-400 font-mono block"
-  }, "Guardia 24h activa · Auto propio"))), /*#__PURE__*/React.createElement(StatusBadge, {
-    variant: "info"
-  }, "Guardia"))), /*#__PURE__*/React.createElement("div", {
+  }, t.name), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono block truncate"
+  }, t.stats))), /*#__PURE__*/React.createElement(StatusBadge, {
+    variant: t.badgeVariant
+  }, t.badge)))), /*#__PURE__*/React.createElement("div", {
     className: "pt-2"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2"
-  }, "AUDITORÍA GPS (Ingresos en tiempo real)"), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border space-y-2 font-mono text-[11px] ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center text-zinc-300"
-  }, /*#__PURE__*/React.createElement("span", null, "Ana Martínez · Puerta 4"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[#34D399]"
-  }, "13:45 hs (A 60m)")), /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center text-zinc-300"
-  }, /*#__PURE__*/React.createElement("span", null, "Elena Bosch · Puerta VIP"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[#34D399]"
-  }, "13:42 hs (A 40m)")), /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center text-zinc-400 text-[10px]"
-  }, /*#__PURE__*/React.createElement("span", null, "Carlos Gómez · Pendiente"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[#F97316]"
-  }, "En viaje")))));
+  }, "AUDITORÍA GPS (Ingresos en tiempo real · ", country, ")"), /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-card space-y-2 font-mono text-[11px] ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
+  }, gpsList.map((log, idx) => /*#__PURE__*/React.createElement("div", {
+    key: idx,
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: isDark ? 'text-zinc-300' : 'text-slate-800'
+  }, log.staff, " · ", log.gate), /*#__PURE__*/React.createElement("span", {
+    className: `font-bold ${log.status === 'ok' ? 'text-[#34D399]' : 'text-[#F97316]'}`
+  }, log.time, " (", log.distance, ")"))))));
 };
 
-// --- Tab 4: Avisos (Notificaciones Operativas) ---
+// --- Tab 4: Avisos (Notificaciones Operativas Regionalizadas) ---
 const AgencyTabAvisos = () => {
   const {
     isDark,
     showToast,
     country
   } = useContext(AppContext);
+  const avisosList = AVISOS_DATA[country] || AVISOS_DATA.AR;
   return /*#__PURE__*/React.createElement("div", {
     className: "p-4 space-y-4 animate-fade-in overflow-y-auto hide-scroll pb-10"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
   }, "Centro de avisos"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Alertas operativas, bajas reportadas y compliance de seguros (", country, ").")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border space-y-1.5 ${isDark ? 'bg-red-950/20 border-red-900/40 text-red-200' : 'bg-rose-50 border-rose-200 text-rose-800'}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs flex items-center gap-1.5"
-  }, /*#__PURE__*/React.createElement("i", {
-    className: "ph-fill ph-warning text-sm text-[#EF4444]"
-  }), " Baja cubierta con Smart Backup"), /*#__PURE__*/React.createElement("span", {
-    className: "font-mono text-[10px] text-zinc-400"
-  }, "Hace 10m")), /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] leading-snug"
-  }, "Lucas Pereyra confirmó asistencia en reemplazo de la vacante en Puerta 4. Cupo completo.")), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border space-y-1.5 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "font-bold text-xs flex items-center gap-1.5"
-  }, /*#__PURE__*/React.createElement("i", {
-    className: "ph-fill ph-shield-warning text-sm text-[#F97316]"
-  }), country === 'AR' ? 'Póliza AP por vencer' : 'Certificado PRL por renovar'), /*#__PURE__*/React.createElement("span", {
-    className: "font-mono text-[10px] text-zinc-400"
-  }, "Hoy")), /*#__PURE__*/React.createElement("p", {
-    className: `text-[11px] leading-snug ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
-  }, "Carlos Gómez tiene pendiente subir la constancia de cobertura antes de las 18:00 hs."))));
+    className: "space-y-3"
+  }, avisosList.map(item => {
+    const isDanger = item.type === "danger";
+    const isWarning = item.type === "warning";
+    return /*#__PURE__*/React.createElement("div", {
+      key: item.id,
+      className: `p-3.5 rounded-card space-y-1.5 transition-all ${isDanger ? isDark ? 'bg-red-950/25 text-red-200' : 'bg-rose-50 text-rose-800 border border-rose-200' : isWarning ? isDark ? 'bg-amber-950/25 text-amber-200' : 'bg-amber-50 text-amber-900 border border-amber-200' : isDark ? 'bg-zinc-900 text-zinc-200' : 'bg-white text-slate-800 border border-slate-200 shadow-sm'}`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-center"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "font-bold text-xs flex items-center gap-1.5"
+    }, /*#__PURE__*/React.createElement("i", {
+      className: `ph-fill ${item.icon} text-sm ${isDanger ? 'text-[#EF4444]' : isWarning ? 'text-[#F97316]' : 'text-sky-400'}`
+    }), item.title), /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-[10px] text-zinc-400"
+    }, item.time)), /*#__PURE__*/React.createElement("p", {
+      className: `text-[11px] leading-snug ${isDark ? 'text-zinc-300' : 'text-slate-600'}`
+    }, item.desc));
+  })));
 };
 
 // --- Source: src/worker_views.jsx ---
@@ -1940,13 +2074,13 @@ const WorkerTabInicio = ({
         hour: '2-digit',
         minute: '2-digit'
       }));
-      showToast(`GPS validado en Puerta 4. Seguro activo y geocerca confirmada.`, "success");
+      showToast(`GPS validado en geocerca (150m). Seguro activo.`, "success");
     }, 800);
   };
   const handleSimularErrorGPS = () => {
     setCheckedInState(false);
     setGpsErrorState(true);
-    showToast("Error de Geocerca GPS: Te encontrás a 420m de Puerta 4.", "warning");
+    showToast("Error de Geocerca GPS: Te encontrás a 420m del predio.", "warning");
   };
   const handleAcceptProposal = id => {
     setProposals(prev => prev.map(p => p.id === id ? {
@@ -1976,13 +2110,15 @@ const WorkerTabInicio = ({
     className: "w-2 h-2 rounded-full bg-[#34D399] shrink-0"
   })), /*#__PURE__*/React.createElement("p", {
     className: "font-mono text-[10px] font-semibold text-sky-400 mt-0.5 truncate"
-  }, "Perfil verificado • Top 5% Staff (", country, ")")), /*#__PURE__*/React.createElement("img", {
+  }, "Perfil verificado • Top 5% Staff")), /*#__PURE__*/React.createElement("img", {
     src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
-    className: "w-10 h-10 rounded-card object-cover border border-zinc-700 shrink-0"
-  })), /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-center mb-1.5"
+    className: "w-10 h-10 rounded-card object-cover shrink-0"
+  })), /*#__PURE__*/React.createElement("section", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center px-0.5"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Tu Jornada de Hoy"), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2"
   }, /*#__PURE__*/React.createElement("button", {
@@ -1992,7 +2128,7 @@ const WorkerTabInicio = ({
     onClick: handleSimularErrorGPS,
     className: "text-[10px] font-mono text-zinc-400 hover:text-[#EF4444] transition-colors"
   }, "Simular Error GPS"))), !hasShiftToday ? /*#__PURE__*/React.createElement("div", {
-    className: `p-5 rounded-hero border text-center space-y-3 ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `p-6 rounded-hero text-center space-y-3 ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: `w-12 h-12 rounded-full mx-auto flex items-center justify-center ${isDark ? 'bg-zinc-800 text-sky-400' : 'bg-sky-50 text-sky-600'}`
   }, /*#__PURE__*/React.createElement("i", {
@@ -2000,15 +2136,15 @@ const WorkerTabInicio = ({
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "text-sm font-bold tracking-tight"
   }, "Sin jornadas asignadas hoy"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-1 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
-  }, "No tenés turnos activos para hoy en ", country, ". Activá tu Guardia 24h para recibir convocatorias de emergencia o postulate a las propuestas de abajo.")), /*#__PURE__*/React.createElement(LuminousButton, {
+    className: `text-xs mt-1 leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
+  }, "No tenés turnos activos para hoy. Activá tu Guardia 24h para recibir convocatorias de emergencia o postulate a las propuestas de abajo.")), /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-shield-check",
     onClick: () => showToast("Guardia 24h activada. Tu perfil está primero en el radar de emergencias.", "success")
   }, "Activar Guardia 24h Smart Backup")) :
   /*#__PURE__*/
   /* ESTADO ACTIVO: Hero Card del Turno */
   React.createElement("div", {
-    className: `relative rounded-hero overflow-hidden border shadow-xl transition-all ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`
+    className: `relative rounded-hero overflow-hidden shadow-xl transition-all ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-md'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative h-28 w-full overflow-hidden"
   }, /*#__PURE__*/React.createElement("img", {
@@ -2023,7 +2159,7 @@ const WorkerTabInicio = ({
   }, checkedInState ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse"
   }), "EN TURNO (", checkInTime, ")") : "PENDIENTE")), checkedInState && /*#__PURE__*/React.createElement("div", {
-    className: "absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-sky-400 font-mono text-[10px] font-bold"
+    className: "absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-sky-400 font-mono text-[10px] font-bold"
   }, "⏱️ ", formatTimer(secondsInShift)), /*#__PURE__*/React.createElement("div", {
     className: "absolute bottom-2 left-3 right-3"
   }, /*#__PURE__*/React.createElement("h3", {
@@ -2035,19 +2171,19 @@ const WorkerTabInicio = ({
   }, /*#__PURE__*/React.createElement("div", {
     className: "space-y-1.5 font-mono text-xs"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-input flex items-center gap-2 border ${isDark ? 'bg-zinc-950/70 border-zinc-800/80 text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'}`
+    className: `p-2 rounded-input flex items-center gap-2 ${isDark ? 'bg-zinc-950/70 text-zinc-300' : 'bg-slate-50 text-slate-700'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-clock text-sky-400 text-sm shrink-0"
   }), /*#__PURE__*/React.createElement("span", {
     className: "truncate"
   }, "14:00 - 22:00 hs (Break 45m)")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-input flex items-center gap-2 border ${isDark ? 'bg-zinc-950/70 border-zinc-800/80 text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'}`
+    className: `p-2 rounded-input flex items-center gap-2 ${isDark ? 'bg-zinc-950/70 text-zinc-300' : 'bg-slate-50 text-slate-700'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-map-pin text-sky-400 text-sm shrink-0"
   }), /*#__PURE__*/React.createElement("span", {
     className: "truncate"
   }, currentEvent.location))), gpsErrorState && /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card border space-y-2 animate-fade-in ${isDark ? 'bg-red-950/30 border-red-800/50 text-red-300' : 'bg-rose-50 border-rose-200 text-red-800'}`
+    className: `p-2.5 rounded-card space-y-2 animate-fade-in ${isDark ? 'bg-red-950/30 text-red-200' : 'bg-rose-50 text-rose-800 border border-rose-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-1.5 font-bold text-xs"
   }, /*#__PURE__*/React.createElement("i", {
@@ -2058,7 +2194,7 @@ const WorkerTabInicio = ({
     onClick: handleFicharGPS,
     className: "w-full py-1.5 rounded-input bg-[#EF4444] text-white text-[11px] font-bold"
   }, "Reintentar Detección GPS")), checkedInState && /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card border space-y-1.5 animate-fade-in ${isDark ? 'bg-[#34D399]/10 border-[#34D399]/30' : 'bg-emerald-50 border-emerald-200'}`
+    className: `p-2.5 rounded-card space-y-1.5 animate-fade-in ${isDark ? 'bg-[#34D399]/10 text-zinc-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2067,33 +2203,33 @@ const WorkerTabInicio = ({
     className: "ph-fill ph-shield-check"
   }), " Ingreso Registrado"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-[10px] text-zinc-400"
-  }, "Seguro AP Activo")), /*#__PURE__*/React.createElement("p", {
+  }, "Seguro Activo")), /*#__PURE__*/React.createElement("p", {
     className: `text-[10px] ${isDark ? 'text-zinc-300' : 'text-slate-600'}`
   }, "Fichaje confirmado a las ", checkInTime, ". Tu liquidación se computará automáticamente al completar el turno.")), !checkedInState && !gpsErrorState && /*#__PURE__*/React.createElement(LuminousButton, {
     icon: "ph-navigation-arrow",
     loading: isCheckingIn,
     onClick: handleFicharGPS
   }, "Fichar Ingreso con GPS")))), /*#__PURE__*/React.createElement("section", {
-    className: "space-y-2"
+    className: "space-y-2.5"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center px-0.5"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Propuestas Directas"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-400/10 text-sky-400"
   }, proposals.filter(p => p.status === 'pending').length, " NUEVAS")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5"
+    className: "space-y-3"
   }, proposals.map(prop => /*#__PURE__*/React.createElement("div", {
     key: prop.id,
-    className: `border rounded-card p-3 transition-all ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `rounded-card p-3.5 transition-all ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-start gap-1 mb-1.5"
+    className: "flex justify-between items-start gap-1 mb-2"
   }, /*#__PURE__*/React.createElement("div", {
     className: "min-w-0"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "font-bold text-xs truncate"
   }, prop.title), /*#__PURE__*/React.createElement("p", {
-    className: `text-[10px] ${isDark ? 'text-zinc-400' : 'text-slate-500'} truncate`
+    className: `text-[10px] ${isDark ? 'text-zinc-400' : 'text-slate-600'} truncate`
   }, prop.agency)), /*#__PURE__*/React.createElement("span", {
     className: "font-mono text-xs font-black text-sky-400 shrink-0"
   }, prop.pay)), /*#__PURE__*/React.createElement("div", {
@@ -2120,7 +2256,7 @@ const WorkerTabInicio = ({
     className: "flex-1"
   }, "Aceptar con mi Perfil"), /*#__PURE__*/React.createElement("button", {
     onClick: () => handleRejectProposal(prop.id),
-    className: `px-3 h-12 rounded-input border text-xs font-bold transition-colors shrink-0 ${isDark ? 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700' : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'}`
+    className: `px-3 h-12 rounded-input border text-xs font-bold transition-colors shrink-0 ${isDark ? 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'}`
   }, "Rechazar")) : /*#__PURE__*/React.createElement("div", {
     className: "pt-1 flex items-center justify-between font-mono text-[10px]"
   }, /*#__PURE__*/React.createElement(StatusBadge, {
@@ -2130,7 +2266,7 @@ const WorkerTabInicio = ({
   }, "Respondido")))))));
 };
 
-// --- Tab 2: Agenda (Mis Fechas) ---
+// --- Tab 2: Agenda (Mis Fechas Regionalizadas) ---
 const WorkerTabAgenda = () => {
   const {
     isDark,
@@ -2143,32 +2279,32 @@ const WorkerTabAgenda = () => {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
   }, "Mis fechas"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Calendario operativo y logística de eventos confirmados (", country, ").")), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-1.5 overflow-x-auto hide-scroll pb-1"
   }, ["Confirmados", "Postulados", "Historial"].map(tab => /*#__PURE__*/React.createElement("button", {
     key: tab,
     onClick: () => setAgendaTab(tab),
-    className: `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${agendaTab === tab ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-600'}`
+    className: `px-3 py-1 rounded-full text-xs font-semibold border shrink-0 transition-colors ${agendaTab === tab ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 border-zinc-800 text-zinc-400' : 'bg-white border-slate-200 text-slate-700'}`
   }, tab))), /*#__PURE__*/React.createElement("div", {
     className: "space-y-3"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-900 shadow-sm' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between items-start mb-2"
+    className: "flex justify-between items-start mb-2.5"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold"
   }, country === "AR" ? "Lollapalooza 2026" : "Mobile World Congress 2026"), /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] text-zinc-400 font-mono"
-  }, country === "AR" ? "Sáb 28 Nov · 14:00 hs" : "Lun 2 Mar · 09:00 hs")), /*#__PURE__*/React.createElement(StatusBadge, {
+  }, country === "AR" ? "Sáb 28 Nov · 14:00 hs · San Isidro" : "Lun 2 Mar · 09:00 hs · Fira Gran Via")), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Confirmado")), /*#__PURE__*/React.createElement("button", {
     onClick: () => showToast("Abriendo navegación en Google Maps...", "info"),
-    className: "w-full h-10 rounded-input border border-zinc-700 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800 transition-colors"
+    className: "w-full h-10 rounded-input border border-zinc-700/60 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800/60 transition-colors"
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph-fill ph-navigation-arrow text-sky-400"
   }), " Cómo llegar al Venue")), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
   }, "COORDINADORA EN VENUE"), /*#__PURE__*/React.createElement("div", {
@@ -2180,15 +2316,15 @@ const WorkerTabAgenda = () => {
     className: "w-8 h-8 rounded-full object-cover"
   }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h5", {
     className: "text-xs font-bold"
-  }, country === "AR" ? "Florencia V. (Agencia DER)" : "Marta S. (NSH Azafatas BCN)"), /*#__PURE__*/React.createElement("span", {
+  }, country === "AR" ? "Florencia V. (Somos DER)" : "Marta S. (NSH Azafatas BCN)"), /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] text-zinc-400"
   }, country === "AR" ? "En Puerta 4 Staff" : "En Pabellón 3 Acceso Norte"))), /*#__PURE__*/React.createElement("button", {
     onClick: () => showToast("Abriendo chat directo con la coordinadora...", "info"),
-    className: "px-2.5 py-1 rounded-input bg-sky-400/20 text-sky-400 border border-sky-400/30 text-[11px] font-bold"
+    className: "px-3 py-1.5 rounded-input bg-sky-400/20 text-sky-400 border border-sky-400/30 text-[11px] font-bold"
   }, "Contactar")))));
 };
 
-// --- Tab 3: Cobros (Centro Financiero) ---
+// --- Tab 3: Cobros (Centro Financiero Regionalizado) ---
 const WorkerTabCobros = () => {
   const {
     isDark,
@@ -2200,17 +2336,17 @@ const WorkerTabCobros = () => {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
   }, "Cobros • Centro financiero"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Liquidaciones al día con pago garantizado (", country, ").")), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-sky-400/30' : 'bg-white border-sky-600/30 shadow-sm'}`
+    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-900 border border-sky-400/30' : 'bg-white border border-sky-600/30 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-0.5"
   }, "PENDIENTE"), /*#__PURE__*/React.createElement("span", {
     className: "font-mono font-extrabold text-sm text-sky-400 block"
   }, country === "AR" ? "$120.000" : "€275")), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `p-3.5 rounded-card ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-0.5"
   }, "COBRADO (MES)"), /*#__PURE__*/React.createElement("span", {
@@ -2220,7 +2356,7 @@ const WorkerTabCobros = () => {
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block"
   }, "Detalle por evento trabajado"), /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `p-3 rounded-card flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "font-bold block text-zinc-200"
   }, country === "AR" ? "Maratón Nordelta" : "Mobile World Congress 2026"), /*#__PURE__*/React.createElement("span", {
@@ -2228,7 +2364,7 @@ const WorkerTabCobros = () => {
   }, "Hace 3 días • Acreditado")), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-zinc-100"
   }, country === "AR" ? "$65.000" : "€130")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-card border flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`
+    className: `p-3 rounded-card flex items-center justify-between font-mono text-xs ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "font-bold block text-zinc-200"
   }, country === "AR" ? "Experiencia Nike Run" : "Sephora Beauty Experience"), /*#__PURE__*/React.createElement("span", {
@@ -2241,19 +2377,19 @@ const WorkerTabCobros = () => {
     icon: "ph-receipt",
     onClick: () => showToast(country === 'AR' ? 'Cargando comprobante de Factura AFIP...' : 'Subiendo factura con IRPF/IVA...', 'success')
   }, country === 'AR' ? 'Cargar Factura Electrónica (AFIP)' : 'Subir Factura con IRPF / IVA')), /*#__PURE__*/React.createElement("div", {
-    className: `p-3 rounded-card border space-y-1 font-mono text-xs ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
+    className: `p-3 rounded-card space-y-1 font-mono text-xs ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] font-bold uppercase tracking-wider text-zinc-400 block"
-  }, "CUENTA DE DEPÓSITO"), /*#__PURE__*/React.createElement("div", {
+  }, "CUENTA DE DEPÓSITO (", country, ")"), /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between items-center"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-zinc-300"
+    className: isDark ? 'text-zinc-300' : 'text-slate-800'
   }, country === 'AR' ? 'Alias: martina.staff.mp' : 'IBAN: ES91 2100 0418 4502 ****'), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Verificada"))));
 };
 
-// --- Tab 4: Mi Perfil (Medidas, Fotos & Bóveda Legal) ---
+// --- Tab 4: Mi Book & Perfil (Medidas, Fotos & Bóveda Legal) ---
 const WorkerTabMiPerfil = ({
   onLogout
 }) => {
@@ -2270,63 +2406,63 @@ const WorkerTabMiPerfil = ({
     className: "flex justify-between items-start"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "text-base font-extrabold tracking-tight"
-  }, "Mi Perfil"), /*#__PURE__*/React.createElement("p", {
-    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-500'}`
+  }, "Mi Book Único"), /*#__PURE__*/React.createElement("p", {
+    className: `text-xs mt-0.5 ${isDark ? 'text-zinc-400' : 'text-slate-600'}`
   }, "Medidas, fotos verificadas y bóveda legal (", country, ").")), /*#__PURE__*/React.createElement("button", {
     onClick: onLogout,
-    className: `px-2.5 py-1 rounded-card border text-[11px] font-bold flex items-center gap-1 transition-colors ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-red-400 hover:border-red-500/40' : 'border-slate-300 text-slate-600 hover:text-red-600'}`,
+    className: `px-3 py-1 rounded-card border text-[11px] font-bold flex items-center gap-1 transition-colors ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-red-400 hover:border-red-500/40' : 'border-slate-300 text-slate-700 hover:text-red-600'}`,
     title: "Cerrar sesión"
   }, /*#__PURE__*/React.createElement("i", {
     className: "ph ph-sign-out"
   }), " Salir")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
   }, "Fotos de Perfil Verificadas (3)"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-3 gap-1.5"
+    className: "grid grid-cols-3 gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Rostro")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80",
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Cuerpo")), /*#__PURE__*/React.createElement("div", {
-    className: "rounded-card overflow-hidden border border-zinc-700/50 aspect-[3/4] relative"
+    className: "rounded-card overflow-hidden aspect-[3/4] relative shadow-sm"
   }, /*#__PURE__*/React.createElement("img", {
     src: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80",
     className: "w-full h-full object-cover"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "absolute bottom-1 left-1 px-1 py-0.5 rounded bg-black/70 text-[8px] font-bold text-white"
+    className: "absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[8px] font-bold text-white"
   }, "Calzado")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5"
   }, "Medidas de Guardarropa"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 gap-1.5 font-mono text-center"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "ALT"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs"
   }, "1.74 m")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "REM"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs text-sky-400"
   }, "M")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "PAN"), /*#__PURE__*/React.createElement("span", {
     className: "font-bold text-xs"
   }, "38")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2 rounded-card ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[9px] text-zinc-400 block"
   }, "CAL"), /*#__PURE__*/React.createElement("span", {
@@ -2336,25 +2472,25 @@ const WorkerTabMiPerfil = ({
   }, "BÓVEDA LEGAL (", country, ")"), /*#__PURE__*/React.createElement("div", {
     className: "space-y-1.5"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "DNI / CUIL: 42.100.892" : "DNI / NIE: Y-4921028-H"), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Vigente")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Monotributo: Al día" : "Seguridad Social: Alta activa"), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Verificado")), /*#__PURE__*/React.createElement("div", {
-    className: `p-2 rounded-card border flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-2.5 rounded-card flex items-center justify-between text-xs font-mono ${isDark ? 'bg-zinc-950' : 'bg-slate-100'}`
   }, /*#__PURE__*/React.createElement("span", null, country === "AR" ? "Póliza AP: Cláusula No Rep." : "Certificado PRL: Apto"), /*#__PURE__*/React.createElement(StatusBadge, {
     variant: "success"
   }, "Vigente")))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2"
+    className: "space-y-2.5"
   }, /*#__PURE__*/React.createElement("div", {
     onClick: () => {
       setGuard24(!guard24);
       showToast(guard24 ? "Guardia 24h pausada." : "Guardia 24h activada.", "info");
     },
-    className: `p-2.5 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-3 rounded-card flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-bold"
   }, "Guardia 24h Smart Backup"), /*#__PURE__*/React.createElement("div", {
@@ -2366,7 +2502,7 @@ const WorkerTabMiPerfil = ({
       setCar(!car);
       showToast(car ? "Movilidad propia desactivada." : "Movilidad propia activada.", "info");
     },
-    className: `p-2.5 rounded-card border flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`
+    className: `p-3 rounded-card flex items-center justify-between cursor-pointer ${isDark ? 'bg-zinc-900' : 'bg-white border border-slate-200/80 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-bold"
   }, "Movilidad Propia"), /*#__PURE__*/React.createElement("div", {
@@ -2385,7 +2521,7 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const isDark = isDarkMode;
   const [currentView, setCurrentView] = useState('app'); // 'app' | 'login' | 'onboarding'
-  const [viewportMode, setViewportMode] = useState('mobile'); // 'mobile' (393px) | 'tablet' (768px)
+  const [demoOpen, setDemoOpen] = useState(false);
 
   // Sub-tabs de Productora
   const [prodTab, setProdTab] = useState('evento');
@@ -2472,69 +2608,95 @@ const App = () => {
       showToast
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: `min-h-screen w-full flex flex-col items-center justify-start py-2 sm:py-5 px-0 sm:px-4 transition-colors ${isDarkMode ? 'bg-[#09090B]' : 'bg-[#E2E8F0]'}`
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "w-full max-w-[393px] mb-2.5 flex items-center justify-between gap-1.5 px-3 select-none"
+    className: `min-h-screen w-full flex flex-col items-center justify-center py-0 sm:py-6 px-0 sm:px-4 transition-colors relative ${isDarkMode ? 'bg-[#09090B]' : 'bg-[#F1F5F9]'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-1.5"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-7 h-7 rounded-input bg-sky-400 flex items-center justify-center text-[#09090B] font-black text-xs shadow-glow-sky-subtle"
-  }, "E"), /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col"
+    className: "fixed top-3 right-3 sm:top-4 sm:right-6 z-50 flex flex-col items-end"
+  }, !demoOpen ? /*#__PURE__*/React.createElement("button", {
+    onClick: () => setDemoOpen(true),
+    className: `h-8 px-3 rounded-full backdrop-blur-md border text-xs font-bold flex items-center gap-2 shadow-xl transition-all duration-200 active:scale-95 cursor-pointer ${isDarkMode ? 'bg-zinc-900/85 border-zinc-700/80 text-zinc-200 hover:bg-zinc-800' : 'bg-white/90 border-slate-300 text-slate-800 hover:bg-white shadow-sm'}`,
+    title: "Abrir controles de prueba Demo"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `font-bold text-xs tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-slate-900'}`
-  }, "EventuApp"), /*#__PURE__*/React.createElement("span", {
-    className: "text-[9px] font-mono text-zinc-500"
-  }, "v1.0 • B2B2C"))), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-1.5"
+    className: "w-2 h-2 rounded-full bg-sky-400 animate-pulse"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[11px] font-bold"
+  }, "Demo ⚙️"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-400 font-mono"
+  }, "[", country, "] [", roleView === 'worker' ? 'Staff' : 'Prod', "]")) : /*#__PURE__*/React.createElement("div", {
+    className: `p-3 rounded-hero border backdrop-blur-xl shadow-2xl w-64 animate-fade-in space-y-2.5 ${isDarkMode ? 'bg-zinc-900/95 border-zinc-700 text-zinc-100' : 'bg-white/95 border-slate-300 text-slate-900'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`
+    className: "flex justify-between items-center pb-1 border-b border-zinc-800/80"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-xs font-bold text-sky-400 flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph-bold ph-gear text-sm"
+  }), " Controles Demo"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setDemoOpen(false),
+    className: "w-6 h-6 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 cursor-pointer text-xs"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-x"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between text-xs"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-semibold text-zinc-400"
+  }, "País"), /*#__PURE__*/React.createElement("div", {
+    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       setCountry("AR");
       showToast("🇦🇷 Argentina (DNI, Monotributo, Póliza AP)", "info");
     },
-    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "AR" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
-  }, "AR"), /*#__PURE__*/React.createElement("button", {
+    className: `px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "AR" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "🇦🇷 AR"), /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       setCountry("ES");
       showToast("🇪🇸 España (NIE, Seguridad Social, PRL)", "info");
     },
-    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "ES" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
-  }, "ES")), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setIsDarkMode(!isDarkMode),
-    className: `h-7 px-2 rounded-full text-[10px] font-semibold flex items-center gap-1 border transition-all ${isDarkMode ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-white text-slate-800 border-slate-300 shadow-sm'}`,
-    title: "Alternar Modo Oscuro / Claro"
-  }, /*#__PURE__*/React.createElement("i", {
-    className: `ph-fill ${isDarkMode ? 'ph-moon text-sky-400' : 'ph-sun text-amber-500'}`
-  })), /*#__PURE__*/React.createElement("div", {
-    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`
+    className: `px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${country === "ES" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "🇪🇸 ES"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between text-xs"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-semibold text-zinc-400"
+  }, "Rol"), /*#__PURE__*/React.createElement("div", {
+    className: `p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       setRoleView('worker');
       setCurrentView('app');
     },
-    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'worker' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+    className: `px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'worker' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
   }, "Staff"), /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       setRoleView('agency');
       setCurrentView('app');
     },
-    className: `px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'agency' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
-  }, "Prod")), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentView(currentView === 'login' ? 'app' : 'login'),
-    className: `h-7 px-2 rounded-full text-[10px] font-semibold border transition-all ${currentView === 'login' ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-zinc-200' : 'bg-white text-slate-600 border-slate-300'}`,
-    title: "Acceder a la cuenta"
+    className: `px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${roleView === 'agency' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'}`
+  }, "Prod"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between text-xs"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-semibold text-zinc-400"
+  }, "Tema"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsDarkMode(!isDarkMode),
+    className: `h-7 px-3 rounded-full text-[10px] font-semibold flex items-center gap-1.5 border transition-all ${isDarkMode ? 'bg-zinc-950 text-zinc-200 border-zinc-800' : 'bg-white text-slate-800 border-slate-300 shadow-sm'}`
   }, /*#__PURE__*/React.createElement("i", {
-    className: "ph ph-key text-xs"
-  })))), /*#__PURE__*/React.createElement("main", {
+    className: `ph-fill ${isDarkMode ? 'ph-moon text-sky-400' : 'ph-sun text-amber-500'}`
+  }), /*#__PURE__*/React.createElement("span", null, isDarkMode ? "Dark Mode" : "Light Mode"))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-1 border-t border-zinc-800/80"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setCurrentView(currentView === 'login' ? 'app' : 'login');
+      setDemoOpen(false);
+    },
+    className: "w-full h-8 rounded-input border border-zinc-700/60 text-[10px] font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800/60 transition-colors"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "ph ph-key"
+  }), /*#__PURE__*/React.createElement("span", null, currentView === 'login' ? 'Volver a la App' : 'Ver Pantalla de Login'))))), /*#__PURE__*/React.createElement("main", {
     className: `
           w-full max-w-full sm:max-w-[393px] h-[100dvh] sm:h-[852px] sm:max-h-[90dvh] mx-auto 
           relative overflow-hidden sm:rounded-[40px] sm:border-[8px] border-zinc-800 shadow-2xl flex flex-col transition-colors
           ${isDarkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-slate-50 text-slate-900'}
         `
   }, /*#__PURE__*/React.createElement("div", {
-    className: `h-7 w-full flex justify-between items-center px-5 font-mono text-[10px] font-semibold select-none shrink-0 ${isDarkMode ? 'text-zinc-400 bg-zinc-950' : 'text-slate-500 bg-slate-50'}`
+    className: `h-7 w-full flex justify-between items-center px-5 font-mono text-[10px] font-semibold select-none shrink-0 ${isDarkMode ? 'text-zinc-400 bg-zinc-950' : 'text-slate-600 bg-slate-50'}`
   }, /*#__PURE__*/React.createElement("span", null, "09:41"), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-1.5 text-xs"
   }, /*#__PURE__*/React.createElement("i", {
@@ -2573,31 +2735,31 @@ const App = () => {
   }) : staffTab === 'agenda' ? /*#__PURE__*/React.createElement(WorkerTabAgenda, null) : staffTab === 'cobros' ? /*#__PURE__*/React.createElement(WorkerTabCobros, null) : /*#__PURE__*/React.createElement(WorkerTabMiPerfil, {
     onLogout: () => setCurrentView('login')
   }))), currentView === 'app' && roleView === 'agency' && /*#__PURE__*/React.createElement("nav", {
-    className: `absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'}`
+    className: `absolute bottom-0 w-full h-[70px] border-t backdrop-blur-lg flex justify-around items-center px-2 pt-1 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/95 border-slate-200 text-slate-400'}`
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => setProdTab('evento'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'evento' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'evento' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${prodTab === 'evento' ? 'ph-fill ph-broadcast' : 'ph ph-broadcast'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-bold"
+    className: "text-[10px] tracking-tight"
   }, "Evento")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setProdTab('fechas'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'fechas' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'fechas' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${prodTab === 'fechas' ? 'ph-fill ph-calendar-plus' : 'ph ph-calendar-plus'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
+    className: "text-[10px] tracking-tight"
   }, "Fechas")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setProdTab('talento'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'talento' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'talento' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${prodTab === 'talento' ? 'ph-fill ph-users-three' : 'ph ph-users-three'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
+    className: "text-[10px] tracking-tight"
   }, "Talento")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setProdTab('avisos'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'avisos' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'avisos' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative"
   }, /*#__PURE__*/React.createElement("i", {
@@ -2605,33 +2767,33 @@ const App = () => {
   }), /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-[#F97316] absolute -top-0.5 -right-0.5"
   })), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
+    className: "text-[10px] tracking-tight"
   }, "Avisos"))), currentView === 'app' && roleView === 'worker' && /*#__PURE__*/React.createElement("nav", {
-    className: `absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'}`
+    className: `absolute bottom-0 w-full h-[70px] border-t backdrop-blur-lg flex justify-around items-center px-2 pt-1 pb-2 z-30 ${isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/95 border-slate-200 text-slate-400'}`
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => setStaffTab('inicio'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'inicio' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'inicio' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${staffTab === 'inicio' ? 'ph-fill ph-house' : 'ph ph-house'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-bold"
+    className: "text-[10px] tracking-tight"
   }, "Inicio")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setStaffTab('agenda'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'agenda' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'agenda' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${staffTab === 'agenda' ? 'ph-fill ph-calendar-blank' : 'ph ph-calendar-blank'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
+    className: "text-[10px] tracking-tight"
   }, "Agenda")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setStaffTab('cobros'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'cobros' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'cobros' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("i", {
     className: `text-xl ${staffTab === 'cobros' ? 'ph-fill ph-wallet' : 'ph ph-wallet'}`
   }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
+    className: "text-[10px] tracking-tight"
   }, "Cobros")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setStaffTab('miperfil'),
-    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'miperfil' ? isDarkMode ? 'text-sky-400' : 'text-sky-600' : 'hover:opacity-80'}`
+    className: `flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'miperfil' ? isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold' : 'hover:opacity-80'}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative"
   }, /*#__PURE__*/React.createElement("i", {
@@ -2639,8 +2801,8 @@ const App = () => {
   }), /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-sky-400 absolute -top-0.5 -right-0.5"
   })), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-semibold"
-  }, "Mi Perfil"))), /*#__PURE__*/React.createElement(FeedbackToast, {
+    className: "text-[10px] tracking-tight"
+  }, "Mi Book"))), /*#__PURE__*/React.createElement(FeedbackToast, {
     message: toastData?.message,
     type: toastData?.type,
     onClose: () => setToastData(null)

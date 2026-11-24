@@ -6,7 +6,7 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const isDark = isDarkMode;
   const [currentView, setCurrentView] = useState('app'); // 'app' | 'login' | 'onboarding'
-  const [viewportMode, setViewportMode] = useState('mobile'); // 'mobile' (393px) | 'tablet' (768px)
+  const [demoOpen, setDemoOpen] = useState(false);
 
   // Sub-tabs de Productora
   const [prodTab, setProdTab] = useState('evento');
@@ -87,103 +87,135 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ isDark: isDarkMode, country, showToast }}>
-      <div className={`min-h-screen w-full flex flex-col items-center justify-start py-2 sm:py-5 px-0 sm:px-4 transition-colors ${
-        isDarkMode ? 'bg-[#09090B]' : 'bg-[#E2E8F0]'
+      <div className={`min-h-screen w-full flex flex-col items-center justify-center py-0 sm:py-6 px-0 sm:px-4 transition-colors relative ${
+        isDarkMode ? 'bg-[#09090B]' : 'bg-[#F1F5F9]'
       }`}>
+
         {/* =========================================================================
-            BARRA EXTERNA DE PRUEBAS & PRESENTACIÓN (Fuera del marco simulado)
+            PILL FLOTANTE Y DISCRETO DE DEMO (Descongestiona el Shell Superior)
         ========================================================================= */}
-        <header className="w-full max-w-[393px] mb-2.5 flex items-center justify-between gap-1.5 px-3 select-none">
-          {/* Logo & Version */}
-          <div className="flex items-center gap-1.5">
-            <div className="w-7 h-7 rounded-input bg-sky-400 flex items-center justify-center text-[#09090B] font-black text-xs shadow-glow-sky-subtle">
-              E
-            </div>
-            <div className="flex flex-col">
-              <span className={`font-bold text-xs tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-slate-900'}`}>
-                EventuApp
+        <div className="fixed top-3 right-3 sm:top-4 sm:right-6 z-50 flex flex-col items-end">
+          {!demoOpen ? (
+            <button
+              onClick={() => setDemoOpen(true)}
+              className={`h-8 px-3 rounded-full backdrop-blur-md border text-xs font-bold flex items-center gap-2 shadow-xl transition-all duration-200 active:scale-95 cursor-pointer ${
+                isDarkMode 
+                  ? 'bg-zinc-900/85 border-zinc-700/80 text-zinc-200 hover:bg-zinc-800' 
+                  : 'bg-white/90 border-slate-300 text-slate-800 hover:bg-white shadow-sm'
+              }`}
+              title="Abrir controles de prueba Demo"
+            >
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+              <span className="font-mono text-[11px] font-bold">Demo ⚙️</span>
+              <span className="text-[10px] text-zinc-400 font-mono">
+                [{country}] [{roleView === 'worker' ? 'Staff' : 'Prod'}]
               </span>
-              <span className="text-[9px] font-mono text-zinc-500">v1.0 • B2B2C</span>
-            </div>
-          </div>
-
-          {/* Quick Switchers */}
-          <div className="flex items-center gap-1.5">
-            {/* Country Toggle (AR / ES) */}
-            <div className={`p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`}>
-              <button
-                onClick={() => {
-                  setCountry("AR");
-                  showToast("🇦🇷 Argentina (DNI, Monotributo, Póliza AP)", "info");
-                }}
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                  country === "AR" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                AR
-              </button>
-              <button
-                onClick={() => {
-                  setCountry("ES");
-                  showToast("🇪🇸 España (NIE, Seguridad Social, PRL)", "info");
-                }}
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                  country === "ES" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                ES
-              </button>
-            </div>
-
-            {/* Dark / Light Mode Toggle */}
-            <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className={`h-7 px-2 rounded-full text-[10px] font-semibold flex items-center gap-1 border transition-all ${
-                isDarkMode ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-white text-slate-800 border-slate-300 shadow-sm'
-              }`}
-              title="Alternar Modo Oscuro / Claro"
-            >
-              <i className={`ph-fill ${isDarkMode ? 'ph-moon text-sky-400' : 'ph-sun text-amber-500'}`} />
             </button>
+          ) : (
+            <div className={`p-3 rounded-hero border backdrop-blur-xl shadow-2xl w-64 animate-fade-in space-y-2.5 ${
+              isDarkMode ? 'bg-zinc-900/95 border-zinc-700 text-zinc-100' : 'bg-white/95 border-slate-300 text-slate-900'
+            }`}>
+              {/* Header Panel */}
+              <div className="flex justify-between items-center pb-1 border-b border-zinc-800/80">
+                <span className="font-mono text-xs font-bold text-sky-400 flex items-center gap-1">
+                  <i className="ph-bold ph-gear text-sm" /> Controles Demo
+                </span>
+                <button
+                  onClick={() => setDemoOpen(false)}
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 cursor-pointer text-xs"
+                >
+                  <i className="ph ph-x" />
+                </button>
+              </div>
 
-            {/* Role Switcher (Staff / Prod) */}
-            <div className={`p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-300'}`}>
-              <button
-                onClick={() => {
-                  setRoleView('worker');
-                  setCurrentView('app');
-                }}
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                  roleView === 'worker' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                Staff
-              </button>
-              <button
-                onClick={() => {
-                  setRoleView('agency');
-                  setCurrentView('app');
-                }}
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                  roleView === 'agency' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                Prod
-              </button>
+              {/* Selector País */}
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-zinc-400">País</span>
+                <div className={`p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`}>
+                  <button
+                    onClick={() => {
+                      setCountry("AR");
+                      showToast("🇦🇷 Argentina (DNI, Monotributo, Póliza AP)", "info");
+                    }}
+                    className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                      country === "AR" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    🇦🇷 AR
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCountry("ES");
+                      showToast("🇪🇸 España (NIE, Seguridad Social, PRL)", "info");
+                    }}
+                    className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                      country === "ES" ? 'bg-sky-400 text-zinc-950 font-black' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    🇪🇸 ES
+                  </button>
+                </div>
+              </div>
+
+              {/* Selector Rol */}
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-zinc-400">Rol</span>
+                <div className={`p-0.5 rounded-full border flex items-center ${isDarkMode ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-100 border-slate-200'}`}>
+                  <button
+                    onClick={() => {
+                      setRoleView('worker');
+                      setCurrentView('app');
+                    }}
+                    className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                      roleView === 'worker' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    Staff
+                  </button>
+                  <button
+                    onClick={() => {
+                      setRoleView('agency');
+                      setCurrentView('app');
+                    }}
+                    className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                      roleView === 'agency' && currentView === 'app' ? 'bg-sky-400 text-[#09090B] font-black' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    Prod
+                  </button>
+                </div>
+              </div>
+
+              {/* Toggle Tema */}
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-zinc-400">Tema</span>
+                <button
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                  className={`h-7 px-3 rounded-full text-[10px] font-semibold flex items-center gap-1.5 border transition-all ${
+                    isDarkMode ? 'bg-zinc-950 text-zinc-200 border-zinc-800' : 'bg-white text-slate-800 border-slate-300 shadow-sm'
+                  }`}
+                >
+                  <i className={`ph-fill ${isDarkMode ? 'ph-moon text-sky-400' : 'ph-sun text-amber-500'}`} />
+                  <span>{isDarkMode ? "Dark Mode" : "Light Mode"}</span>
+                </button>
+              </div>
+
+              {/* Botón Login Directo */}
+              <div className="pt-1 border-t border-zinc-800/80">
+                <button
+                  onClick={() => {
+                    setCurrentView(currentView === 'login' ? 'app' : 'login');
+                    setDemoOpen(false);
+                  }}
+                  className="w-full h-8 rounded-input border border-zinc-700/60 text-[10px] font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800/60 transition-colors"
+                >
+                  <i className="ph ph-key" />
+                  <span>{currentView === 'login' ? 'Volver a la App' : 'Ver Pantalla de Login'}</span>
+                </button>
+              </div>
             </div>
-
-            {/* Direct Login Key */}
-            <button
-              onClick={() => setCurrentView(currentView === 'login' ? 'app' : 'login')}
-              className={`h-7 px-2 rounded-full text-[10px] font-semibold border transition-all ${
-                currentView === 'login' ? 'bg-sky-400 text-zinc-950 border-sky-400 font-bold' : isDark ? 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-zinc-200' : 'bg-white text-slate-600 border-slate-300'
-              }`}
-              title="Acceder a la cuenta"
-            >
-              <i className="ph ph-key text-xs" />
-            </button>
-          </div>
-        </header>
+          )}
+        </div>
 
         {/* =========================================================================
             CONTENEDOR MOBILE ESTRICTO (393px Centrado & Relative)
@@ -195,7 +227,7 @@ const App = () => {
         `}>
           {/* Simulated iOS Status Bar */}
           <div className={`h-7 w-full flex justify-between items-center px-5 font-mono text-[10px] font-semibold select-none shrink-0 ${
-            isDarkMode ? 'text-zinc-400 bg-zinc-950' : 'text-slate-500 bg-slate-50'
+            isDarkMode ? 'text-zinc-400 bg-zinc-950' : 'text-slate-600 bg-slate-50'
           }`}>
             <span>09:41</span>
             <div className="flex items-center gap-1.5 text-xs">
@@ -265,77 +297,77 @@ const App = () => {
               BOTTOM NAVIGATION BAR (Exclusivo por Rol y Absoluto al Contenedor 393px)
           ========================================================================= */}
           {currentView === 'app' && roleView === 'agency' && (
-            <nav className={`absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${
-              isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'
+            <nav className={`absolute bottom-0 w-full h-[70px] border-t backdrop-blur-lg flex justify-around items-center px-2 pt-1 pb-2 z-30 ${
+              isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/95 border-slate-200 text-slate-400'
             }`}>
               <button 
                 onClick={() => setProdTab('evento')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'evento' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'evento' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${prodTab === 'evento' ? 'ph-fill ph-broadcast' : 'ph ph-broadcast'}`} />
-                <span className="text-[10px] font-bold">Evento</span>
+                <span className="text-[10px] tracking-tight">Evento</span>
               </button>
               <button 
                 onClick={() => setProdTab('fechas')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'fechas' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'fechas' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${prodTab === 'fechas' ? 'ph-fill ph-calendar-plus' : 'ph ph-calendar-plus'}`} />
-                <span className="text-[10px] font-semibold">Fechas</span>
+                <span className="text-[10px] tracking-tight">Fechas</span>
               </button>
               <button 
                 onClick={() => setProdTab('talento')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'talento' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'talento' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${prodTab === 'talento' ? 'ph-fill ph-users-three' : 'ph ph-users-three'}`} />
-                <span className="text-[10px] font-semibold">Talento</span>
+                <span className="text-[10px] tracking-tight">Talento</span>
               </button>
               <button 
                 onClick={() => setProdTab('avisos')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'avisos' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${prodTab === 'avisos' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <div className="relative">
                   <i className={`text-xl ${prodTab === 'avisos' ? 'ph-fill ph-bell' : 'ph ph-bell'}`} />
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F97316] absolute -top-0.5 -right-0.5" />
                 </div>
-                <span className="text-[10px] font-semibold">Avisos</span>
+                <span className="text-[10px] tracking-tight">Avisos</span>
               </button>
             </nav>
           )}
 
           {currentView === 'app' && roleView === 'worker' && (
-            <nav className={`absolute bottom-0 w-full h-[72px] border-t backdrop-blur-lg flex justify-around items-center px-2 pb-2 z-30 ${
-              isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/90 border-slate-200 text-slate-400'
+            <nav className={`absolute bottom-0 w-full h-[70px] border-t backdrop-blur-lg flex justify-around items-center px-2 pt-1 pb-2 z-30 ${
+              isDarkMode ? 'bg-zinc-950/90 border-zinc-800/80 text-zinc-500' : 'bg-white/95 border-slate-200 text-slate-400'
             }`}>
               <button 
                 onClick={() => setStaffTab('inicio')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'inicio' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'inicio' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${staffTab === 'inicio' ? 'ph-fill ph-house' : 'ph ph-house'}`} />
-                <span className="text-[10px] font-bold">Inicio</span>
+                <span className="text-[10px] tracking-tight">Inicio</span>
               </button>
               <button 
                 onClick={() => setStaffTab('agenda')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'agenda' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'agenda' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${staffTab === 'agenda' ? 'ph-fill ph-calendar-blank' : 'ph ph-calendar-blank'}`} />
-                <span className="text-[10px] font-semibold">Agenda</span>
+                <span className="text-[10px] tracking-tight">Agenda</span>
               </button>
               <button 
                 onClick={() => setStaffTab('cobros')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'cobros' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'cobros' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <i className={`text-xl ${staffTab === 'cobros' ? 'ph-fill ph-wallet' : 'ph ph-wallet'}`} />
-                <span className="text-[10px] font-semibold">Cobros</span>
+                <span className="text-[10px] tracking-tight">Cobros</span>
               </button>
               <button 
                 onClick={() => setStaffTab('miperfil')}
-                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'miperfil' ? (isDarkMode ? 'text-sky-400' : 'text-sky-600') : 'hover:opacity-80'}`}
+                className={`flex flex-col items-center gap-0.5 cursor-pointer py-1 ${staffTab === 'miperfil' ? (isDarkMode ? 'text-sky-400 font-bold' : 'text-sky-600 font-bold') : 'hover:opacity-80'}`}
               >
                 <div className="relative">
                   <i className={`text-xl ${staffTab === 'miperfil' ? 'ph-fill ph-user-circle' : 'ph ph-user-circle'}`} />
                   <span className="w-1.5 h-1.5 rounded-full bg-sky-400 absolute -top-0.5 -right-0.5" />
                 </div>
-                <span className="text-[10px] font-semibold">Mi Perfil</span>
+                <span className="text-[10px] tracking-tight">Mi Book</span>
               </button>
             </nav>
           )}
